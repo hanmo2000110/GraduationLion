@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
+import 'navigationPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,10 +14,14 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'MyUIBuilding',
       theme: ThemeData(
+        // 아이콘 클릭 시 물결 효과 없애기
+        splashColor: Colors.transparent,
+        highlightColor: Colors.transparent,
+
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: const NavigationPage(),
     );
   }
 }
