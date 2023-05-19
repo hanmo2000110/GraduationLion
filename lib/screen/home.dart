@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -46,7 +47,9 @@ class HomePageState extends State<HomePage> {
               // Inkwell
               child: InkWell(
                 radius: 33,
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed('/mypage');
+                },
                 child: Image.asset('assets/images/profile.png'),
               ),
             ),

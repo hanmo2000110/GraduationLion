@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'screen/navigationPage.dart';
 import 'package:get/get.dart';
 import 'package:graduationlion/route/pages.dart';
+import 'package:graduationlion/binding/binding.dart';
 
 void main() {
   runApp(const MyApp());
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       home: const NavigationPage(),
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
+      initialBinding: InitBinding(),
     );
   }
 }
