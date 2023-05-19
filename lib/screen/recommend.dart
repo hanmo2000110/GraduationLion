@@ -1,23 +1,24 @@
 import 'package:flutter/material.dart';
 
-class MyPage extends StatefulWidget {
-  const MyPage({super.key});
+class RecommendPage extends StatefulWidget {
+  const RecommendPage({super.key});
 
   @override
-  State<MyPage> createState() => MyPageState();
+  State<RecommendPage> createState() => RecommendPageState();
 }
 
-class MyPageState extends State<MyPage> {
+class RecommendPageState extends State<RecommendPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         forceMaterialTransparency: true,
         backgroundColor: Colors.white,
         title: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 8),
           child: Text(
-            'MyPage',
+            'Recommend',
             style: TextStyle(
               fontWeight: FontWeight.w800,
               fontSize: 20,
@@ -32,7 +33,7 @@ class MyPageState extends State<MyPage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Text('My Page'),
+              Text('Recommend Page'),
             ],
           ),
         ],

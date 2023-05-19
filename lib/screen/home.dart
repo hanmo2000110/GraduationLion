@@ -24,6 +24,7 @@ class HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         forceMaterialTransparency: true,
         backgroundColor: Colors.white,
         title: const Padding(
@@ -36,6 +37,21 @@ class HomePageState extends State<HomePage> {
             ),
           ),
         ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
+            child: SizedBox(
+              width: 33,
+              height: 33,
+              // Inkwell
+              child: InkWell(
+                radius: 33,
+                onTap: () {},
+                child: Image.asset('assets/images/profile.png'),
+              ),
+            ),
+          ),
+        ],
         centerTitle: false,
         elevation: 0.0,
       ),
