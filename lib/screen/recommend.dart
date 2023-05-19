@@ -8,6 +8,17 @@ class RecommendPage extends StatefulWidget {
 }
 
 class RecommendPageState extends State<RecommendPage> {
+  List<String> courseDesc1 = [
+    '2학점',
+    '영어',
+    '설계',
+  ];
+
+  List<String> courseDesc2 = [
+    '3학점',
+    'P/F',
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,15 +40,92 @@ class RecommendPageState extends State<RecommendPage> {
         elevation: 0.0,
       ),
       body: ListView(
-        children: const [
+        children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              Text('Recommend Page'),
+              semesterTitle('5'),
+              courseInfo('AI 프로젝트 입문', courseDesc1),
+              divider(),
+              courseInfo('환경과 인간', courseDesc2),
+              divider(),
+              courseInfo('Computer Vision', courseDesc1),
+              semesterTitle('6'),
+              courseInfo('공학프로젝트 기획', courseDesc1),
+              divider(),
+              courseInfo('환경과 인간', courseDesc2),
+              divider(),
+              courseInfo('Operating System', courseDesc1),
+              semesterTitle('7'),
+              courseInfo('AI 프로젝트 입문', courseDesc1),
+              divider(),
+              courseInfo('모바일 앱 개발', courseDesc2),
+              divider(),
+              courseInfo('Computer Network', courseDesc1),
+              semesterTitle('8'),
+              courseInfo('AI 프로젝트 입문', courseDesc1),
+              divider(),
+              courseInfo('환경과 인간', courseDesc2),
+              divider(),
+              courseInfo('Computer Vision', courseDesc1),
             ],
           ),
         ],
       ),
     );
   }
+}
+
+Widget semesterTitle(String semester) {
+  // 학기 수
+  return Stack(
+    alignment: AlignmentDirectional.bottomStart,
+    children: [
+      Container(
+        height: 30,
+        color: const Color(0xFFEFEFF4),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(left: 24, bottom: 5),
+        child: Text('$semester학기', style: const TextStyle(fontSize: 10)),
+      ),
+    ],
+  );
+}
+
+Widget divider() {
+  return const Divider(
+    thickness: 1,
+    color: Color(0xffC4C4C4),
+    height: 0,
+  );
+}
+
+Widget courseInfo(String title, List desc) {
+  // 학기 별 강의 목록, 강의 정보
+
+  var showList = desc.join(", ");
+
+  return Container(
+    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
+    child: Row(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Text(
+          title,
+          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+        ),
+        Text(
+          showList,
+          textAlign: TextAlign.end,
+          style: const TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 15,
+              color: Color(0xff8B95A1),
+              height: 1.1),
+        ),
+      ],
+    ),
+  );
 }
