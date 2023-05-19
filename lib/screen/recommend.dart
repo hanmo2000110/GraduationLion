@@ -7,18 +7,18 @@ class RecommendPage extends StatefulWidget {
   State<RecommendPage> createState() => RecommendPageState();
 }
 
+List<String> courseDesc1 = [
+  '2학점',
+  '영어',
+  '설계',
+];
+
+List<String> courseDesc2 = [
+  '3학점',
+  'P/F',
+];
+
 class RecommendPageState extends State<RecommendPage> {
-  List<String> courseDesc1 = [
-    '2학점',
-    '영어',
-    '설계',
-  ];
-
-  List<String> courseDesc2 = [
-    '3학점',
-    'P/F',
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
