@@ -18,10 +18,10 @@ class RecommendPageState extends State<RecommendPage> {
         title: const Padding(
           padding: EdgeInsets.symmetric(horizontal: 8),
           child: Text(
-            'Recommend',
+            '졸업사자님께 추천하는 졸업 계획',
             style: TextStyle(
               fontWeight: FontWeight.w800,
-              fontSize: 20,
+              fontSize: 18,
             ),
           ),
         ),

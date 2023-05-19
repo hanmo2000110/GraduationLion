@@ -34,7 +34,7 @@ class HomePageState extends State<HomePage> {
             '나의 수강 현황',
             style: TextStyle(
               fontWeight: FontWeight.w800,
-              fontSize: 20,
+              fontSize: 18,
             ),
           ),
         ),
@@ -44,11 +44,10 @@ class HomePageState extends State<HomePage> {
             child: SizedBox(
               width: 33,
               height: 33,
-              // Inkwell
               child: InkWell(
                 radius: 33,
                 onTap: () {
-                  Get.toNamed('/mypage');
+                  // Get.toNamed('/mypage');
                 },
                 child: Image.asset('assets/images/profile.png'),
               ),
