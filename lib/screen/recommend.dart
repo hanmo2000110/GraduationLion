@@ -32,7 +32,7 @@ class RecommendPageState extends State<RecommendPage> {
             '졸업사자님께 추천하는 졸업 계획',
             style: TextStyle(
               fontWeight: FontWeight.w800,
-              fontSize: 18,
+              fontSize: 16,
             ),
           ),
         ),
@@ -49,17 +49,23 @@ class RecommendPageState extends State<RecommendPage> {
               divider(),
               courseInfo('환경과 인간', courseDesc2),
               divider(),
+              courseInfo('모바일 앱 개발', courseDesc2),
+              divider(),
               courseInfo('Computer Vision', courseDesc1),
               semesterTitle('6'),
               courseInfo('공학프로젝트 기획', courseDesc1),
               divider(),
               courseInfo('환경과 인간', courseDesc2),
               divider(),
+              courseInfo('모바일 앱 개발', courseDesc2),
+              divider(),
               courseInfo('Operating System', courseDesc1),
               semesterTitle('7'),
               courseInfo('AI 프로젝트 입문', courseDesc1),
               divider(),
               courseInfo('모바일 앱 개발', courseDesc2),
+              divider(),
+              courseInfo('환경과 인간', courseDesc2),
               divider(),
               courseInfo('Computer Network', courseDesc1),
               semesterTitle('8'),
@@ -68,6 +74,8 @@ class RecommendPageState extends State<RecommendPage> {
               courseInfo('환경과 인간', courseDesc2),
               divider(),
               courseInfo('Computer Vision', courseDesc1),
+              divider(),
+              courseInfo('환경과 인간', courseDesc2),
             ],
           ),
         ],
@@ -107,21 +115,21 @@ Widget courseInfo(String title, List desc) {
   var showList = desc.join(", ");
 
   return Container(
-    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 15),
+    padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 11),
     child: Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
           title,
-          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
         ),
         Text(
           showList,
           textAlign: TextAlign.end,
           style: const TextStyle(
               fontWeight: FontWeight.w500,
-              fontSize: 15,
+              fontSize: 14,
               color: Color(0xff8B95A1),
               height: 1.1),
         ),

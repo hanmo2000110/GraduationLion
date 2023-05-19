@@ -34,7 +34,7 @@ class HomePageState extends State<HomePage> {
             '나의 수강 현황',
             style: TextStyle(
               fontWeight: FontWeight.w800,
-              fontSize: 18,
+              fontSize: 16,
             ),
           ),
         ),
@@ -219,7 +219,7 @@ Widget scoreInfo(String type, int left, int full) {
     contentPadding: const EdgeInsets.symmetric(horizontal: 24),
     leading: Text(
       type,
-      style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+      style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
     ),
     trailing: RichText(
         text: TextSpan(children: [
@@ -227,13 +227,13 @@ Widget scoreInfo(String type, int left, int full) {
         text: '$left ',
         style: const TextStyle(
             fontWeight: FontWeight.w800,
-            fontSize: 15,
+            fontSize: 14,
             color: Color(0xffFFC107)),
       ),
       TextSpan(
         text: '/ $full학점',
         style: const TextStyle(
-            fontWeight: FontWeight.w800, fontSize: 15, color: Colors.black),
+            fontWeight: FontWeight.w800, fontSize: 14, color: Colors.black),
       ),
     ])),
   );
@@ -252,14 +252,14 @@ Widget takeCSinfo(String cond, List cslist) {
       children: [
         Text(
           cond,
-          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
         ),
         Text(
           showList,
           textAlign: TextAlign.end,
           style: const TextStyle(
               fontWeight: FontWeight.w500,
-              fontSize: 15,
+              fontSize: 14,
               color: Color(0xff8B95A1),
               height: 1.1),
         ),
@@ -287,14 +287,14 @@ Widget showCond(String type, String cond) {
       children: [
         Text(
           type,
-          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 15),
+          style: const TextStyle(fontWeight: FontWeight.w800, fontSize: 14),
         ),
         Text(
           cond,
           textAlign: TextAlign.end,
           style: TextStyle(
               fontWeight: FontWeight.w800,
-              fontSize: 15,
+              fontSize: 14,
               color: color,
               height: 1.1),
         ),
