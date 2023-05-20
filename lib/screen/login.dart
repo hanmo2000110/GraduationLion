@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class LoginPage extends StatefulWidget{
   const LoginPage({super.key});
@@ -32,9 +33,12 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 149),
             InkWell(
+
+              // TODO : Google SignIn
               onTap: (){
-                // TODO
+                Get.toNamed('/init');
               },
+
               child: Container(
                   width: 330, height: 54,
                   decoration: BoxDecoration(

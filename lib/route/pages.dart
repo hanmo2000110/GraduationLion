@@ -1,4 +1,5 @@
 import 'package:graduationlion/screen/home.dart';
+import 'package:graduationlion/screen/InitPage/initPage.dart';
 import 'package:graduationlion/screen/recommend.dart';
 import 'package:graduationlion/screen/mypage.dart';
 import 'package:graduationlion/screen/navigationPage.dart';
@@ -21,6 +22,10 @@ class AppPages {
     GetPage(
       name: Routes.login,
       page: () => LoginPage(),
+    ),
+    GetPage(
+      name: Routes.init,
+      page: () => InitPage(),
     ),
     GetPage(
       name: Routes.navigation,
