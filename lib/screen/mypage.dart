@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduationlion/controller/coursecontroller.dart';
 import 'recommend.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 
@@ -126,7 +127,10 @@ Widget profile(String nickname) {
               width: 3,
             ),
           ),
-          child: Image.asset('assets/images/profile.png'),
+          child: InkWell(
+            child: Image.asset('assets/images/profile.png'),
+            onTap: () => CourseController.to.addData(),
+          ),
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
