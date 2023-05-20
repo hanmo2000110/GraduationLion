@@ -12,11 +12,13 @@
 	<string>AIzaSyAaDut4yNGy_juGRXdBlRn9Hnp7SN8XvNo</string>
 	<key>GCM_SENDER_ID</key>
 	<string>1092178133208</string>
+
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>com.example.graduationlion</string>
 	<key>PROJECT_ID</key>
+
 	<string>draduationlion</string>
 	<key>STORAGE_BUCKET</key>
 	<string>draduationlion.appspot.com</string>
@@ -32,5 +34,6 @@
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:1092178133208:ios:c0bcb5e7529c49299597ad</string>
+
 </dict>
 </plist>

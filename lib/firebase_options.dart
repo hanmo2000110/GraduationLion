@@ -21,6 +21,7 @@ class DefaultFirebaseOptions {
         'DefaultFirebaseOptions have not been configured for web - '
         'you can reconfigure this by running the FlutterFire CLI again.',
       );
+
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -28,10 +29,12 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
+
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
           'you can reconfigure this by running the FlutterFire CLI again.',
         );
+
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -49,6 +52,7 @@ class DefaultFirebaseOptions {
     }
   }
 
+
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyCFbn5aSMaFzQWJUWfK_ygFs03gFdT8SV8',
     appId: '1:1092178133208:android:5ed01abd8113d5109597ad',
@@ -65,6 +69,7 @@ class DefaultFirebaseOptions {
     storageBucket: 'draduationlion.appspot.com',
     androidClientId: '1092178133208-1p0utmsd7qtq6tg7oppokprkd7cqa9fv.apps.googleusercontent.com',
     iosClientId: '1092178133208-fuk0gsg91qeav4640uoc3kivlptbcn6m.apps.googleusercontent.com',
+
     iosBundleId: 'com.example.graduationlion',
   );
 }
