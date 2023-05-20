@@ -4,13 +4,18 @@ import 'package:graduationlion/screen/mypage.dart';
 import 'package:graduationlion/screen/navigationPage.dart';
 
 import 'package:get/get.dart';
+import 'package:graduationlion/screen/splash.dart';
 
 part 'routes.dart';
 
 class AppPages {
-  static const initial = Routes.navigation;
+  static const initial = Routes.splash;
 
   static final routes = [
+    GetPage(
+      name: Routes.splash,
+      page: () => SplashScreen(),
+    ),
     GetPage(
       name: Routes.navigation,
       page: () => const NavigationPage(),

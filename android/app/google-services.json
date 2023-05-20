@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1052028042977",
+    "project_id": "graduation-lion",
+    "storage_bucket": "graduation-lion.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1052028042977:android:3255ed48ddc5b2c7ba01a0",
+        "android_client_info": {
+          "package_name": "com.example.graduationlion"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1052028042977-ca4il1ehrsk9a4a0q0n1cvsu48uq1495.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCZg8sOGTS35PSqNlStMwu6F9b5i-8eonM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1052028042977-bbdhhbvj2mdsq03jfa0160igm9gmlilf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
