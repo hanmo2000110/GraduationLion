@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:graduationlion/model/courseModel.dart';
@@ -10,6 +11,7 @@ class CourseController extends GetxController {
   @override
   Future<void> onInit() async {
     super.onInit();
+    await FirebaseAuth.instance.signOut();
     await initMajorCourses();
   }
 
@@ -19,7 +21,7 @@ class CourseController extends GetxController {
     var snapshot = await db.collection('Courses').get();
     snapshot.docs.forEach(
         (element) => majorCourses.add(CourseModel.fromJson(element.data())));
-    print(majorCourses);
+    // print(majorCourses);
   }
 
   // 개발자용) 수업 추가 함수
