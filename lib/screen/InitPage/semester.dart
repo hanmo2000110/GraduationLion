@@ -17,7 +17,9 @@ class _InitSemesterPageState extends State<InitSemesterPage> {
 
   @override
   void dispose() {
-    initPageController.setSemester(int.parse(textController.text));
+    if(textController.text.isNotEmpty){
+      initPageController.setSemester(int.parse(textController.text));
+    }
     textController.dispose();
     super.dispose();
   }
@@ -46,13 +48,16 @@ class _InitSemesterPageState extends State<InitSemesterPage> {
           width: 100, height: 120,
           child: TextField(
             controller: textController,
-            decoration: const InputDecoration(
-              border: OutlineInputBorder(
+            decoration: InputDecoration(
+              border: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(20)),
                 borderSide: BorderSide(color: Color(0xff00579C))
               ),
+              hintText: initPageController.semester.value.toString(),
+              hintStyle: const TextStyle(fontSize: 60),
             ),
-            style: const TextStyle(fontSize: 80),
+            textAlign: TextAlign.center,
+            style: const TextStyle(fontSize: 60),
             keyboardType: TextInputType.number,
             inputFormatters: <TextInputFormatter>[
               FilteringTextInputFormatter.digitsOnly

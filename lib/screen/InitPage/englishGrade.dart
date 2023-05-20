@@ -29,7 +29,7 @@ class _InitEnglishGradePageState extends State<InitEnglishGradePage> {
     return Column(
       children: [
         const SizedBox(
-          height: 90,
+          height: 120,
           child: Text('영어 교양 수강 시작\n단계가 무엇인가요?',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -38,7 +38,7 @@ class _InitEnglishGradePageState extends State<InitEnglishGradePage> {
             ),
           ),
         ),
-        const Divider(),
+        const Divider(height: 0),
         Expanded(
             child: ListView.separated(
               itemCount: gradeList.length,
@@ -50,7 +50,7 @@ class _InitEnglishGradePageState extends State<InitEnglishGradePage> {
                   textColor: index==initPageController.englishGrade.value ? Colors.white : Colors.black,
                 ));
               },
-              separatorBuilder: (BuildContext context, int index) => const Divider(),
+              separatorBuilder: (BuildContext context, int index) => const Divider(height: 0),
             )
         )
       ],

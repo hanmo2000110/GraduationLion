@@ -36,16 +36,17 @@ class _InitPageState extends State<InitPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      InkWell(
-                          child: const Text('이전'),
-                          onTap: ()=> _.decreaseIndex()
+                      _.index.value==0 ? const SizedBox(width: 48)
+                      : InkWell(
+                        child: navButton('이전'),
+                        onTap: ()=> _.decreaseIndex()
                       ),
                       DotsIndicator(
                         dotsCount: 4,
                         position: _.index.value,
                       ),
                       InkWell(
-                          child: const Text('다음'),
+                          child: navButton('다음'),
                           onTap: (){
                             if(_.index.value==3){
                               Get.offNamed('/navigation');
@@ -66,6 +67,13 @@ class _InitPageState extends State<InitPage> {
         )
         ),
       ),
+    );
+  }
+
+  Widget navButton(String msg){
+    return SizedBox(
+      width: 48, height: 28,
+      child: Text(msg, textAlign: TextAlign.center, style: const TextStyle(fontSize: 16)),
     );
   }
 

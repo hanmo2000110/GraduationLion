@@ -23,17 +23,13 @@ class InitPageController extends GetxController{
 
   void setSemester(int idx){
     semester.value = idx;
-    print(semester.value);
-    update();
   }
 
   void setEnglishSubmit(int idx){
     englishSubmit.value = idx;
-    update();
   }
 
   void setEnglishGrade(int idx){
     englishGrade.value = idx;
-    update();
   }
 }
