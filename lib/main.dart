@@ -2,16 +2,11 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:graduationlion/screen/splash.dart';
 import 'firebase_options.dart';
-import 'screen/navigationPage.dart';
 import 'package:get/get.dart';
 import 'package:graduationlion/route/pages.dart';
 import 'package:graduationlion/binding/binding.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-
 
 Future<void> main() async {
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
