@@ -17,7 +17,11 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      return web;
+      throw UnsupportedError(
+        'DefaultFirebaseOptions have not been configured for web - '
+        'you can reconfigure this by running the FlutterFire CLI again.',
+      );
+
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -25,7 +29,12 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        return macos;
+
+        throw UnsupportedError(
+          'DefaultFirebaseOptions have not been configured for macos - '
+          'you can reconfigure this by running the FlutterFire CLI again.',
+        );
+
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -43,41 +52,24 @@ class DefaultFirebaseOptions {
     }
   }
 
-  static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyBVhmHDqvazjoWXuG2XbIgWb2lyAf-zFHc',
-    appId: '1:1052028042977:web:1948d340f2ee069cba01a0',
-    messagingSenderId: '1052028042977',
-    projectId: 'graduation-lion',
-    authDomain: 'graduation-lion.firebaseapp.com',
-    storageBucket: 'graduation-lion.appspot.com',
-    measurementId: 'G-NPZ70FJE5Q',
-  );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyCZg8sOGTS35PSqNlStMwu6F9b5i-8eonM',
-    appId: '1:1052028042977:android:3255ed48ddc5b2c7ba01a0',
-    messagingSenderId: '1052028042977',
-    projectId: 'graduation-lion',
-    storageBucket: 'graduation-lion.appspot.com',
+    apiKey: 'AIzaSyCFbn5aSMaFzQWJUWfK_ygFs03gFdT8SV8',
+    appId: '1:1092178133208:android:5ed01abd8113d5109597ad',
+    messagingSenderId: '1092178133208',
+    projectId: 'draduationlion',
+    storageBucket: 'draduationlion.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyDZfly91rjUPBU-X39SXbB4KtisK3bp-nw',
-    appId: '1:1052028042977:ios:6ff38109dfa06349ba01a0',
-    messagingSenderId: '1052028042977',
-    projectId: 'graduation-lion',
-    storageBucket: 'graduation-lion.appspot.com',
-    iosClientId: '1052028042977-mprk6trl8fkmtjdss7jr630ae8dc2l4t.apps.googleusercontent.com',
-    iosBundleId: 'com.example.graduationlion',
-  );
+    apiKey: 'AIzaSyAaDut4yNGy_juGRXdBlRn9Hnp7SN8XvNo',
+    appId: '1:1092178133208:ios:c0bcb5e7529c49299597ad',
+    messagingSenderId: '1092178133208',
+    projectId: 'draduationlion',
+    storageBucket: 'draduationlion.appspot.com',
+    androidClientId: '1092178133208-1p0utmsd7qtq6tg7oppokprkd7cqa9fv.apps.googleusercontent.com',
+    iosClientId: '1092178133208-fuk0gsg91qeav4640uoc3kivlptbcn6m.apps.googleusercontent.com',
 
-  static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyDZfly91rjUPBU-X39SXbB4KtisK3bp-nw',
-    appId: '1:1052028042977:ios:6ff38109dfa06349ba01a0',
-    messagingSenderId: '1052028042977',
-    projectId: 'graduation-lion',
-    storageBucket: 'graduation-lion.appspot.com',
-    iosClientId: '1052028042977-mprk6trl8fkmtjdss7jr630ae8dc2l4t.apps.googleusercontent.com',
     iosBundleId: 'com.example.graduationlion',
   );
 }

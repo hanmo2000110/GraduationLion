@@ -1,34 +1,59 @@
 {
   "project_info": {
-    "project_number": "1052028042977",
-    "project_id": "graduation-lion",
-    "storage_bucket": "graduation-lion.appspot.com"
+
+    "project_number": "1092178133208",
+    "project_id": "draduationlion",
+    "storage_bucket": "draduationlion.appspot.com"
+
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1052028042977:android:3255ed48ddc5b2c7ba01a0",
+
+        "mobilesdk_app_id": "1:1092178133208:android:5ed01abd8113d5109597ad",
+
         "android_client_info": {
           "package_name": "com.example.graduationlion"
         }
       },
       "oauth_client": [
         {
-          "client_id": "1052028042977-ca4il1ehrsk9a4a0q0n1cvsu48uq1495.apps.googleusercontent.com",
+
+          "client_id": "1092178133208-1p0utmsd7qtq6tg7oppokprkd7cqa9fv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.graduationlion",
+            "certificate_hash": "da6619cfec68931dc530867721e770104367d4a2"
+          }
+        },
+        {
+          "client_id": "1092178133208-8hg84d077lc3iqhocqqi62jt3sqlumb3.apps.googleusercontent.com",
+
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyCZg8sOGTS35PSqNlStMwu6F9b5i-8eonM"
+
+          "current_key": "AIzaSyCFbn5aSMaFzQWJUWfK_ygFs03gFdT8SV8"
+
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1052028042977-bbdhhbvj2mdsq03jfa0160igm9gmlilf.apps.googleusercontent.com",
+
+              "client_id": "1092178133208-8hg84d077lc3iqhocqqi62jt3sqlumb3.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "1092178133208-fuk0gsg91qeav4640uoc3kivlptbcn6m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.graduationlion"
+              }
+
             }
           ]
         }
