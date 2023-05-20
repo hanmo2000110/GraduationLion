@@ -6,6 +6,8 @@ import 'package:graduationlion/screen/navigationPage.dart';
 import 'package:get/get.dart';
 import 'package:graduationlion/screen/splash.dart';
 
+import '../screen/login.dart';
+
 part 'routes.dart';
 
 class AppPages {
@@ -15,6 +17,10 @@ class AppPages {
     GetPage(
       name: Routes.splash,
       page: () => SplashScreen(),
+    ),
+    GetPage(
+      name: Routes.login,
+      page: () => LoginPage(),
     ),
     GetPage(
       name: Routes.navigation,
