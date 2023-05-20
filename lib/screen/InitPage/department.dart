@@ -29,6 +29,7 @@ class _InitDepartmentPageState extends State<InitDepartmentPage> {
         const SizedBox(
           height: 90,
           child: Text('어떤 학부에\n소속되어있으신가요?',
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold

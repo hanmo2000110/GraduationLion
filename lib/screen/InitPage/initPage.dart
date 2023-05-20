@@ -46,7 +46,14 @@ class _InitPageState extends State<InitPage> {
                       ),
                       InkWell(
                           child: const Text('다음'),
-                          onTap: ()=> _.increaseIndex()
+                          onTap: (){
+                            if(_.index.value==3){
+                              Get.offNamed('/navigation');
+                            }
+                            else{
+                              _.increaseIndex();
+                            }
+                          }
                       ),
                     ],
                   )

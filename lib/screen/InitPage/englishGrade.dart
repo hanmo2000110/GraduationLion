@@ -11,7 +11,13 @@ class InitEnglishGradePage extends StatefulWidget{
 }
 
 class _InitEnglishGradePageState extends State<InitEnglishGradePage> {
-  final InitPageController initPageController = Get.put(InitPageController());
+  final InitPageController initPageController = Get.find<InitPageController>();
+  List<String> gradeList = [
+    'EF',
+    'EC',
+    'ERC',
+    'EAP'
+  ];
 
   @override
   void initState() {
@@ -22,9 +28,32 @@ class _InitEnglishGradePageState extends State<InitEnglishGradePage> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Text('InitEnglishGradePage')
+        const SizedBox(
+          height: 90,
+          child: Text('영어 교양 수강 시작\n단계가 무엇인가요?',
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold
+            ),
+          ),
+        ),
+        const Divider(),
+        Expanded(
+            child: ListView.separated(
+              itemCount: gradeList.length,
+              itemBuilder: (BuildContext context, int index) {
+                return Obx(() => ListTile(
+                  title: Text(gradeList[index]),
+                  onTap: () => initPageController.setEnglishGrade(index),
+                  tileColor: index==initPageController.englishGrade.value ? Color(0xff00579C) : Colors.white,
+                  textColor: index==initPageController.englishGrade.value ? Colors.white : Colors.black,
+                ));
+              },
+              separatorBuilder: (BuildContext context, int index) => const Divider(),
+            )
+        )
       ],
-
     );
   }
 }
