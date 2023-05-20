@@ -27,7 +27,7 @@ class _InitEnglishSubmitPageState extends State<InitEnglishSubmitPage> {
     return Column(
       children: [
         const SizedBox(
-          height: 90,
+          height: 120,
           child: Text('졸업 영어 성적을\n제출하셨나요?',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -36,7 +36,7 @@ class _InitEnglishSubmitPageState extends State<InitEnglishSubmitPage> {
             ),
           ),
         ),
-        const Divider(),
+        const Divider(height: 0),
         Expanded(
             child: ListView.separated(
               itemCount: list.length,
@@ -48,7 +48,7 @@ class _InitEnglishSubmitPageState extends State<InitEnglishSubmitPage> {
                   textColor: index==initPageController.englishSubmit.value ? Colors.white : Colors.black,
                 ));
               },
-              separatorBuilder: (BuildContext context, int index) => const Divider(),
+              separatorBuilder: (BuildContext context, int index) => const Divider(height: 0),
             )
         )
       ],

@@ -14,7 +14,8 @@ class _InitDepartmentPageState extends State<InitDepartmentPage> {
   final InitPageController initPageController = Get.find<InitPageController>();
   List<String> departmentList = [
     '전산전자공학부',
-    'gg'
+    '글로벌리더십학부',
+    '경영경제학부'
   ];
 
   @override
@@ -27,7 +28,7 @@ class _InitDepartmentPageState extends State<InitDepartmentPage> {
     return Column(
       children: [
         const SizedBox(
-          height: 90,
+          height: 120,
           child: Text('어떤 학부에\n소속되어있으신가요?',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -36,21 +37,21 @@ class _InitDepartmentPageState extends State<InitDepartmentPage> {
             ),
           ),
         ),
-        const Divider(),
+        const Divider(height: 0),
         Expanded(
-        child: ListView.separated(
-          itemCount: departmentList.length,
-          itemBuilder: (BuildContext context, int index) {
-            return Obx(() => ListTile(
-              title: Text(departmentList[index]),
-              onTap: () => initPageController.setDepartment(index),
-              tileColor: index==initPageController.department.value ? Color(0xff00579C) : Colors.white,
-              textColor: index==initPageController.department.value ? Colors.white : Colors.black,
-            ));
-          },
-          separatorBuilder: (BuildContext context, int index) => const Divider(),
-        )
-        )
+          child: ListView.separated(
+            itemCount: departmentList.length,
+            itemBuilder: (BuildContext context, int index) {
+              return Obx(() => ListTile(
+                title: Text(departmentList[index]),
+                onTap: () => initPageController.setDepartment(index),
+                tileColor: index==initPageController.department.value ? const Color(0xff00579C) : Colors.white,
+                textColor: index==initPageController.department.value ? Colors.white : Colors.black,
+              ));
+            },
+            separatorBuilder: (BuildContext context, int index) => const Divider(height: 0),
+          )
+        ),
       ],
     );
   }
