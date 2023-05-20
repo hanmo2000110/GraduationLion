@@ -8,6 +8,7 @@ import 'package:graduationlion/route/pages.dart';
 import 'package:graduationlion/binding/binding.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
