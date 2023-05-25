@@ -30,7 +30,9 @@ class MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
+      body: ListView(
+        children: [
+      Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -38,40 +40,32 @@ class MyPageState extends State<MyPage> {
               currentState(45),
 
               semesterWithAdd('1'),
-
-            ListView.builder(
-                shrinkWrap: true,
-              itemCount: myCourseList.length,
-              itemBuilder: (context, i) {
-              return ListTile(
-                visualDensity: const VisualDensity(vertical: -3),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-                leading: Text(
-                  '${myCourseList[i]['course']}',
-                  style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-                ),
-                trailing: Text(
-                  '${myCourseList[i]['desc']}',
-                  textAlign: TextAlign.end,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: Color(0xff8B95A1),
-                      height: 1.1),
-                ),
-              );
-            }
-          ),
+              courseView(myCourseList),
 
               semesterWithAdd('2'),
+              courseView(myCourseList),
+
               semesterWithAdd('3'),
+              courseView(myCourseList),
+
               semesterWithAdd('4'),
+              courseView(myCourseList),
+
               semesterWithAdd('5'),
+              courseView(myCourseList),
+
               semesterWithAdd('6'),
+              courseView(myCourseList),
+
               semesterWithAdd('7'),
+              courseView(myCourseList),
+
               semesterWithAdd('8'),
+              courseView(myCourseList),
             ],
           ),
+      ],
+      ),
     );
   }
 }
@@ -240,38 +234,28 @@ Widget semesterWithAdd(String semester) {
   );
 }
 
-Widget courseView(String title, List desc) {
-  var showList = desc.join(", ");
-
-  return Slidable(
-    endActionPane: ActionPane(
-      extentRatio: 0.2,
-      motion: const ScrollMotion(),
-      children: [
-        SlidableAction(
-          onPressed: (BuildContext context) {},
-          backgroundColor: const Color(0xFFFF0000),
-          foregroundColor: Colors.white,
-          icon: Icons.delete,
-        ),
-      ],
-    ),
-    child: ListTile(
-      visualDensity: const VisualDensity(vertical: -3),
-      contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-      leading: Text(
-        title,
-        style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-      ),
-      trailing: Text(
-        showList,
-        textAlign: TextAlign.end,
-        style: const TextStyle(
-            fontWeight: FontWeight.w500,
-            fontSize: 14,
-            color: Color(0xff8B95A1),
-            height: 1.1),
-      ),
-    ),
+Widget courseView(List myCourseList) {
+  return ListView.builder(
+      shrinkWrap: true,
+      itemCount: myCourseList.length,
+      itemBuilder: (context, i) {
+        return ListTile(
+          visualDensity: const VisualDensity(vertical: -3),
+          contentPadding: const EdgeInsets.symmetric(horizontal: 24),
+          leading: Text(
+            '${myCourseList[i]['course']}',
+            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+          ),
+          trailing: Text(
+            '${myCourseList[i]['desc']}',
+            textAlign: TextAlign.end,
+            style: const TextStyle(
+                fontWeight: FontWeight.w500,
+                fontSize: 14,
+                color: Color(0xff8B95A1),
+                height: 1.1),
+          ),
+        );
+      }
   );
 }
