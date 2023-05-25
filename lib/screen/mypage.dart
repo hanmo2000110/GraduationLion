@@ -15,7 +15,7 @@ class MyPageState extends State<MyPage> {
   List<Map<String, String>> myCourseList = [
     {
       'course': 'AI 프로젝트 입문',
-      'desc': '2학점 영어 설계',
+      'desc': '2학점, 영어, 설계',
     },
     {
       'course': '모바일 앱 개발',
@@ -23,7 +23,7 @@ class MyPageState extends State<MyPage> {
     },
     {
       'course': '환경과 인간',
-      'desc': '3학점 P/F',
+      'desc': '3학점, P/F',
     },
   ];
 
