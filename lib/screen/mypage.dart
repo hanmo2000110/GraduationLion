@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:graduationlion/controller/coursecontroller.dart';
 import 'recommend.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
@@ -11,102 +12,66 @@ class MyPage extends StatefulWidget {
 }
 
 class MyPageState extends State<MyPage> {
+  List<Map<String, String>> myCourseList = [
+    {
+      'course': 'AI 프로젝트 입문',
+      'desc': '2학점 영어 설계',
+    },
+    {
+      'course': '모바일 앱 개발',
+      'desc': '3학점',
+    },
+    {
+      'course': '환경과 인간',
+      'desc': '3학점 P/F',
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ListView(
-        children: [
-          Column(
+      body: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               profile('졸업사자'),
               currentState(45),
 
-              // 학기 별 수강 강의 목록
-              // 1학기
               semesterWithAdd('1'),
-              courseView('AI 프로젝트 입문', courseDesc1),
-              divider(),
-              courseView('환경과 인간', courseDesc2),
-              divider(),
-              courseView('모바일 앱 개발', courseDesc2),
-              divider(),
-              courseView('Computer Vision', courseDesc1),
 
-              // 2학기
+            ListView.builder(
+                shrinkWrap: true,
+              itemCount: myCourseList.length,
+              itemBuilder: (context, i) {
+              return ListTile(
+                visualDensity: const VisualDensity(vertical: -3),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 24),
+                leading: Text(
+                  '${myCourseList[i]['course']}',
+                  style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                ),
+                trailing: Text(
+                  '${myCourseList[i]['desc']}',
+                  textAlign: TextAlign.end,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: Color(0xff8B95A1),
+                      height: 1.1),
+                ),
+              );
+            }
+          ),
+
               semesterWithAdd('2'),
-              courseView('공학프로젝트 기획', courseDesc1),
-              divider(),
-              courseView('환경과 인간', courseDesc2),
-              divider(),
-              courseView('모바일 앱 개발', courseDesc2),
-              divider(),
-              courseView('Operating System', courseDesc1),
-
-              // 3학기
               semesterWithAdd('3'),
-              courseView('AI 프로젝트 입문', courseDesc1),
-              divider(),
-              courseView('모바일 앱 개발', courseDesc2),
-              divider(),
-              courseView('환경과 인간', courseDesc2),
-              divider(),
-              courseView('Computer Network', courseDesc1),
-
-              // 4학기
               semesterWithAdd('4'),
-              courseView('AI 프로젝트 입문', courseDesc1),
-              divider(),
-              courseView('환경과 인간', courseDesc2),
-              divider(),
-              courseView('모바일 앱 개발', courseDesc2),
-              divider(),
-              courseView('Computer Vision', courseDesc1),
-
-              // 5학기
               semesterWithAdd('5'),
-              courseView('AI 프로젝트 입문', courseDesc1),
-              divider(),
-              courseView('환경과 인간', courseDesc2),
-              divider(),
-              courseView('모바일 앱 개발', courseDesc2),
-              divider(),
-              courseView('Computer Vision', courseDesc1),
-
-              // 6학기
               semesterWithAdd('6'),
-              courseView('공학프로젝트 기획', courseDesc1),
-              divider(),
-              courseView('환경과 인간', courseDesc2),
-              divider(),
-              courseView('모바일 앱 개발', courseDesc2),
-              divider(),
-              courseView('Operating System', courseDesc1),
-
-              // 7학기
               semesterWithAdd('7'),
-              courseView('AI 프로젝트 입문', courseDesc1),
-              divider(),
-              courseView('모바일 앱 개발', courseDesc2),
-              divider(),
-              courseView('환경과 인간', courseDesc2),
-              divider(),
-              courseView('Computer Network', courseDesc1),
-
-              // 8학기
               semesterWithAdd('8'),
-              courseView('AI 프로젝트 입문', courseDesc1),
-              divider(),
-              courseView('환경과 인간', courseDesc2),
-              divider(),
-              courseView('Computer Vision', courseDesc1),
-              divider(),
-              courseView('환경과 인간', courseDesc2),
             ],
           ),
-        ],
-      ),
     );
   }
 }
