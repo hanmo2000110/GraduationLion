@@ -39,35 +39,23 @@ class MyPageState extends State<MyPage> {
               profile('졸업사자'),
               currentState(45),
 
-              semesterWithAdd('1'),
-              courseView(myCourseList),
-
-              semesterWithAdd('2'),
-              courseView(myCourseList),
-
-              semesterWithAdd('3'),
-              courseView(myCourseList),
-
-              semesterWithAdd('4'),
-              courseView(myCourseList),
-
-              semesterWithAdd('5'),
-              courseView(myCourseList),
-
-              semesterWithAdd('6'),
-              courseView(myCourseList),
-
-              semesterWithAdd('7'),
-              courseView(myCourseList),
-
-              semesterWithAdd('8'),
-              courseView(myCourseList),
+              for(int i=1 ; i<=8 ; i++)
+                myCourseInfo(i, myCourseList)
             ],
           ),
       ],
       ),
     );
   }
+}
+
+Widget myCourseInfo(int semester, List myCourseList){
+  return Column(
+    children: [
+      semesterWithAdd(semester),
+      courseView(myCourseList),
+    ],
+  );
 }
 
 Widget profile(String nickname) {
@@ -179,7 +167,7 @@ Widget currentState(int state) {
   );
 }
 
-Widget semesterWithAdd(String semester) {
+Widget semesterWithAdd(int semester) {
   // 학기 수 + 추가 버튼
   return Stack(
     alignment: AlignmentDirectional.center,
