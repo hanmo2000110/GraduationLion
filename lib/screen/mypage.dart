@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_state_manager/src/rx_flutter/rx_obx_widget.dart';
 import 'package:graduationlion/controller/coursecontroller.dart';
 import 'recommend.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:get/get.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
@@ -47,6 +46,33 @@ class MyPageState extends State<MyPage> {
       ),
     );
   }
+}
+
+Widget courseView(List myCourseList) {
+  return ListView.separated(
+    shrinkWrap: true,
+    itemCount: myCourseList.length,
+    itemBuilder: (context, i) {
+      return ListTile(
+        visualDensity: const VisualDensity(vertical: -3),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 24),
+        leading: Text(
+          '${myCourseList[i]['course']}',
+          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+        ),
+        trailing: Text(
+          '${myCourseList[i]['desc']}',
+          textAlign: TextAlign.end,
+          style: const TextStyle(
+              fontWeight: FontWeight.w500,
+              fontSize: 14,
+              color: Color(0xff8B95A1),
+              height: 1.1),
+        ),
+      );
+    },
+    separatorBuilder: (BuildContext context, int index) => divider(),
+  );
 }
 
 Widget myCourseInfo(int semester, List myCourseList){
@@ -188,7 +214,9 @@ Widget semesterWithAdd(int semester) {
             width: 45,
             margin: const EdgeInsets.only(left: 10),
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed('/addcourse');
+              },
               style: ElevatedButton.styleFrom(
                   elevation: 0.0,
                   minimumSize: Size.zero,
@@ -219,32 +247,5 @@ Widget semesterWithAdd(int semester) {
         ],
       ),
     ],
-  );
-}
-
-Widget courseView(List myCourseList) {
-  return ListView.separated(
-      shrinkWrap: true,
-      itemCount: myCourseList.length,
-      itemBuilder: (context, i) {
-        return ListTile(
-          visualDensity: const VisualDensity(vertical: -3),
-          contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-          leading: Text(
-            '${myCourseList[i]['course']}',
-            style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-          ),
-          trailing: Text(
-            '${myCourseList[i]['desc']}',
-            textAlign: TextAlign.end,
-            style: const TextStyle(
-                fontWeight: FontWeight.w500,
-                fontSize: 14,
-                color: Color(0xff8B95A1),
-                height: 1.1),
-          ),
-        );
-      },
-      separatorBuilder: (BuildContext context, int index) => divider(),
   );
 }

@@ -48,23 +48,23 @@ Widget recommendCourseInfo(int semester, List myCourseList){
   return Column(
     children: [
       Stack(
-      alignment: AlignmentDirectional.center,
-      children: [
-        Container(
-          height: 30,
-          color: const Color(0xFFEFEFF4),
-        ),
-        Row(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 24),
-              child: Text('$semester학기', style: const TextStyle(fontSize: 10)),
-            ),
-          ],
-        ),
-      ],
-    ),
+        alignment: AlignmentDirectional.center,
+        children: [
+          Container(
+            height: 30,
+            color: const Color(0xFFEFEFF4),
+          ),
+          Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(left: 24),
+                child: Text('$semester학기', style: const TextStyle(fontSize: 10)),
+              ),
+            ],
+          ),
+        ],
+      ),
       courseView(myCourseList),
     ],
   );
