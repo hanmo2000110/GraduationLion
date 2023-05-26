@@ -11,22 +11,22 @@ class MyPage extends StatefulWidget {
   State<MyPage> createState() => MyPageState();
 }
 
-class MyPageState extends State<MyPage> {
-  List<Map<String, String>> myCourseList = [
-    {
-      'course': 'AI 프로젝트 입문',
-      'desc': '2학점, 영어, 설계',
-    },
-    {
-      'course': '모바일 앱 개발',
-      'desc': '3학점',
-    },
-    {
-      'course': '환경과 인간',
-      'desc': '3학점, P/F',
-    },
-  ];
+List<Map<String, String>> myCourseList = [
+  {
+    'course': 'AI 프로젝트 입문',
+    'desc': '2학점, 영어, 설계',
+  },
+  {
+    'course': '모바일 앱 개발',
+    'desc': '3학점',
+  },
+  {
+    'course': '환경과 인간',
+    'desc': '3학점, P/F',
+  },
+];
 
+class MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -223,7 +223,7 @@ Widget semesterWithAdd(int semester) {
 }
 
 Widget courseView(List myCourseList) {
-  return ListView.builder(
+  return ListView.separated(
       shrinkWrap: true,
       itemCount: myCourseList.length,
       itemBuilder: (context, i) {
@@ -244,6 +244,7 @@ Widget courseView(List myCourseList) {
                 height: 1.1),
           ),
         );
-      }
+      },
+      separatorBuilder: (BuildContext context, int index) => divider(),
   );
 }
