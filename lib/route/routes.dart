@@ -8,4 +8,5 @@ abstract class Routes {
   static const home = '/home';
   static const recommned = '/recommend';
   static const mypage = '/mypage';
+  static const addcourse = '/addcourse';
 }

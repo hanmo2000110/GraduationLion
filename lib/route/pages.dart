@@ -3,6 +3,7 @@ import 'package:graduationlion/screen/InitPage/initPage.dart';
 import 'package:graduationlion/screen/recommend.dart';
 import 'package:graduationlion/screen/mypage.dart';
 import 'package:graduationlion/screen/navigationPage.dart';
+import 'package:graduationlion/screen/addCourse.dart';
 
 import 'package:get/get.dart';
 import 'package:graduationlion/screen/splash.dart';
@@ -21,11 +22,11 @@ class AppPages {
     ),
     GetPage(
       name: Routes.login,
-      page: () => LoginPage(),
+      page: () => const LoginPage(),
     ),
     GetPage(
       name: Routes.init,
-      page: () => InitPage(),
+      page: () => const InitPage(),
     ),
     GetPage(
       name: Routes.navigation,
@@ -42,6 +43,10 @@ class AppPages {
     GetPage(
       name: Routes.mypage,
       page: () => const MyPage(),
+    ),
+    GetPage(
+      name: Routes.addcourse,
+      page: () => const addCoursePage(),
     ),
   ];
 }
