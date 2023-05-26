@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'mypage.dart';
 
 class RecommendPage extends StatefulWidget {
   const RecommendPage({super.key});
@@ -6,17 +7,6 @@ class RecommendPage extends StatefulWidget {
   @override
   State<RecommendPage> createState() => RecommendPageState();
 }
-
-List<String> courseDesc1 = [
-  '2학점',
-  '영어',
-  '설계',
-];
-
-List<String> courseDesc2 = [
-  '3학점',
-  'P/F',
-];
 
 class RecommendPageState extends State<RecommendPage> {
   @override
@@ -44,44 +34,40 @@ class RecommendPageState extends State<RecommendPage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              semesterTitle('5'),
-              courseInfo('AI 프로젝트 입문', courseDesc1),
-              divider(),
-              courseInfo('환경과 인간', courseDesc2),
-              divider(),
-              courseInfo('모바일 앱 개발', courseDesc2),
-              divider(),
-              courseInfo('Computer Vision', courseDesc1),
-              semesterTitle('6'),
-              courseInfo('공학프로젝트 기획', courseDesc1),
-              divider(),
-              courseInfo('환경과 인간', courseDesc2),
-              divider(),
-              courseInfo('모바일 앱 개발', courseDesc2),
-              divider(),
-              courseInfo('Operating System', courseDesc1),
-              semesterTitle('7'),
-              courseInfo('AI 프로젝트 입문', courseDesc1),
-              divider(),
-              courseInfo('모바일 앱 개발', courseDesc2),
-              divider(),
-              courseInfo('환경과 인간', courseDesc2),
-              divider(),
-              courseInfo('Computer Network', courseDesc1),
-              semesterTitle('8'),
-              courseInfo('AI 프로젝트 입문', courseDesc1),
-              divider(),
-              courseInfo('환경과 인간', courseDesc2),
-              divider(),
-              courseInfo('Computer Vision', courseDesc1),
-              divider(),
-              courseInfo('환경과 인간', courseDesc2),
+              for(int i=1 ; i<=8 ; i++)
+                recommendCourseInfo(i, myCourseList)
             ],
           ),
         ],
       ),
     );
   }
+}
+
+Widget recommendCourseInfo(int semester, List myCourseList){
+  return Column(
+    children: [
+      Stack(
+      alignment: AlignmentDirectional.center,
+      children: [
+        Container(
+          height: 30,
+          color: const Color(0xFFEFEFF4),
+        ),
+        Row(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(left: 24),
+              child: Text('$semester학기', style: const TextStyle(fontSize: 10)),
+            ),
+          ],
+        ),
+      ],
+    ),
+      courseView(myCourseList),
+    ],
+  );
 }
 
 Widget semesterTitle(String semester) {
