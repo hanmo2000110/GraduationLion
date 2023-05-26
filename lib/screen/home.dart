@@ -46,9 +46,7 @@ class HomePageState extends State<HomePage> {
               height: 33,
               child: InkWell(
                 radius: 33,
-                onTap: () {
-                  // Get.toNamed('/mypage');
-                },
+                onTap: (){},
                 child: Image.asset('assets/images/profile.png'),
               ),
             ),
@@ -62,85 +60,16 @@ class HomePageState extends State<HomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              // 신앙 및 세계관
-              categoryTitle('신앙및세계관'),
-              scoreInfo('남은 학점', 6, 9),
-              divider(),
-              takeCSinfo('수강 완료', cmplt),
-              divider(),
-              takeCSinfo('수강 예정', notcmplt),
-
-              // 인성 및 리더십
-              categoryTitle('인성및리더십'),
-              scoreInfo('남은 학점', 3, 6),
-              divider(),
-              takeCSinfo('수강 완료', cmplt),
-              divider(),
-              takeCSinfo('수강 예정', notcmplt),
-
-              // 실무 영어
-              categoryTitle('실무영어'),
-              scoreInfo('남은 학점', 6, 9),
-              divider(),
-              takeCSinfo('수강 완료', cmplt),
-              divider(),
-              takeCSinfo('수강 예정', notcmplt),
-
-              // 전문 교양
-              categoryTitle('전문교양'),
-              scoreInfo('남은 학점', 5, 5),
-              divider(),
-              takeCSinfo('수강 완료', cmplt),
-              divider(),
-              takeCSinfo('수강 예정', notcmplt),
-
-              // BSM
-              categoryTitle('BSM'),
-              scoreInfo('남은 학점', 8, 18),
-              divider(),
-              takeCSinfo('수강 완료', cmplt),
-              divider(),
-              takeCSinfo('수강 예정', notcmplt),
-
-              // ICT 융합 기초
-              categoryTitle('ICT융합기초'),
-              scoreInfo('남은 학점', 2, 2),
-              divider(),
-              takeCSinfo('수강 완료', cmplt),
-              divider(),
-              takeCSinfo('수강 예정', notcmplt),
-
-              // 자유선택 (교양)
-              categoryTitle('자유선택(교양)'),
-              scoreInfo('남은 학점', 6, 9),
-              divider(),
-              takeCSinfo('수강 완료', cmplt),
-              divider(),
-              takeCSinfo('수강 예정', notcmplt),
-
-              // 자유선택 (교양 또는 비교양)
-              categoryTitle('자유선택(교양또는비교양)'),
-              scoreInfo('남은 학점', 6, 12),
-              divider(),
-              takeCSinfo('수강 완료', cmplt),
-              divider(),
-              takeCSinfo('수강 예정', notcmplt),
-
-              // 전공 주제
-              categoryTitle('전공주제'),
-              scoreInfo('남은 학점', 35, 60),
-              divider(),
-              takeCSinfo('수강 완료', cmplt),
-              divider(),
-              takeCSinfo('수강 예정', notcmplt),
-
-              // P/F 과목 총 이수학점
-              categoryTitle('P/F과목 총이수학점'),
-              scoreInfo('남은 학점', 16, 39),
-              divider(),
-              takeCSinfo('수강 완료', cmplt),
-              divider(),
-              takeCSinfo('수강 예정', notcmplt),
+              setView('신앙및세계관', 6, 9, cmplt, notcmplt),
+              setView('인성및리더십', 3, 6, cmplt, notcmplt),
+              setView('전문교양', 5, 5, cmplt, notcmplt),
+              setView('BSM', 8, 18, cmplt, notcmplt),
+              setView('ICT융합기초', 2, 2, cmplt, notcmplt),
+              setView('자유선택(교양)', 6, 9, cmplt, notcmplt),
+              setView('자유선택(교양또는비교양)', 6, 12, cmplt, notcmplt),
+              setView('전공주제', 35, 60, cmplt, notcmplt),
+              setView('신앙및세계관', 6, 9, cmplt, notcmplt),
+              setView('P/F과목 총이수학점', 16, 39, cmplt, notcmplt),
 
               // 총 취득학점
               categoryTitle('총 취득학점'),
@@ -187,6 +116,19 @@ class HomePageState extends State<HomePage> {
       ),
     );
   }
+}
+
+Widget setView(String category, int remainA, int remainB, List cmplt, List notcmplt){
+  return Column(
+    children:[
+      categoryTitle(category),
+      scoreInfo('남은 학점', remainA, remainB),
+      divider(),
+      takeCSinfo('수강 완료', cmplt),
+      divider(),
+      takeCSinfo('수강 예정', notcmplt),
+    ]
+  );
 }
 
 Widget categoryTitle(String title) {
