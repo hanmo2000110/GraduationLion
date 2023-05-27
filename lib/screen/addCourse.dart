@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'home.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class addCoursePage extends StatefulWidget {
   const addCoursePage({super.key});
@@ -74,70 +75,84 @@ class addCoursePageState extends State<addCoursePage> {
           ),
           ),
         ),
-      body: ListView.separated(
-        shrinkWrap: true,
-        itemCount: searchResult.length,
-        itemBuilder: (context, i) {
-          return SizedBox(
-            height: 75,
-            child: ListTile(
-            contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
-            leading: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  '${searchResult[i]['course']}',
-                  style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
-                ),
-                const Padding(padding: EdgeInsets.only(top: 4)),
-                Text(
-                  '학점: ${searchResult[i]['grade']} (설계 ${searchResult[i]['designGrade']})\n영어비율: ${searchResult[i]['english']}%',
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 11,
-                      color: Color(0xff8B95A1),
-                      height: 1.4),
-                ),
-              ],
-            ),
-              trailing: Container(
-                margin: const EdgeInsets.only(bottom: 28),
-                height: 19,
-                width: 45,
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                      elevation: 0.0,
-                      minimumSize: Size.zero,
-                      padding: EdgeInsets.zero,
-                      backgroundColor: const Color(0xff8B95A1),
-                      textStyle: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12)),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+        body: StreamBuilder(
+          stream: FirebaseFirestore.instance.collection('Courses').snapshots(),
+          builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          final docs = snapshot.data!.docs;
+          return ListView.separated(
+            shrinkWrap: true,
+            itemCount: docs.length,
+            itemBuilder: (context, index) {
+              return SizedBox(
+                height: 69,
+                child: ListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                  leading: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Icon(
-                        Icons.add,
-                        size: 14,
-                        color: Colors.white,
+                      Text(
+                        docs[index]['name'],
+                        style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
                       ),
-                      Text("추가",
-                          style: TextStyle(
-                              height: 1,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 10)),
+                      const Padding(padding: EdgeInsets.only(top: 4)),
+                      Text(
+                        '${docs[index]['credit']}학점 (설계 ${docs[index]['design']}학점), ${docs[index]['type']}',
+                        style: const TextStyle(
+                        fontWeight: FontWeight.w500,
+                        fontSize: 11,
+                        color: Color(0xff8B95A1),
+                        height: 1.4),
+                      ),
                     ],
                   ),
+                  trailing: Container(
+                    margin: const EdgeInsets.only(bottom: 28),
+                    height: 19,
+                    width: 45,
+                    child: ElevatedButton(
+                      onPressed: () {},
+                      style: ElevatedButton.styleFrom(
+                        elevation: 0.0,
+                        minimumSize: Size.zero,
+                        padding: EdgeInsets.zero,
+                        backgroundColor: const Color(0xff8B95A1),
+                        textStyle: const TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 12)
+                      ),
+                      child: const Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            Icons.add,
+                            size: 14,
+                            color: Colors.white,
+                          ),
+                          Text("추가",
+                            style: TextStyle(
+                            height: 1,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 10)),
+                        ],
+                      ),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-          );
-        },
-        separatorBuilder: (BuildContext context, int index) => divider(),
-      ),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) => divider(),
+            );
+          },
+        ),
     );
   }
 }
