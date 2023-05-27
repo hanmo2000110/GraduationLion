@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 
 class addCoursePage extends StatefulWidget {
   const addCoursePage({super.key});
@@ -111,7 +112,7 @@ class addCoursePageState extends State<addCoursePage> {
                               Navigator.of(context).pop();
                             }, child: const Text("취소", style: TextStyle(color: Colors.grey, fontSize: 14))),
                             CupertinoDialogAction(onPressed: (){
-                              Navigator.of(context).pop();
+                              Get.offNamed('/mypage');
                             }, child: const Text("추가", style: TextStyle(color: Color(0xff00579C), fontSize: 14))),
                           ],
                           content: Text('${docs[index]['name']}\n${docs[index]['credit']}학점 (설계 ${docs[index]['design']}학점), ${docs[index]['type']}', style: const TextStyle(fontSize: 12)),
