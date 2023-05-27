@@ -35,6 +35,7 @@ class addCoursePageState extends State<addCoursePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          scrolledUnderElevation: 0.0,
           backgroundColor: Colors.white,
           leadingWidth: 30,
           title: const SizedBox(
@@ -76,7 +77,7 @@ class addCoursePageState extends State<addCoursePage> {
           ),
         ),
         body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('Courses').snapshots(),
+          stream: FirebaseFirestore.instance.collection('Courses').orderBy('name', descending: false).snapshots(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
 
           if (snapshot.connectionState == ConnectionState.waiting) {
