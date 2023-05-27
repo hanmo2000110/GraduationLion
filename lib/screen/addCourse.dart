@@ -103,16 +103,18 @@ class addCoursePageState extends State<addCoursePage> {
                       barrierDismissible: false, // user must tap button!
                       builder: (BuildContext context) {
                         return CupertinoAlertDialog(
-                          title: const Text('강의를 추가하시겠습니까?', style: TextStyle(fontSize: 14)),
+                          title: const Padding(
+                            padding: EdgeInsets.only(bottom: 7),
+                              child: Text('강의를 추가하시겠습니까?', style: TextStyle(fontSize: 14))),
                           actions: [
                             CupertinoDialogAction(onPressed: (){
                               Navigator.of(context).pop();
-                            }, child: const Text("취소", style: TextStyle(color: Colors.grey))),
+                            }, child: const Text("취소", style: TextStyle(color: Colors.grey, fontSize: 14))),
                             CupertinoDialogAction(onPressed: (){
                               Navigator.of(context).pop();
-                            }, child: const Text("추가", style: TextStyle(color: Color(0xff00579C)))),
+                            }, child: const Text("추가", style: TextStyle(color: Color(0xff00579C), fontSize: 14))),
                           ],
-                          content: Text('강의명: ${docs[index]['name']}\n${docs[index]['credit']}학점 (설계 ${docs[index]['design']}학점), ${docs[index]['type']}'),
+                          content: Text('강의명: ${docs[index]['name']}\n${docs[index]['credit']}학점 (설계 ${docs[index]['design']}학점), ${docs[index]['type']}', style: const TextStyle(fontSize: 12)),
                         );
                       },
                     ),
