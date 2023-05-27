@@ -114,7 +114,7 @@ class addCoursePageState extends State<addCoursePage> {
                               Navigator.of(context).pop();
                             }, child: const Text("추가", style: TextStyle(color: Color(0xff00579C), fontSize: 14))),
                           ],
-                          content: Text('강의명: ${docs[index]['name']}\n${docs[index]['credit']}학점 (설계 ${docs[index]['design']}학점), ${docs[index]['type']}', style: const TextStyle(fontSize: 12)),
+                          content: Text('${docs[index]['name']}\n${docs[index]['credit']}학점 (설계 ${docs[index]['design']}학점), ${docs[index]['type']}', style: const TextStyle(fontSize: 12)),
                         );
                       },
                     ),
