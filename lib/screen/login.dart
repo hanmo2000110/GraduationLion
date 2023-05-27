@@ -38,7 +38,7 @@ class _LoginPageState extends State<LoginPage> {
                 onTap: () async {
                   var result = await UserController.to.signin();
                   if (result) {
-                    Get.toNamed('/init');
+                    Get.offNamed('/init');
                   } else {
                     Get.snackbar(
                         "Log In Failed", "Your email is not Handong email");

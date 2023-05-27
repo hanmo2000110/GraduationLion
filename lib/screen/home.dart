@@ -46,7 +46,36 @@ class HomePageState extends State<HomePage> {
               height: 33,
               child: InkWell(
                 radius: 33,
-                onTap: (){},
+                onTap: (){
+                  showDialog(
+                      context: context,
+                      builder: (BuildContext context){
+                        return AlertDialog(
+                            surfaceTintColor: Colors.white,
+                            contentPadding: const EdgeInsets.fromLTRB(4, 2, 4, 0),
+                            content: Container(
+                              width: 340, height: 675,
+                              decoration: BoxDecoration(borderRadius: BorderRadius.circular(20)),
+                              clipBehavior: Clip.hardEdge,
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  children: [
+                                    const Padding(
+                                        padding: EdgeInsets.symmetric(vertical: 40),
+                                        child: Text('AI·컴퓨터공학심화 졸업요건',
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                                        )
+                                    ),
+                                    Image.asset("assets/images/CS.png")
+                                  ],
+                                ),
+                              ),
+                            )
+                        );
+                    }
+                  );
+                },
                 child: Image.asset('assets/images/profile.png'),
               ),
             ),
