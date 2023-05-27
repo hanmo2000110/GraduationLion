@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -10,27 +11,6 @@ class addCoursePage extends StatefulWidget {
 }
 
 class addCoursePageState extends State<addCoursePage> {
-  List<Map<String, String>> searchResult = [
-    {
-      'course': '데이타구조',
-      'grade': '3학점',
-      'english': '0',
-      'designGrade': '0학점',
-    },
-    {
-      'course': '데이타구조',
-      'grade': '3학점',
-      'english': '0',
-      'designGrade': '0학점',
-    },
-    {
-      'course': '데이타구조',
-      'grade': '3학점',
-      'english': '0',
-      'designGrade': '0학점',
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,7 +49,7 @@ class addCoursePageState extends State<addCoursePage> {
                         Radius.circular(10),
                       ),
                     ),
-                    hintText: '과목명 입력',
+                    hintText: '강의명 입력',
                       hintStyle: TextStyle(color: Colors.white),
                   ),
 
@@ -118,7 +98,24 @@ class addCoursePageState extends State<addCoursePage> {
                     height: 19,
                     width: 45,
                     child: ElevatedButton(
-                      onPressed: () {},
+                      onPressed: () => showDialog<void>(
+                      context: context,
+                      barrierDismissible: false, // user must tap button!
+                      builder: (BuildContext context) {
+                        return CupertinoAlertDialog(
+                          title: const Text('강의를 추가하시겠습니까?', style: TextStyle(fontSize: 14)),
+                          actions: [
+                            CupertinoDialogAction(onPressed: (){
+                              Navigator.of(context).pop();
+                            }, child: const Text("취소", style: TextStyle(color: Colors.grey))),
+                            CupertinoDialogAction(onPressed: (){
+                              Navigator.of(context).pop();
+                            }, child: const Text("추가", style: TextStyle(color: Color(0xff00579C)))),
+                          ],
+                          content: Text('강의명: ${docs[index]['name']}\n${docs[index]['credit']}학점 (설계 ${docs[index]['design']}학점), ${docs[index]['type']}'),
+                        );
+                      },
+                    ),
                       style: ElevatedButton.styleFrom(
                         elevation: 0.0,
                         minimumSize: Size.zero,
