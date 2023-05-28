@@ -9,4 +9,5 @@ abstract class Routes {
   static const recommned = '/recommend';
   static const mypage = '/mypage';
   static const addcourse = '/addcourse';
+  static const addcourseg = '/addcourseg';
 }
