@@ -13,6 +13,8 @@ class addCourseGPage extends StatefulWidget {
 }
 
 class addCourseGPageState extends State<addCourseGPage> {
+  final myController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var arguments = Get.arguments;
@@ -21,11 +23,15 @@ class addCourseGPageState extends State<addCourseGPage> {
         scrolledUnderElevation: 0.0,
         backgroundColor: Colors.white,
         leadingWidth: 30,
-        title: const SizedBox(
+        title: SizedBox(
           height: 40,
           child: TextField(
+            onChanged: ((text) {
+              setState(() {});
+            }),
+            controller: myController,
             cursorColor: Colors.white,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 15, decorationThickness: 0, color: Colors.white),
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.search, color: Colors.white),
@@ -72,9 +78,17 @@ class addCourseGPageState extends State<addCourseGPage> {
           }
 
           final docs = snapshot.data!.docs;
+          var searchedList = [];
+          for (var element in docs) {
+            if ((element.data()['name'] as String)
+                .contains(myController.text)) {
+              searchedList.add(element);
+            }
+          }
+
           return ListView.separated(
             shrinkWrap: true,
-            itemCount: docs.length,
+            itemCount: searchedList.length,
             itemBuilder: (context, index) {
               return SizedBox(
                 height: 79,
@@ -85,13 +99,13 @@ class addCourseGPageState extends State<addCourseGPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        docs[index]['name'],
+                        searchedList[index]['name'],
                         style: const TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 13),
                       ),
                       const Padding(padding: EdgeInsets.only(top: 4)),
                       Text(
-                        '${docs[index]['credit']}학점, 성적산출(Grade/PF): ${docs[index]['gradeOrPf']}\n${docs[index]['category']}, ${docs[index]['type']}',
+                        '${searchedList[index]['credit']}학점, 성적산출(Grade/PF): ${searchedList[index]['gradeOrPf']}\n${searchedList[index]['category']}, ${searchedList[index]['type']}',
                         style: const TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 11,
@@ -124,7 +138,7 @@ class addCourseGPageState extends State<addCourseGPage> {
                               CupertinoDialogAction(
                                   onPressed: () async {
                                     await UserController.to.addCourseData(
-                                        docs[index].data(),
+                                        searchedList[index].data(),
                                         true,
                                         "G",
                                         arguments['semester']);
@@ -136,7 +150,7 @@ class addCourseGPageState extends State<addCourseGPage> {
                                           fontSize: 14))),
                             ],
                             content: Text(
-                                '[교양] ${docs[index]['name']}\n${docs[index]['credit']}학점, 성적산출(Grade/PF): ${docs[index]['gradeOrPf']}\n${docs[index]['category']}, ${docs[index]['type']}',
+                                '[교양] ${searchedList[index]['name']}\n${searchedList[index]['credit']}학점, 성적산출(Grade/PF): ${searchedList[index]['gradeOrPf']}\n${searchedList[index]['category']}, ${searchedList[index]['type']}',
                                 style: const TextStyle(fontSize: 12)),
                           );
                         },

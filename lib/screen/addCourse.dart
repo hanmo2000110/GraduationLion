@@ -13,19 +13,26 @@ class addCoursePage extends StatefulWidget {
 }
 
 class addCoursePageState extends State<addCoursePage> {
+  final myController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     var arguments = Get.arguments;
+
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0.0,
         backgroundColor: Colors.white,
         leadingWidth: 30,
-        title: const SizedBox(
+        title: SizedBox(
           height: 40,
           child: TextField(
+            onChanged: ((text) {
+              setState(() {});
+            }),
+            controller: myController,
             cursorColor: Colors.white,
-            style: TextStyle(
+            style: const TextStyle(
                 fontSize: 15, decorationThickness: 0, color: Colors.white),
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.search, color: Colors.white),
@@ -72,9 +79,18 @@ class addCoursePageState extends State<addCoursePage> {
           }
 
           final docs = snapshot.data!.docs;
+
+          var searchedList = [];
+          for (var element in docs) {
+            if ((element.data()['name'] as String)
+                .contains(myController.text)) {
+              searchedList.add(element);
+            }
+          }
+
           return ListView.separated(
             shrinkWrap: true,
-            itemCount: docs.length,
+            itemCount: searchedList.length,
             itemBuilder: (context, index) {
               return SizedBox(
                 height: 69,
@@ -85,13 +101,13 @@ class addCoursePageState extends State<addCoursePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        docs[index]['name'],
+                        searchedList[index]['name'],
                         style: const TextStyle(
                             fontWeight: FontWeight.w500, fontSize: 13),
                       ),
                       const Padding(padding: EdgeInsets.only(top: 4)),
                       Text(
-                        '${docs[index]['credit']}학점 (설계 ${docs[index]['design']}학점), ${docs[index]['type']}',
+                        '${searchedList[index]['credit']}학점 (설계 ${searchedList[index]['design']}학점), ${searchedList[index]['type']}',
                         style: const TextStyle(
                             fontWeight: FontWeight.w500,
                             fontSize: 11,
@@ -125,7 +141,7 @@ class addCoursePageState extends State<addCoursePage> {
                               CupertinoDialogAction(
                                   onPressed: () async {
                                     await UserController.to.addCourseData(
-                                        docs[index].data(),
+                                        searchedList[index].data(),
                                         true,
                                         "G",
                                         arguments['semester']);
@@ -139,7 +155,7 @@ class addCoursePageState extends State<addCoursePage> {
                             content: Column(
                               children: [
                                 Text(
-                                    '[전공] ${docs[index]['name']}\n${docs[index]['credit']}학점 (설계 ${docs[index]['design']}학점), ${docs[index]['type']}',
+                                    '[전공] ${searchedList[index]['name']}\n${searchedList[index]['credit']}학점 (설계 ${searchedList[index]['design']}학점), ${searchedList[index]['type']}',
                                     style: const TextStyle(fontSize: 12)),
                               ],
                             ),
