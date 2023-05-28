@@ -13,9 +13,8 @@ class InitDepartmentPage extends StatefulWidget{
 class _InitDepartmentPageState extends State<InitDepartmentPage> {
   final InitPageController initPageController = Get.find<InitPageController>();
   List<String> departmentList = [
-    '전산전자공학부',
-    '글로벌리더십학부',
-    '경영경제학부'
+    'AI·컴퓨터공학심화',
+    '전자공학심화',
   ];
 
   @override
@@ -29,7 +28,7 @@ class _InitDepartmentPageState extends State<InitDepartmentPage> {
       children: [
         const SizedBox(
           height: 120,
-          child: Text('어떤 학부에\n소속되어있으신가요?',
+          child: Text('전공이 무엇인가요?',
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 24,

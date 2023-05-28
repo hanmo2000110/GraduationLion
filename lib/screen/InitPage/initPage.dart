@@ -49,6 +49,7 @@ class _InitPageState extends State<InitPage> {
                           child: navButton('다음'),
                           onTap: (){
                             if(_.index.value==3){
+                              _.submit();
                               Get.offNamed('/navigation');
                             }
                             else{
