@@ -4,6 +4,7 @@ import 'package:graduationlion/screen/recommend.dart';
 import 'package:graduationlion/screen/mypage.dart';
 import 'package:graduationlion/screen/navigationPage.dart';
 import 'package:graduationlion/screen/addCourse.dart';
+import 'package:graduationlion/screen/addCourseG.dart';
 
 import 'package:get/get.dart';
 import 'package:graduationlion/screen/splash.dart';
@@ -47,6 +48,10 @@ class AppPages {
     GetPage(
       name: Routes.addcourse,
       page: () => const addCoursePage(),
+    ),
+    GetPage(
+      name: Routes.addcourseg,
+      page: () => const addCourseGPage(),
     ),
   ];
 }
