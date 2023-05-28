@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import '../controller/userController.dart';
 import 'home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
@@ -14,6 +15,7 @@ class addCourseGPage extends StatefulWidget {
 class addCourseGPageState extends State<addCourseGPage> {
   @override
   Widget build(BuildContext context) {
+    var arguments = Get.arguments;
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0.0,
@@ -21,10 +23,10 @@ class addCourseGPageState extends State<addCourseGPage> {
         leadingWidth: 30,
         title: const SizedBox(
           height: 40,
-          child:
-          TextField(
+          child: TextField(
             cursorColor: Colors.white,
-            style: TextStyle(fontSize: 15, decorationThickness: 0, color: Colors.white),
+            style: TextStyle(
+                fontSize: 15, decorationThickness: 0, color: Colors.white),
             decoration: InputDecoration(
               prefixIcon: Icon(Icons.search, color: Colors.white),
               filled: true,
@@ -53,14 +55,16 @@ class addCourseGPageState extends State<addCourseGPage> {
               hintText: '[교양] 강의명 입력',
               hintStyle: TextStyle(color: Colors.white),
             ),
-
           ),
         ),
       ),
       body: StreamBuilder(
-        stream: FirebaseFirestore.instance.collection('GCourses').orderBy('name', descending: false).snapshots(),
-        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-
+        stream: FirebaseFirestore.instance
+            .collection('GCourses')
+            .orderBy('name', descending: false)
+            .snapshots(),
+        builder: (BuildContext context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
@@ -75,13 +79,15 @@ class addCourseGPageState extends State<addCourseGPage> {
               return SizedBox(
                 height: 79,
                 child: ListTile(
-                  contentPadding: const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
+                  contentPadding:
+                      const EdgeInsets.symmetric(horizontal: 24, vertical: 10),
                   leading: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         docs[index]['name'],
-                        style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 13),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.w500, fontSize: 13),
                       ),
                       const Padding(padding: EdgeInsets.only(top: 4)),
                       Text(
@@ -105,23 +111,39 @@ class addCourseGPageState extends State<addCourseGPage> {
                           return CupertinoAlertDialog(
                             title: const Padding(
                                 padding: EdgeInsets.only(bottom: 7),
-                                child: Text('강의를 추가하시겠습니까?', style: TextStyle(fontSize: 14))),
+                                child: Text('강의를 추가하시겠습니까?',
+                                    style: TextStyle(fontSize: 14))),
                             actions: [
-                              CupertinoDialogAction(onPressed: (){
-                                Navigator.of(context).pop();
-                              }, child: const Text("취소", style: TextStyle(color: Colors.grey, fontSize: 14))),
-                              CupertinoDialogAction(onPressed: (){
-                                Get.offNamed('/mypage');
-                              }, child: const Text("추가", style: TextStyle(color: Color(0xff00579C), fontSize: 14))),
+                              CupertinoDialogAction(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text("취소",
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 14))),
+                              CupertinoDialogAction(
+                                  onPressed: () async {
+                                    await UserController.to.addCourseData(
+                                        docs[index].data(),
+                                        true,
+                                        "G",
+                                        arguments['semester']);
+                                    Get.offNamed('/navigation');
+                                  },
+                                  child: const Text("추가",
+                                      style: TextStyle(
+                                          color: Color(0xff00579C),
+                                          fontSize: 14))),
                             ],
-                            content: Text('[교양] ${docs[index]['name']}\n${docs[index]['credit']}학점, 성적산출(Grade/PF): ${docs[index]['gradeOrPf']}\n${docs[index]['category']}, ${docs[index]['type']}', style: const TextStyle(fontSize: 12)),
+                            content: Text(
+                                '[교양] ${docs[index]['name']}\n${docs[index]['credit']}학점, 성적산출(Grade/PF): ${docs[index]['gradeOrPf']}\n${docs[index]['category']}, ${docs[index]['type']}',
+                                style: const TextStyle(fontSize: 12)),
                           );
                         },
                       ),
                       style: ElevatedButton.styleFrom(
                         shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4.0)
-                        ),
+                            borderRadius: BorderRadius.circular(4.0)),
                         elevation: 0.0,
                         minimumSize: Size.zero,
                         padding: EdgeInsets.zero,

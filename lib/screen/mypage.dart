@@ -216,13 +216,12 @@ Widget semesterWithAdd(int semester) {
                 margin: const EdgeInsets.only(left: 10),
                 child: ElevatedButton(
                   onPressed: () {
-                Get.toNamed('/addcourse',
-                    arguments: ({"semester": semester.toString()}));
-                },
+                    Get.toNamed('/addcourse',
+                        arguments: ({"semester": semester.toString()}));
+                  },
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0)
-                      ),
+                          borderRadius: BorderRadius.circular(4.0)),
                       elevation: 0.0,
                       minimumSize: Size.zero,
                       padding: EdgeInsets.zero,
@@ -255,12 +254,12 @@ Widget semesterWithAdd(int semester) {
                 margin: const EdgeInsets.only(left: 7, right: 24),
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.toNamed('/addcourseg');
+                    Get.toNamed('/addcourseg',
+                        arguments: ({"semester": semester.toString()}));
                   },
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0)
-                      ),
+                          borderRadius: BorderRadius.circular(4.0)),
                       elevation: 0.0,
                       minimumSize: Size.zero,
                       padding: EdgeInsets.zero,

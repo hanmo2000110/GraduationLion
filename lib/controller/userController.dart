@@ -6,14 +6,28 @@ import 'package:graduationlion/model/userCourseModel.dart';
 
 class UserController extends GetxController {
   static UserController get to => Get.find();
-  late List<UserCourseModel> userCourseModel;
+  late List<UserCourseModel> userCourses;
 
   Future<void> onInit() async {
     super.onInit();
+    await loadUserCourses();
   }
 
   Future<void> loadUserCourses() async {
     final db = FirebaseFirestore.instance;
+
+    var snapshot = await db
+        .collection("Users")
+        .doc(FirebaseAuth.instance.currentUser?.email)
+        .collection("Courses")
+        .get();
+
+    userCourses = [];
+
+    for (var element in snapshot.docs) {
+      userCourses.add(UserCourseModel.fromJson(element.data()));
+    }
+    // print(userCourse.length);
   }
 
   Future<void> addCourseData(Map<String, dynamic> json, bool isEnglish,
@@ -26,6 +40,7 @@ class UserController extends GetxController {
     json['isEnglish'] = isEnglish;
     if (!json.containsKey("category")) json['category'] = "전공";
     json['semester'] = semester;
+    if (!json.containsKey("design")) json['design'] = 0;
 
     await db.add(UserCourseModel.fromJson(json).toJson());
   }
