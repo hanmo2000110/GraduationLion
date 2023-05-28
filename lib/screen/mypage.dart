@@ -31,18 +31,16 @@ class MyPageState extends State<MyPage> {
     return Scaffold(
       body: ListView(
         children: [
-      Column(
+          Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               profile('졸업사자'),
               currentState(45),
-
-              for(int i=1 ; i<=8 ; i++)
-                myCourseInfo(i, myCourseList)
+              for (int i = 1; i <= 8; i++) myCourseInfo(i, myCourseList)
             ],
           ),
-      ],
+        ],
       ),
     );
   }
@@ -75,7 +73,7 @@ Widget courseView(List myCourseList) {
   );
 }
 
-Widget myCourseInfo(int semester, List myCourseList){
+Widget myCourseInfo(int semester, List myCourseList) {
   return Column(
     children: [
       semesterWithAdd(semester),
@@ -218,8 +216,9 @@ Widget semesterWithAdd(int semester) {
                 margin: const EdgeInsets.only(left: 10),
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.toNamed('/addcourse');
-                  },
+                Get.toNamed('/addcourse',
+                    arguments: ({"semester": semester.toString()}));
+                },
                   style: ElevatedButton.styleFrom(
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(4.0)

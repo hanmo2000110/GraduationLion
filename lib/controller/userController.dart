@@ -2,9 +2,33 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:graduationlion/model/userCourseModel.dart';
 
 class UserController extends GetxController {
   static UserController get to => Get.find();
+  late List<UserCourseModel> userCourseModel;
+
+  Future<void> onInit() async {
+    super.onInit();
+  }
+
+  Future<void> loadUserCourses() async {
+    final db = FirebaseFirestore.instance;
+  }
+
+  Future<void> addCourseData(Map<String, dynamic> json, bool isEnglish,
+      String gradeOfPf, String semester) async {
+    final db = await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(FirebaseAuth.instance.currentUser?.email)
+        .collection("Courses");
+
+    json['isEnglish'] = isEnglish;
+    if (!json.containsKey("category")) json['category'] = "전공";
+    json['semester'] = semester;
+
+    await db.add(UserCourseModel.fromJson(json).toJson());
+  }
 
   Future<bool> signin() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();

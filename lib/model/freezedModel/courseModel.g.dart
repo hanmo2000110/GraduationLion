@@ -1,27 +1,31 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'gcourseModel.dart';
+part of '../courseModel.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$_GCourseModel _$$_GCourseModelFromJson(Map<String, dynamic> json) =>
-    _$_GCourseModel(
+_$_CourseModel _$$_CourseModelFromJson(Map<String, dynamic> json) =>
+    _$_CourseModel(
       name: json['name'] as String,
-      credit: (json['credit'] as num).toDouble(),
+      englishName: json['englishName'] as String,
+      credit: json['credit'] as int,
       type: json['type'] as String,
+      design: json['design'] as int,
       detail: json['detail'] as String,
+      semester: json['semester'] as String,
       gradeOrPf: json['gradeOrPf'] as String,
-      category: json['category'] as String,
     );
 
-Map<String, dynamic> _$$_GCourseModelToJson(_$_GCourseModel instance) =>
+Map<String, dynamic> _$$_CourseModelToJson(_$_CourseModel instance) =>
     <String, dynamic>{
       'name': instance.name,
+      'englishName': instance.englishName,
       'credit': instance.credit,
       'type': instance.type,
+      'design': instance.design,
       'detail': instance.detail,
+      'semester': instance.semester,
       'gradeOrPf': instance.gradeOrPf,
-      'category': instance.category,
     };
