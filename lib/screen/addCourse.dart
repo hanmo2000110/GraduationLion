@@ -50,7 +50,7 @@ class addCoursePageState extends State<addCoursePage> {
                         Radius.circular(10),
                       ),
                     ),
-                    hintText: '강의명 입력',
+                    hintText: '[전공] 강의명 입력',
                       hintStyle: TextStyle(color: Colors.white),
                   ),
 
@@ -101,7 +101,7 @@ class addCoursePageState extends State<addCoursePage> {
                     child: ElevatedButton(
                       onPressed: () => showDialog<void>(
                       context: context,
-                      barrierDismissible: false, // user must tap button!
+                      barrierDismissible: false,
                       builder: (BuildContext context) {
                         return CupertinoAlertDialog(
                           title: const Padding(
@@ -115,11 +115,14 @@ class addCoursePageState extends State<addCoursePage> {
                               Get.offNamed('/mypage');
                             }, child: const Text("추가", style: TextStyle(color: Color(0xff00579C), fontSize: 14))),
                           ],
-                          content: Text('${docs[index]['name']}\n${docs[index]['credit']}학점 (설계 ${docs[index]['design']}학점), ${docs[index]['type']}', style: const TextStyle(fontSize: 12)),
+                          content: Text('[전공] ${docs[index]['name']}\n${docs[index]['credit']}학점 (설계 ${docs[index]['design']}학점), ${docs[index]['type']}', style: const TextStyle(fontSize: 12)),
                         );
                       },
                     ),
                       style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(4.0)
+                          ),
                         elevation: 0.0,
                         minimumSize: Size.zero,
                         padding: EdgeInsets.zero,
