@@ -13,6 +13,7 @@ class CourseModel with _$CourseModel {
     required int design,
     required String detail,
     required String semester,
+    required String gradeOrPf,
   }) = _CourseModel;
 
   factory CourseModel.fromJson(Map<String, dynamic> json) =>
