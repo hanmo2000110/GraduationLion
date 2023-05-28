@@ -1,7 +1,7 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'courseModel.freezed.dart';
-part 'courseModel.g.dart';
+part 'freezedModel/courseModel.freezed.dart';
+part 'freezedModel/courseModel.g.dart';
 
 @freezed
 class CourseModel with _$CourseModel {

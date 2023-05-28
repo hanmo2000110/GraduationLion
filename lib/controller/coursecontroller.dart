@@ -1,4 +1,3 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:graduationlion/model/courseModel.dart';
@@ -16,7 +15,6 @@ class CourseController extends GetxController {
     // await FirebaseAuth.instance.signOut();
     await initMajorCourses();
     await initGeneralCourses();
-    print(generalCourses.length);
   }
 
   Future<void> initMajorCourses() async {
