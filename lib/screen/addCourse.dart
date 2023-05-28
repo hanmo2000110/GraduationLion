@@ -95,9 +95,9 @@ class addCoursePageState extends State<addCoursePage> {
                     ],
                   ),
                   trailing: Container(
-                    margin: const EdgeInsets.only(bottom: 28),
-                    height: 19,
-                    width: 45,
+                    margin: const EdgeInsets.only(bottom: 10),
+                    height: 30,
+                    width: 44,
                     child: ElevatedButton(
                       onPressed: () => showDialog<void>(
                       context: context,
@@ -126,28 +126,13 @@ class addCoursePageState extends State<addCoursePage> {
                         elevation: 0.0,
                         minimumSize: Size.zero,
                         padding: EdgeInsets.zero,
-                        backgroundColor: const Color(0xff8B95A1),
-                        textStyle: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12)
+                        backgroundColor: const Color(0xff00579C),
                       ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.add,
-                            size: 14,
-                            color: Colors.white,
-                          ),
-                          Text("추가",
+                      child: const Text("추가",
                             style: TextStyle(
-                            height: 1,
                             color: Colors.white,
                             fontWeight: FontWeight.w600,
-                            fontSize: 10)),
-                        ],
-                      ),
+                            fontSize: 12)),
                     ),
                   ),
                 ),

@@ -94,10 +94,9 @@ class addCourseGPageState extends State<addCourseGPage> {
                       ),
                     ],
                   ),
-                  trailing: Container(
-                    margin: const EdgeInsets.only(bottom: 28),
-                    height: 19,
-                    width: 45,
+                  trailing: SizedBox(
+                    height: 30,
+                    width: 44,
                     child: ElevatedButton(
                       onPressed: () => showDialog<void>(
                         context: context,
@@ -120,34 +119,19 @@ class addCourseGPageState extends State<addCourseGPage> {
                         },
                       ),
                       style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.0)
-                          ),
-                          elevation: 0.0,
-                          minimumSize: Size.zero,
-                          padding: EdgeInsets.zero,
-                          backgroundColor: const Color(0xff8B95A1),
-                          textStyle: const TextStyle(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4.0)
+                        ),
+                        elevation: 0.0,
+                        minimumSize: Size.zero,
+                        padding: EdgeInsets.zero,
+                        backgroundColor: const Color(0xff00579C),
+                      ),
+                      child: const Text("추가",
+                          style: TextStyle(
                               color: Colors.white,
                               fontWeight: FontWeight.w600,
-                              fontSize: 12)
-                      ),
-                      child: const Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            Icons.add,
-                            size: 14,
-                            color: Colors.white,
-                          ),
-                          Text("추가",
-                              style: TextStyle(
-                                  height: 1,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                  fontSize: 10)),
-                        ],
-                      ),
+                              fontSize: 12)),
                     ),
                   ),
                 ),
