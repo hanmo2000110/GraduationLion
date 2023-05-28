@@ -17,46 +17,44 @@ class addCoursePageState extends State<addCoursePage> {
   Widget build(BuildContext context) {
     var arguments = Get.arguments;
     return Scaffold(
-        appBar: AppBar(
-          scrolledUnderElevation: 0.0,
-          backgroundColor: Colors.white,
-          leadingWidth: 30,
-          title: const SizedBox(
-        height: 40,
-        child:
-        TextField(
-              cursorColor: Colors.white,
-            style: TextStyle(fontSize: 15, decorationThickness: 0, color: Colors.white),
-                  decoration: InputDecoration(
-                    prefixIcon: Icon(Icons.search, color: Colors.white),
-                    filled: true,
-                    fillColor: Color(0xffC4C4C4),
-                    contentPadding: EdgeInsets.symmetric(
-                      vertical: 8,
-                      horizontal: 16,
-                    ),
-                    enabledBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 1, color: Color(0xffC4C4C4)),
-                        borderRadius: BorderRadius.all(
-                          Radius.circular(10),
-                        ),
-                      ),
-                    focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 1, color: Color(0xffC4C4C4)),
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.all(
-                        Radius.circular(10),
-                      ),
-                    ),
-                    hintText: '[전공] 강의명 입력',
-                      hintStyle: TextStyle(color: Colors.white),
-                  ),
-
-          ),
+      appBar: AppBar(
+        scrolledUnderElevation: 0.0,
+        backgroundColor: Colors.white,
+        leadingWidth: 30,
+        title: const SizedBox(
+          height: 40,
+          child: TextField(
+            cursorColor: Colors.white,
+            style: TextStyle(
+                fontSize: 15, decorationThickness: 0, color: Colors.white),
+            decoration: InputDecoration(
+              prefixIcon: Icon(Icons.search, color: Colors.white),
+              filled: true,
+              fillColor: Color(0xffC4C4C4),
+              contentPadding: EdgeInsets.symmetric(
+                vertical: 8,
+                horizontal: 16,
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 1, color: Color(0xffC4C4C4)),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderSide: BorderSide(width: 1, color: Color(0xffC4C4C4)),
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.all(
+                  Radius.circular(10),
+                ),
+              ),
+              hintText: '[전공] 강의명 입력',
+              hintStyle: TextStyle(color: Colors.white),
+            ),
           ),
         ),
       ),
@@ -108,48 +106,59 @@ class addCoursePageState extends State<addCoursePage> {
                     width: 44,
                     child: ElevatedButton(
                       onPressed: () => showDialog<void>(
-                      context: context,
-                      barrierDismissible: false,
-                      builder: (BuildContext context) {
-                        return CupertinoAlertDialog(
-                          title: const Padding(
-                            padding: EdgeInsets.only(bottom: 7),
-                              child: Text('강의를 추가하시겠습니까?', style: TextStyle(fontSize: 14))),
-                          actions: [
-                            CupertinoDialogAction(onPressed: (){
-                              Navigator.of(context).pop();
-                            }, child: const Text("취소", style: TextStyle(color: Colors.grey, fontSize: 14))),
-                            CupertinoDialogAction( onPressed: () async {
+                        context: context,
+                        barrierDismissible: false,
+                        builder: (BuildContext context) {
+                          return CupertinoAlertDialog(
+                            title: const Padding(
+                                padding: EdgeInsets.only(bottom: 7),
+                                child: Text('강의를 추가하시겠습니까?',
+                                    style: TextStyle(fontSize: 14))),
+                            actions: [
+                              CupertinoDialogAction(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text("취소",
+                                      style: TextStyle(
+                                          color: Colors.grey, fontSize: 14))),
+                              CupertinoDialogAction(
+                                  onPressed: () async {
                                     await UserController.to.addCourseData(
                                         docs[index].data(),
                                         true,
                                         "G",
                                         arguments['semester']);
                                     Get.offNamed('/navigation');
-                                  }, child: const Text("추가", style: TextStyle(color: Color(0xff00579C), fontSize: 14))),
-                          ],
-                          content: Column(
-                            children: [
-                              Text('[전공] ${docs[index]['name']}\n${docs[index]['credit']}학점 (설계 ${docs[index]['design']}학점), ${docs[index]['type']}', style: const TextStyle(fontSize: 12)),
+                                  },
+                                  child: const Text("추가",
+                                      style: TextStyle(
+                                          color: Color(0xff00579C),
+                                          fontSize: 14))),
                             ],
-                          ),
-                        );
-                      },
-                    ),
+                            content: Column(
+                              children: [
+                                Text(
+                                    '[전공] ${docs[index]['name']}\n${docs[index]['credit']}학점 (설계 ${docs[index]['design']}학점), ${docs[index]['type']}',
+                                    style: const TextStyle(fontSize: 12)),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
                       style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4.0)
-                          ),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(4.0)),
                         elevation: 0.0,
                         minimumSize: Size.zero,
                         padding: EdgeInsets.zero,
                         backgroundColor: const Color(0xff00579C),
                       ),
                       child: const Text("추가",
-                            style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.w600,
-                            fontSize: 12)),
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.w600,
+                              fontSize: 12)),
                     ),
                   ),
                 ),
