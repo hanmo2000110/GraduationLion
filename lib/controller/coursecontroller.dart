@@ -37,6 +37,14 @@ class CourseController extends GetxController {
     // print(majorCourses);
   }
 
+  Stream<QuerySnapshot> getCategory1(){
+    return FirebaseFirestore.instance
+        .collection("GCourses")
+        .where("category", isGreaterThanOrEqualTo: "신앙")
+        .where("category", isLessThan: "신앙" +'z')
+        .snapshots();
+  }
+
   // 개발자용) 수업 추가 함수
   Future<void> addData() async {
     // var db = FirebaseFirestore.instance;

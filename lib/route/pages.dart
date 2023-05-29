@@ -8,6 +8,7 @@ import 'package:graduationlion/screen/addCourse.dart';
 import 'package:get/get.dart';
 import 'package:graduationlion/screen/splash.dart';
 
+import '../screen/homeCategoryCourse.dart';
 import '../screen/login.dart';
 
 part 'routes.dart';
@@ -47,6 +48,10 @@ class AppPages {
     GetPage(
       name: Routes.addcourse,
       page: () => const addCoursePage(),
+    ),
+    GetPage(
+      name: Routes.homeCategoryCourse,
+      page: () => const HomeCategoryCourse(),
     ),
   ];
 }
