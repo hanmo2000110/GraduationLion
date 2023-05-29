@@ -12,21 +12,6 @@ class MyPage extends StatefulWidget {
   State<MyPage> createState() => MyPageState();
 }
 
-List<Map<String, String>> myCourseList = [
-  {
-    'course': 'AI 프로젝트 입문',
-    'desc': '2학점, 영어, 설계',
-  },
-  {
-    'course': '모바일 앱 개발',
-    'desc': '3학점',
-  },
-  {
-    'course': '환경과 인간',
-    'desc': '3학점, P/F',
-  },
-];
-
 class MyPageState extends State<MyPage> {
   @override
   Widget build(BuildContext context) {
@@ -61,20 +46,28 @@ class MyPageState extends State<MyPage> {
 
                         final docs = snapshot.data!.docs;
 
+                        var semesterCourseList = [];
+                        for (var element in docs) {
+                          if ((element.data()['semester'] as String)
+                              .contains("$i")) {
+                            semesterCourseList.add(element);
+                          }
+                        }
+
                         return ListView.separated(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
-                          itemCount: docs.length,
+                          itemCount: semesterCourseList.length,
                           itemBuilder: (context, index) {
                             return ListTile(
                               visualDensity: const VisualDensity(vertical: -3),
                               contentPadding: const EdgeInsets.symmetric(horizontal: 24),
                               leading: Text(
-                                docs[index]['name'],
+                                semesterCourseList[index]['name'],
                                 style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                               ),
                               trailing: Text(
-                                '${docs[index]['credit']}학점, ${docs[index]['gradeOrPf']}',
+                                '${semesterCourseList[index]['credit']}학점, ${semesterCourseList[index]['gradeOrPf']}',
                                 textAlign: TextAlign.end,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w500,
