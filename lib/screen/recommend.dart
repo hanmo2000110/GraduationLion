@@ -10,6 +10,21 @@ class RecommendPage extends StatefulWidget {
 }
 
 class RecommendPageState extends State<RecommendPage> {
+  List<Map<String, String>> myCourseList = [
+    {
+      'course': 'AI 프로젝트 입문',
+      'desc': '2학점, 영어, 설계',
+    },
+    {
+      'course': '모바일 앱 개발',
+      'desc': '3학점',
+    },
+    {
+      'course': '환경과 인간',
+      'desc': '3학점, P/F',
+    },
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
