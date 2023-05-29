@@ -1,6 +1,4 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'mypage.dart';
 
 class RecommendPage extends StatefulWidget {
   const RecommendPage({super.key});
