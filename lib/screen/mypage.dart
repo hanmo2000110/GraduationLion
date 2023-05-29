@@ -208,12 +208,10 @@ Widget semesterWithAdd(int semester) {
             padding: const EdgeInsets.only(left: 24),
             child: Text('$semester학기', style: const TextStyle(fontSize: 10)),
           ),
-          Row(
-            children: [
-              Container(
+          Container(
                 height: 19,
                 width: 42,
-                margin: const EdgeInsets.only(left: 10),
+                margin: const EdgeInsets.only(left: 10, right: 24),
                 child: ElevatedButton(
                   onPressed: () {
                     Get.toNamed('/addcourse',
@@ -238,7 +236,7 @@ Widget semesterWithAdd(int semester) {
                         size: 14,
                         color: Colors.white,
                       ),
-                      Text("전공",
+                      Text("추가",
                           style: TextStyle(
                               height: 1.3,
                               color: Colors.white,
@@ -248,46 +246,6 @@ Widget semesterWithAdd(int semester) {
                   ),
                 ),
               ),
-              Container(
-                height: 19,
-                width: 42,
-                margin: const EdgeInsets.only(left: 7, right: 24),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.toNamed('/addcourseg',
-                        arguments: ({"semester": semester.toString()}));
-                  },
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0)),
-                      elevation: 0.0,
-                      minimumSize: Size.zero,
-                      padding: EdgeInsets.zero,
-                      backgroundColor: const Color(0xff8B95A1),
-                      textStyle: const TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 12)),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.add,
-                        size: 14,
-                        color: Colors.white,
-                      ),
-                      Text("교양",
-                          style: TextStyle(
-                              height: 1.3,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 10.5)),
-                    ],
-                  ),
-                ),
-              ),
-            ],
-          ),
         ],
       ),
     ],
