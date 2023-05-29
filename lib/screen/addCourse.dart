@@ -12,8 +12,13 @@ class addCoursePage extends StatefulWidget {
   State<addCoursePage> createState() => addCoursePageState();
 }
 
+enum engkor { kor, eng }
+enum gradepf { grade, pf }
+
 class addCoursePageState extends State<addCoursePage> {
   final myController = TextEditingController();
+  engkor? value1 = engkor.kor;
+  gradepf? value2 = gradepf.grade;
 
   @override
   Widget build(BuildContext context) {
