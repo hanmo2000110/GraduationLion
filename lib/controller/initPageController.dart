@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:graduationlion/controller/userController.dart';
 
 class InitPageController extends GetxController{
   RxInt index = 0.obs;
@@ -31,5 +32,10 @@ class InitPageController extends GetxController{
 
   void setEnglishGrade(int idx){
     englishGrade.value = idx;
+  }
+
+  void submit(){
+    final UserController userController = Get.find<UserController>();
+    userController.addInitData(department.value, semester.value, englishSubmit.value, englishGrade.value);
   }
 }
