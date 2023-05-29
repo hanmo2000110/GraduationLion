@@ -1,5 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-// import 'package:get/get.dart';
+import 'package:graduationlion/controller/coursecontroller.dart';
+import 'package:get/get.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -9,6 +12,17 @@ class HomePage extends StatefulWidget {
 }
 
 class HomePageState extends State<HomePage> {
+  final CourseController courseController = Get.find<CourseController>();
+
+  @override
+  void initState() {
+    WidgetsBinding.instance.addPostFrameCallback((_){
+      getMajor();
+    });
+    super.initState();
+  }
+  String major = '전자';
+
   List<String> cmplt = [
     '성경의 이해',
     '창조와 진화',
@@ -20,6 +34,7 @@ class HomePageState extends State<HomePage> {
   ];
 
   List<String> notcmplt = ['채플(한국어) 5', '신앙특론'];
+
 
   @override
   Widget build(BuildContext context) {
@@ -60,14 +75,14 @@ class HomePageState extends State<HomePage> {
                               child: SingleChildScrollView(
                                 child: Column(
                                   children: [
-                                    const Padding(
+                                    Padding(
                                         padding: EdgeInsets.symmetric(vertical: 40),
-                                        child: Text('AI·컴퓨터공학심화 졸업요건',
+                                        child: Text(major.contains('컴공') ? 'AI·컴퓨터공학심화 졸업요건' : '전자공학심화 졸업요건',
                                           textAlign: TextAlign.center,
                                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                                         )
                                     ),
-                                    Image.asset("assets/images/CS.png")
+                                    Image.asset(major.contains('컴공') ? "assets/images/CS.png" : "assets/images/EE.png")
                                   ],
                                 ),
                               ),
@@ -89,16 +104,18 @@ class HomePageState extends State<HomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              setView('신앙및세계관', 6, 9, cmplt, notcmplt),
-              setView('인성및리더십', 3, 6, cmplt, notcmplt),
-              setView('전문교양', 5, 5, cmplt, notcmplt),
-              setView('BSM', 8, 18, cmplt, notcmplt),
-              setView('ICT융합기초', 2, 2, cmplt, notcmplt),
-              setView('자유선택(교양)', 6, 9, cmplt, notcmplt),
-              setView('자유선택(교양또는비교양)', 6, 12, cmplt, notcmplt),
-              setView('전공주제', 35, 60, cmplt, notcmplt),
-              setView('신앙및세계관', 6, 9, cmplt, notcmplt),
-              setView('P/F과목 총이수학점', 16, 39, cmplt, notcmplt),
+
+
+              setView(courseController.getCategory1(), '신앙및세계관', 6, 9, cmplt, notcmplt),
+              // setView('인성및리더십', 3, 6, cmplt, notcmplt),
+              // setView('전문교양', 5, 5, cmplt, notcmplt),
+              // setView('BSM', 8, 18, cmplt, notcmplt),
+              // setView('ICT융합기초', 2, 2, cmplt, notcmplt),
+              // setView('자유선택(교양)', 6, 9, cmplt, notcmplt),
+              // setView('자유선택(교양또는비교양)', 6, 12, cmplt, notcmplt),
+              // setView('전공주제', 35, 60, cmplt, notcmplt),
+              // setView('신앙및세계관', 6, 9, cmplt, notcmplt),
+              // setView('P/F과목 총이수학점', 16, 39, cmplt, notcmplt),
 
               // 총 취득학점
               categoryTitle('총 취득학점'),
@@ -145,12 +162,27 @@ class HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  getMajor() async{
+    DocumentReference dr = FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser?.email);
+    await dr.get().then((snapshot) {
+      major = snapshot.get("major");
+    });
+  }
 }
 
-Widget setView(String category, int remainA, int remainB, List cmplt, List notcmplt){
+Widget setView(Stream<QuerySnapshot<Object?>> get, String category, int remainA, int remainB, List cmplt, List notcmplt){
   return Column(
     children:[
-      categoryTitle(category),
+      GestureDetector(
+        onTap: (){
+          Get.toNamed('/homeCategoryCourse',
+              arguments: {'title': category,
+                'snapshots': get
+              });
+        },
+        child: categoryTitle(category),
+      ),
       scoreInfo('남은 학점', remainA, remainB),
       divider(),
       takeCSinfo('수강 완료', cmplt),
@@ -163,18 +195,18 @@ Widget setView(String category, int remainA, int remainB, List cmplt, List notcm
 Widget categoryTitle(String title) {
   // 졸업 요건 항목 카테고리
   return Stack(
-    alignment: AlignmentDirectional.bottomStart,
-    children: [
-      Container(
-        height: 30,
-        color: const Color(0xFFEFEFF4),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(left: 24, bottom: 5),
-        child: Text(title, style: const TextStyle(fontSize: 10)),
-      ),
-    ],
-  );
+      alignment: AlignmentDirectional.bottomStart,
+      children: [
+        Container(
+          height: 30,
+          color: const Color(0xFFEFEFF4),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(left: 24, bottom: 5),
+          child: Text(title, style: const TextStyle(fontSize: 10)),
+        ),
+      ],
+    );
 }
 
 Widget divider() {
