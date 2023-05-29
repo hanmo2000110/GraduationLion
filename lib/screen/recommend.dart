@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'mypage.dart';
 
@@ -65,7 +66,49 @@ Widget recommendCourseInfo(int semester, List myCourseList){
           ),
         ],
       ),
-      courseView(myCourseList),
+      /*
+      StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection('Courses')
+            .orderBy('name', descending: false)
+            .snapshots(),
+        builder: (BuildContext context,
+            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          final docs = snapshot.data!.docs;
+
+          return ListView.separated(
+            shrinkWrap: true,
+            itemCount: myCourseList.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                visualDensity: const VisualDensity(vertical: -3),
+                contentPadding: const EdgeInsets.symmetric(horizontal: 24),
+                leading: Text(
+                  docs[index]['name'],
+                  style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                ),
+                trailing: Text(
+                  '[${docs[index]['category']}] ${docs[index]['credit']}학점, ${docs[index]['gradeOrPf']}',
+                  textAlign: TextAlign.end,
+                  style: const TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 14,
+                      color: Color(0xff8B95A1),
+                      height: 1.1),
+                ),
+              );
+            },
+            separatorBuilder: (BuildContext context, int index) => divider(),
+          );
+        },
+      ),
+       */
     ],
   );
 }

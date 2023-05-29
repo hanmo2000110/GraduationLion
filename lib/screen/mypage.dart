@@ -1,7 +1,9 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:graduationlion/controller/coursecontroller.dart';
 import 'recommend.dart';
 import 'package:get/get.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});
@@ -37,49 +39,63 @@ class MyPageState extends State<MyPage> {
             children: <Widget>[
               profile('졸업사자'),
               currentState(45),
-              for (int i = 1; i <= 8; i++) myCourseInfo(i, myCourseList)
+              for (int i=1 ; i<=8 ; i++)
+                Column(
+                  children: [
+                    semesterWithAdd(i),
+                    StreamBuilder(
+                      stream: FirebaseFirestore.instance
+                          .collection("Users")
+                          .doc(FirebaseAuth.instance.currentUser?.email)
+                          .collection("Courses")
+                          // .where('semester', isEqualTo: "$i")
+                          .orderBy('name', descending: false)
+                          .snapshots(),
+                      builder: (BuildContext context,
+                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
+                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          return const Center(
+                            child: CircularProgressIndicator(),
+                          );
+                        }
+
+                        final docs = snapshot.data!.docs;
+
+                        return ListView.separated(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          itemCount: docs.length,
+                          itemBuilder: (context, index) {
+                            return ListTile(
+                              visualDensity: const VisualDensity(vertical: -3),
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 24),
+                              leading: Text(
+                                docs[index]['name'],
+                                style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                              ),
+                              trailing: Text(
+                                '${docs[index]['credit']}학점, ${docs[index]['gradeOrPf']}',
+                                textAlign: TextAlign.end,
+                                style: const TextStyle(
+                                  fontWeight: FontWeight.w500,
+                                  fontSize: 14,
+                                  color: Color(0xff8B95A1),
+                                  height: 1.1),
+                              ),
+                            );
+                          },
+                          separatorBuilder: (BuildContext context, int index) => divider(),
+                        );
+                      },
+                    ),
+                  ],
+                ),
             ],
           ),
         ],
       ),
     );
   }
-}
-
-Widget courseView(List myCourseList) {
-  return ListView.separated(
-    shrinkWrap: true,
-    itemCount: myCourseList.length,
-    itemBuilder: (context, i) {
-      return ListTile(
-        visualDensity: const VisualDensity(vertical: -3),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-        leading: Text(
-          '${myCourseList[i]['course']}',
-          style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-        ),
-        trailing: Text(
-          '${myCourseList[i]['desc']}',
-          textAlign: TextAlign.end,
-          style: const TextStyle(
-              fontWeight: FontWeight.w500,
-              fontSize: 14,
-              color: Color(0xff8B95A1),
-              height: 1.1),
-        ),
-      );
-    },
-    separatorBuilder: (BuildContext context, int index) => divider(),
-  );
-}
-
-Widget myCourseInfo(int semester, List myCourseList) {
-  return Column(
-    children: [
-      semesterWithAdd(semester),
-      courseView(myCourseList),
-    ],
-  );
 }
 
 Widget profile(String nickname) {
