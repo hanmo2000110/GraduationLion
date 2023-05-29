@@ -143,20 +143,35 @@ class addCoursePageState extends State<addCoursePage> {
                         context: context,
                         barrierDismissible: false,
                         builder: (BuildContext context) {
-                          return CupertinoAlertDialog(
+                          return AlertDialog(
+                            elevation: 0.0,
+                            backgroundColor: Colors.white,
                             title: const Padding(
                                 padding: EdgeInsets.only(bottom: 7),
                                 child: Text('강의를 추가하시겠습니까?',
-                                    style: TextStyle(fontSize: 14))),
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700,))),
                             actions: [
-                              CupertinoDialogAction(
+                              TextButton(
+                                  style: TextButton.styleFrom(
+                                    minimumSize: Size.zero,
+                                    padding: EdgeInsets.zero,
+                                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  ),
                                   onPressed: () {
                                     Navigator.of(context).pop();
                                   },
                                   child: const Text("취소",
                                       style: TextStyle(
-                                          color: Colors.grey, fontSize: 14))),
-                              CupertinoDialogAction(
+                                          color: Colors.grey, fontSize: 14))
+                              ),
+                              const Padding(padding: EdgeInsets.only(right: 7)),
+                              TextButton(
+                                  style: TextButton.styleFrom(
+                                    minimumSize: Size.zero,
+                                    padding: EdgeInsets.zero,
+                                    tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                  ),
                                   onPressed: () async {
                                     await UserController.to.addCourseData(
                                         searchedList[index].data(),
@@ -168,15 +183,104 @@ class addCoursePageState extends State<addCoursePage> {
                                   child: const Text("추가",
                                       style: TextStyle(
                                           color: Color(0xff00579C),
-                                          fontSize: 14))),
+                                          fontSize: 14))
+                              ),
                             ],
-                            content: Column(
-                              children: [
-                                Text(
-                                    '[전공] ${searchedList[index]['name']}\n${searchedList[index]['credit']}학점 (설계 ${searchedList[index]['design']}학점), ${searchedList[index]['type']}',
-                                    style: const TextStyle(fontSize: 12)),
-                              ],
-                            ),
+                            content: StatefulBuilder(
+                                builder: (BuildContext context, StateSetter setState) {
+                                  return Column(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      Text(
+                                          '[전공] ${searchedList[index]['name']}\n${searchedList[index]['credit']}학점 (설계 ${searchedList[index]['design']}학점), ${searchedList[index]['type']}',
+                                          textAlign: TextAlign.center,
+                                          style: const TextStyle(fontSize: 12)),
+                                      const Padding(padding: EdgeInsets.only(bottom: 10)),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  splashRadius: 0.0,
+                                                  activeColor: const Color(0xff00579C),
+                                                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                  value: engkor.kor,
+                                                  groupValue: value1,
+                                                  onChanged: (value) {
+                                                    setState(() => value1 = value);
+                                                  }
+                                              ),
+                                              const Text("한국어분반",
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w500,
+                                                      fontSize: 12)),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  splashRadius: 0.0,
+                                                  activeColor: const Color(0xff00579C),
+                                                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                  value: engkor.eng,
+                                                  groupValue: value1,
+                                                  onChanged: (value) {
+                                                    setState(() => value1 = value);
+                                                  }
+                                              ),
+                                              const Text("영어분반",
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w500,
+                                                      fontSize: 12)),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  splashRadius: 0.0,
+                                                  activeColor: const Color(0xff00579C),
+                                                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                  value: gradepf.grade,
+                                                  groupValue: value2,
+                                                  onChanged: (value) {
+                                                    setState(() => value2 = value);
+                                                  }
+                                              ),
+                                              const Text("Grade 성적",
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w500,
+                                                      fontSize: 12)),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  splashRadius: 0.0,
+                                                  activeColor: const Color(0xff00579C),
+                                                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                  value: gradepf.pf,
+                                                  groupValue: value2,
+                                                  onChanged: (value) {
+                                                    setState(() => value2 = value);
+                                                  }
+                                              ),
+                                              const Text("P/F 성적",
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w500,
+                                                      fontSize: 12)),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  );
+                                }),
                           );
                         },
                       ),
@@ -261,39 +365,147 @@ class addCoursePageState extends State<addCoursePage> {
                                 context: context,
                                 barrierDismissible: false,
                                 builder: (BuildContext context) {
-                                  return CupertinoAlertDialog(
+                                return AlertDialog(
+                                  elevation: 0.0,
+                                    backgroundColor: Colors.white,
                                     title: const Padding(
-                                        padding: EdgeInsets.only(bottom: 7),
-                                        child: Text('강의를 추가하시겠습니까?',
-                                            style: TextStyle(fontSize: 14))),
-                                    actions: [
-                                      CupertinoDialogAction(
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                          child: const Text("취소",
-                                              style: TextStyle(
-                                                  color: Colors.grey, fontSize: 14))),
-                                      CupertinoDialogAction(
-                                          onPressed: () async {
-                                            await UserController.to.addCourseData(
-                                                searchedList[index].data(),
-                                                true,
-                                                "G",
-                                                arguments['semester']);
-                                            Get.offNamed('/navigation');
-                                          },
-                                          child: const Text("추가",
-                                              style: TextStyle(
-                                                  color: Color(0xff00579C),
-                                                  fontSize: 14))),
+                                              padding: EdgeInsets.only(bottom: 7),
+                                              child: Text('강의를 추가하시겠습니까?',
+                                                  textAlign: TextAlign.center,
+                                                  style: TextStyle(fontSize: 14, fontWeight: FontWeight.w700,))),
+                                          actions: [
+                                            TextButton(
+                                                style: TextButton.styleFrom(
+                                                  minimumSize: Size.zero,
+                                                  padding: EdgeInsets.zero,
+                                                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                                child: const Text("취소",
+                                                    style: TextStyle(
+                                                        color: Colors.grey, fontSize: 14))
+                                            ),
+                                            const Padding(padding: EdgeInsets.only(right: 7)),
+                                            TextButton(
+                                                style: TextButton.styleFrom(
+                                                  minimumSize: Size.zero,
+                                                  padding: EdgeInsets.zero,
+                                                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                ),
+                                                onPressed: () async {
+                                                  await UserController.to.addCourseData(
+                                                      searchedList[index].data(),
+                                                      true,
+                                                      "G",
+                                                      arguments['semester']);
+                                                  Get.offNamed('/navigation');
+                                                },
+                                                child: const Text("추가",
+                                                    style: TextStyle(
+                                                        color: Color(0xff00579C),
+                                                        fontSize: 14))
+                                            ),
+                                          ],
+                                  content: StatefulBuilder(
+                                  builder: (BuildContext context, StateSetter setState) {
+                                    return Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      children: [
+                                    Text(
+                                              '[교양] ${searchedList[index]['name']}\n${searchedList[index]['credit']}학점, 성적산출(Grade/PF): ${searchedList[index]['gradeOrPf']}\n${searchedList[index]['category']}, ${searchedList[index]['type']}',
+                                        textAlign: TextAlign.center,
+                                              style: const TextStyle(fontSize: 12)),
+                                        const Padding(padding: EdgeInsets.only(bottom: 10)),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  splashRadius: 0.0,
+                                                activeColor: const Color(0xff00579C),
+                                                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                  value: engkor.kor,
+                                                  groupValue: value1,
+                                                  onChanged: (value) {
+                                                    setState(() => value1 = value);
+                                                  }
+                                              ),
+                                              const Text("한국어분반",
+                                                  style: TextStyle(
+                                                      fontWeight: FontWeight.w500,
+                                                      fontSize: 12)),
+                                            ],
+                                          ),
+                                          Row(
+                                            children: [
+                                              Radio(
+                                                  splashRadius: 0.0,
+                                                  activeColor: const Color(0xff00579C),
+                                                  materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                value: engkor.eng,
+                                                groupValue: value1,
+                                                onChanged: (value) {
+                                                  setState(() => value1 = value);
+                                                }
+                                              ),
+                                              const Text("영어분반",
+                                                style: TextStyle(
+                                                  fontWeight: FontWeight.w500,
+                                                  fontSize: 12)),
+                                            ],
+                                          ),
+                                          ],
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.center,
+                                          children: [
+                                            Row(
+                                              children: [
+                                                Radio(
+                                                    splashRadius: 0.0,
+                                                    activeColor: const Color(0xff00579C),
+                                                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                    value: gradepf.grade,
+                                                    groupValue: value2,
+                                                    onChanged: (value) {
+                                                      setState(() => value2 = value);
+                                                    }
+                                                ),
+                                                const Text("Grade 성적",
+                                                    style: TextStyle(
+                                                        fontWeight: FontWeight.w500,
+                                                        fontSize: 12)),
+                                              ],
+                                            ),
+                                            Row(
+                                              children: [
+                                                Radio(
+                                                    splashRadius: 0.0,
+                                                    activeColor: const Color(0xff00579C),
+                                                    materialTapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                                                    value: gradepf.pf,
+                                                    groupValue: value2,
+                                                    onChanged: (value) {
+                                                      setState(() => value2 = value);
+                                                    }
+                                                ),
+                                                const Text("P/F 성적",
+                                                    style: TextStyle(
+                                                        fontWeight: FontWeight.w500,
+                                                        fontSize: 12)),
+                                              ],
+                                            ),
+                                          ],
+                                        ),
                                     ],
-                                    content: Text(
-                                        '[교양] ${searchedList[index]['name']}\n${searchedList[index]['credit']}학점, 성적산출(Grade/PF): ${searchedList[index]['gradeOrPf']}\n${searchedList[index]['category']}, ${searchedList[index]['type']}',
-                                        style: const TextStyle(fontSize: 12)),
+                                          );
+                                    }),
                                   );
-                                },
-                              ),
+                                  },
+                                  ),
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(4.0)),
