@@ -106,21 +106,21 @@ class HomePageState extends State<HomePage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              setView(courseController.getCategory1(), '신앙및세계관', 6, 9, cmplt, notcmplt),
-              setView(courseController.getCategory2(), '인성및리더십', 3, 6, cmplt, notcmplt),
-              setView(courseController.getCategory3(), '전문교양', 5, 5, cmplt, notcmplt),
-              major=="컴공" ? setView(courseController.getCategory4(), '수학 및 기초과학', 8, 18, cmplt, notcmplt)
-                :setView(courseController.getCategory4_EE(), '수학 및 기초과학 + ICT융합기초', 12, 30, cmplt, notcmplt),
-              major=="컴공" ? setView(courseController.getCategory5(), 'ICT융합기초', 2, 2, cmplt, notcmplt)
+              setView(courseController.getCategory1(), '신앙 및 세계관', 6, 9, cmplt, notcmplt),
+              setView(courseController.getCategory2(), '인성 및 리더십', 3, 6, cmplt, notcmplt),
+              setView(courseController.getCategory3(), '전문 교양', 5, 5, cmplt, notcmplt),
+              major=="컴공" ? setView(courseController.getCategory4(), '수학 및 기초 과학', 8, 18, cmplt, notcmplt)
+                :setView(courseController.getCategory4_EE(), '수학 및 기초 과학 + ICT 융합 기초', 12, 30, cmplt, notcmplt),
+              major=="컴공" ? setView(courseController.getCategory5(), 'ICT 융합 기초', 2, 2, cmplt, notcmplt)
                 :Container(),
-              setView(courseController.getCategory6(), '자유선택(교양)', 6, 9, cmplt, notcmplt),
+              setView(courseController.getCategory6(), '자유 선택 (교양)', 6, 9, cmplt, notcmplt),
 
-              _setView('자유선택(교양또는비교양)', 6, 12, cmplt, notcmplt),
+              _setView('자유 선택 (교양 또는 비교양)', 6, 12, cmplt, notcmplt),
               _setView('전공', 35, 60, cmplt, notcmplt),
-              _setView('P/F과목 총이수학점', 16, 39, cmplt, notcmplt),
+              _setView('P/F과목 총 이수 학점', 16, 39, cmplt, notcmplt),
 
               // 총 취득학점
-              categoryTitle('총 취득학점'),
+              categoryTitle('총 취득 학점'),
               scoreInfo('취득 학점', 88, 130),
 
               // 평점 평균
@@ -128,7 +128,7 @@ class HomePageState extends State<HomePage> {
               scoreInfo('평점 평균', 39, 45),
 
               // 영어강의 과목 이수
-              categoryTitle('영어강의 과목이수'),
+              categoryTitle('영어 강의 과목이수'),
               scoreInfo('전공 영어', 12, 21),
               divider(),
               takeCSinfo('전공 수강 완료', cmplt),
@@ -148,15 +148,15 @@ class HomePageState extends State<HomePage> {
               takeCSinfo('자유 수강 예정', notcmplt),
 
               // 졸업영어시험 제출 여부
-              categoryTitle('졸업영어시험 제출 여부'),
-              showCond('졸업영어시험 제출', '합격'),
+              categoryTitle('졸업 영어 시험 제출 여부'),
+              showCond('졸업 영어 시험 제출', '합격'),
 
               // 학부 추가 졸업 요건
-              categoryTitle('학부추가졸업요건'),
+              categoryTitle('학부 추가 졸업 요건'),
               showCond('학부 추가 졸업 요건', '불합격'),
 
               // 공학인증 최종 졸업판정
-              categoryTitle('공학인증 최종 졸업판정'),
+              categoryTitle('공학인증 최종 졸업 판정'),
               showCond('졸업 판정', '졸업 불가능'),
             ],
           ),
@@ -211,7 +211,7 @@ Widget categoryTitle(String title) {
   return Container(
     width: double.infinity,
     height: 30,
-    padding: const EdgeInsets.fromLTRB(10, 7, 0, 0),
+    padding: const EdgeInsets.fromLTRB(24, 10, 0, 0),
     color: const Color(0xFFEFEFF4),
     child: Text(title, style: const TextStyle(fontSize: 10)),
   );
@@ -221,7 +221,7 @@ Widget courseCategoryTitle(String title) {
   return Container(
     width: double.infinity,
     height: 30,
-    padding: const EdgeInsets.fromLTRB(10, 7, 0, 0),
+    padding: const EdgeInsets.fromLTRB(24, 10, 0, 0),
     color: const Color(0xFFEFEFF4),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -229,7 +229,7 @@ Widget courseCategoryTitle(String title) {
       children: [
         Text(title, style: const TextStyle(fontSize: 10)),
         const Padding(
-          padding: EdgeInsets.only(right: 6),
+          padding: EdgeInsets.only(right: 18),
           child:Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Colors.grey),
         )
       ],
