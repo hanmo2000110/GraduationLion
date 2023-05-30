@@ -44,7 +44,7 @@ class HomeCategoryCourseState extends State<HomeCategoryCourse> {
             Container(
               height: 30,
               width: MediaQuery.of(context).size.width,
-              padding: const EdgeInsets.fromLTRB(10, 7, 0, 0),
+              padding: const EdgeInsets.fromLTRB(24, 10, 0, 0),
               color: const Color(0xFFEFEFF4),
               child: Text(categories[index],
                 style: const TextStyle(fontSize: 10),
