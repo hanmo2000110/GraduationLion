@@ -211,7 +211,7 @@ Widget categoryTitle(String title) {
   return Container(
     width: double.infinity,
     height: 30,
-    padding: const EdgeInsets.fromLTRB(10, 7, 0, 0),
+    padding: const EdgeInsets.fromLTRB(24, 10, 0, 0),
     color: const Color(0xFFEFEFF4),
     child: Text(title, style: const TextStyle(fontSize: 10)),
   );
@@ -221,7 +221,7 @@ Widget courseCategoryTitle(String title) {
   return Container(
     width: double.infinity,
     height: 30,
-    padding: const EdgeInsets.fromLTRB(10, 7, 0, 0),
+    padding: const EdgeInsets.fromLTRB(24, 10, 0, 0),
     color: const Color(0xFFEFEFF4),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -229,7 +229,7 @@ Widget courseCategoryTitle(String title) {
       children: [
         Text(title, style: const TextStyle(fontSize: 10)),
         const Padding(
-          padding: EdgeInsets.only(right: 6),
+          padding: EdgeInsets.only(right: 18),
           child:Icon(Icons.arrow_forward_ios_rounded, size: 16, color: Colors.grey),
         )
       ],
