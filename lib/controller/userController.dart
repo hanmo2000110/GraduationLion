@@ -31,12 +31,13 @@ class UserController extends GetxController {
   }
 
   Future<void> addCourseData(Map<String, dynamic> json, bool isEnglish,
-      String gradeOfPf, String semester) async {
+      String gradeOrPf, String semester) async {
     final db = await FirebaseFirestore.instance
         .collection("Users")
         .doc(FirebaseAuth.instance.currentUser?.email)
         .collection("Courses");
 
+    json['gradeOrPf'] = gradeOrPf;
     json['isEnglish'] = isEnglish;
     if (!json.containsKey("category")) json['category'] = "전공";
     json['semester'] = semester;
