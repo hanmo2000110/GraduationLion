@@ -33,7 +33,6 @@ class MyPageState extends State<MyPage> {
                           .collection("Users")
                           .doc(FirebaseAuth.instance.currentUser?.email)
                           .collection("Courses")
-                          // .where('semester', isEqualTo: "$i")
                           .orderBy('name', descending: false)
                           .snapshots(),
                       builder: (BuildContext context,
@@ -59,6 +58,10 @@ class MyPageState extends State<MyPage> {
                           shrinkWrap: true,
                           itemCount: semesterCourseList.length,
                           itemBuilder: (context, index) {
+                            String courseLanguage = '';
+                            if(semesterCourseList[index]['isEnglish'] == true) courseLanguage = "[한]";
+                            else courseLanguage = "[영]";
+
                             return ListTile(
                               visualDensity: const VisualDensity(vertical: -3),
                               contentPadding: const EdgeInsets.symmetric(horizontal: 24),
@@ -67,7 +70,7 @@ class MyPageState extends State<MyPage> {
                                 style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
                               ),
                               trailing: Text(
-                                '${semesterCourseList[index]['credit']}학점, ${semesterCourseList[index]['gradeOrPf']}',
+                                '$courseLanguage ${semesterCourseList[index]['credit']}학점, ${semesterCourseList[index]['gradeOrPf']}',
                                 textAlign: TextAlign.end,
                                 style: const TextStyle(
                                   fontWeight: FontWeight.w500,
