@@ -75,13 +75,16 @@ class UserController extends GetxController {
     return true;
   }
 
-  Future<void> addInitData(int department, int semester, int englishSubmit, int englishGrade) async {
-    await FirebaseFirestore.instance.collection("Users").doc(FirebaseAuth.instance.currentUser?.email)
+  Future<void> addInitData(
+      int department, int semester, int englishSubmit, int englishGrade) async {
+    await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(FirebaseAuth.instance.currentUser?.email)
         .update({
-      "major": department==0 ? '컴공' : '전자',
+      "major": department == 0 ? '컴공' : '전자',
       "semester": semester,
-      "englishSubmit": englishSubmit==0 ? true : false,
-      "englishSubmit": englishGrade
+      "englishSubmit": englishSubmit == 0 ? true : false,
+      "englishGrade": englishGrade
     });
   }
 }
