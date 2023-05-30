@@ -173,12 +173,20 @@ class addCoursePageState extends State<addCoursePage> {
                                     tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                   ),
                                   onPressed: () async {
-                                    await UserController.to.addCourseData(
-                                        searchedList[index].data(),
-                                        value1==engkor.eng? true:false,
-                                        value2==gradepf.grade? "G":"PF",
-                                        arguments['semester']);
-                                    Get.offNamed('/navigation');
+                                    bool duplicated = await UserController.to.checkDuplicated(searchedList[index].data());
+                                    if(!duplicated){
+                                      await UserController.to.addCourseData(
+                                          searchedList[index].data(),
+                                          value1==engkor.eng? true:false,
+                                          value2==gradepf.grade? "G":"PF",
+                                          arguments['semester']);
+                                      Get.offNamed('/navigation');
+                                    }
+                                    else{
+                                      Get.back();
+                                      Get.snackbar(
+                                          "Add Course Failed", "Duplicated Course");
+                                    }
                                   },
                                   child: const Text("추가",
                                       style: TextStyle(
@@ -395,12 +403,20 @@ class addCoursePageState extends State<addCoursePage> {
                                                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                                                 ),
                                                 onPressed: () async {
-                                                  await UserController.to.addCourseData(
-                                                      searchedList[index].data(),
-                                                      value1==engkor.eng? true:false,
-                                                      value2==gradepf.grade? "G":"PF",
-                                                      arguments['semester']);
-                                                  Get.offNamed('/navigation');
+                                                  bool duplicated = await UserController.to.checkDuplicated(searchedList[index].data());
+                                                  if(!duplicated){
+                                                    await UserController.to.addCourseData(
+                                                        searchedList[index].data(),
+                                                        value1==engkor.eng? true:false,
+                                                        value2==gradepf.grade? "G":"PF",
+                                                        arguments['semester']);
+                                                    Get.offNamed('/navigation');
+                                                  }
+                                                  else{
+                                                    Get.back();
+                                                    Get.snackbar(
+                                                        "Add Course Failed", "Duplicated Course");
+                                                  }
                                                 },
                                                 child: const Text("추가",
                                                     style: TextStyle(

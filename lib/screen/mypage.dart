@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:graduationlion/controller/coursecontroller.dart';
 import 'recommend.dart';
 import 'package:get/get.dart';
@@ -65,21 +66,36 @@ class MyPageState extends State<MyPage> {
                               courseLanguage = "[한]";
                             }
 
-                            return ListTile(
-                              visualDensity: const VisualDensity(vertical: -3),
-                              contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-                              leading: Text(
-                                semesterCourseList[index]['name'],
-                                style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                            return Slidable(
+                              endActionPane: ActionPane(
+                                extentRatio: 0.2,
+                                motion: const ScrollMotion(),
+                                children: [
+                                  SlidableAction(
+                                      icon: Icons.delete,
+                                      backgroundColor: Colors.red,
+                                      foregroundColor: Colors.white,
+                                      onPressed: (context) async{
+                                        //Get.find<CourseController>.deleteCourse();
+                                      })
+                                ],
                               ),
-                              trailing: Text(
-                                '$courseLanguage ${semesterCourseList[index]['credit']}학점, ${semesterCourseList[index]['gradeOrPf']}',
-                                textAlign: TextAlign.end,
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14,
-                                  color: Color(0xff8B95A1),
-                                  height: 1.1),
+                              child: ListTile(
+                                visualDensity: const VisualDensity(vertical: -3),
+                                contentPadding: const EdgeInsets.symmetric(horizontal: 24),
+                                leading: Text(
+                                  semesterCourseList[index]['name'],
+                                  style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+                                ),
+                                trailing: Text(
+                                  '$courseLanguage ${semesterCourseList[index]['credit']}학점, ${semesterCourseList[index]['gradeOrPf']}',
+                                  textAlign: TextAlign.end,
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 14,
+                                      color: Color(0xff8B95A1),
+                                      height: 1.1),
+                                ),
                               ),
                             );
                           },

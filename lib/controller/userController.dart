@@ -46,6 +46,19 @@ class UserController extends GetxController {
     await db.add(UserCourseModel.fromJson(json).toJson());
   }
 
+  Future<bool> checkDuplicated(Map<String, dynamic> json) async {
+    bool duplicated = await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(FirebaseAuth.instance.currentUser?.email)
+        .collection("Courses")
+        .where('name', isEqualTo: json['name'])
+        .get()
+        .then((QuerySnapshot qs){
+          return qs.docs.isNotEmpty ? true : false;
+    });
+    return duplicated;
+  }
+
   Future<bool> signin() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     final db = FirebaseFirestore.instance;
