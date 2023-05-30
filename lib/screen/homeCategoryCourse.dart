@@ -17,6 +17,8 @@ class HomeCategoryCourseState extends State<HomeCategoryCourse> {
     var categories = getCategories(courses);
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
+        forceMaterialTransparency: true,
         backgroundColor: Colors.white,
         title: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
