@@ -175,8 +175,8 @@ class addCoursePageState extends State<addCoursePage> {
                                   onPressed: () async {
                                     await UserController.to.addCourseData(
                                         searchedList[index].data(),
-                                        true,
-                                        "G",
+                                        value1==engkor.eng? true:false,
+                                        value2==gradepf.grade? "G":"PF",
                                         arguments['semester']);
                                     Get.offNamed('/navigation');
                                   },
@@ -397,8 +397,8 @@ class addCoursePageState extends State<addCoursePage> {
                                                 onPressed: () async {
                                                   await UserController.to.addCourseData(
                                                       searchedList[index].data(),
-                                                      true,
-                                                      "G",
+                                                      value1==engkor.eng? true:false,
+                                                      value2==gradepf.grade? "G":"PF",
                                                       arguments['semester']);
                                                   Get.offNamed('/navigation');
                                                 },
