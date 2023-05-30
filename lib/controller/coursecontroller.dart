@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:graduationlion/controller/requirementController.dart';
 import 'package:graduationlion/model/courseModel.dart';
 
 import '../model/gcourseModel.dart';
@@ -19,6 +20,7 @@ class CourseController extends GetxController {
     await initGeneralCourses();
     await initBsmCourses();
     await initSGCourses();
+    await RequirementController.to.calculateRequirement();
   }
 
   Future<void> initMajorCourses() async {
@@ -64,7 +66,8 @@ class CourseController extends GetxController {
   // 신앙및세계관
   List<GCourseModel> getCategory1() {
     return generalCourses
-        .where((element) => element.category.contains("신앙"))
+        .where((element) =>
+            element.category.contains("신앙") || element.category.contains("세계관"))
         .toList();
   }
 
@@ -115,23 +118,29 @@ class CourseController extends GetxController {
     return generalCourses;
   }
 
+  List<GCourseModel> getCategory7() {
+    return generalCourses
+        .where((element) => element.category.contains("실무 영어"))
+        .toList();
+  }
+
   // 개발자용) 수업 추가 함수
   Future<void> addData() async {
-    var db = FirebaseFirestore.instance;
-    var temp = await db.collection("SGCourses").add({
-      "name": "심리학 개론",
-      'gradeOrPf': "G",
-      // 'englishName': 'Machine Learning',
-      'credit': 3,
-      'type': "교양선택필수",
-      'detail': "",
-      'category': "SGC"
+    // var db = FirebaseFirestore.instance;
+    // var temp = await db.collection("GCourses").add({
+    //   "name": "데이터수집과 응용",
+    //   'gradeOrPf': "G",
+    //   // 'englishName': 'Machine Learning',
+    //   'credit': 3,
+    //   'type': "교양선택필수",
+    //   'detail': "",
+    //   'category': "SGC"
 
-      // 'englishName': 'NULL',
-      // 'type': "선택필수",
-      // 'design': 0,
-      // 'semester': '4-2',
-    });
-    temp.get().then((value) => print(value.data()));
+    //   // 'englishName': 'NULL',
+    //   // 'type': "선택필수",
+    //   // 'design': 0,
+    //   // 'semester': '4-2',
+    // });
+    // temp.get().then((value) => print(value.data()));
   }
 }

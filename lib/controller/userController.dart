@@ -2,15 +2,29 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:graduationlion/controller/requirementController.dart';
 import 'package:graduationlion/model/userCourseModel.dart';
 
 class UserController extends GetxController {
   static UserController get to => Get.find();
   late List<UserCourseModel> userCourses;
+  late int englishGrade = 0;
 
   Future<void> onInit() async {
     super.onInit();
     await loadUserCourses();
+    await loadEnglishGrade();
+  }
+
+  Future<void> loadEnglishGrade() async {
+    final db = FirebaseFirestore.instance;
+
+    var snapshot = await db
+        .collection("Users")
+        .doc(FirebaseAuth.instance.currentUser?.email)
+        .get();
+    print(snapshot.data()!['englishGrade']);
+    englishGrade = snapshot.data()!['englishGrade'];
   }
 
   Future<void> loadUserCourses() async {
@@ -43,6 +57,8 @@ class UserController extends GetxController {
     json['semester'] = semester;
     if (!json.containsKey("design")) json['design'] = 0;
 
+    userCourses.add(UserCourseModel.fromJson(json));
+    await RequirementController.to.calculateRequirement();
     await db.add(UserCourseModel.fromJson(json).toJson());
   }
 
@@ -53,8 +69,8 @@ class UserController extends GetxController {
         .collection("Courses")
         .where('name', isEqualTo: json['name'])
         .get()
-        .then((QuerySnapshot qs){
-          return qs.docs.isNotEmpty ? true : false;
+        .then((QuerySnapshot qs) {
+      return qs.docs.isNotEmpty ? true : false;
     });
     return duplicated;
   }

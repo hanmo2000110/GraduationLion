@@ -2,6 +2,7 @@ import 'package:graduationlion/controller/getxcontroller.dart';
 import 'package:get/get.dart';
 
 import '../controller/coursecontroller.dart';
+import '../controller/requirementController.dart';
 import '../controller/userController.dart';
 
 class InitBinding implements Bindings {
@@ -10,5 +11,6 @@ class InitBinding implements Bindings {
     Get.put(NavigationController());
     Get.put(CourseController());
     Get.put(UserController());
+    Get.put(RequirementController());
   }
 }
