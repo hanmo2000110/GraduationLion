@@ -59,8 +59,11 @@ class MyPageState extends State<MyPage> {
                           itemCount: semesterCourseList.length,
                           itemBuilder: (context, index) {
                             String courseLanguage = '';
-                            if(semesterCourseList[index]['isEnglish'] == true) courseLanguage = "[한]";
-                            else courseLanguage = "[영]";
+                            if(semesterCourseList[index]['isEnglish'] == true) {
+                              courseLanguage = "[영]";
+                            } else {
+                              courseLanguage = "[한]";
+                            }
 
                             return ListTile(
                               visualDensity: const VisualDensity(vertical: -3),
