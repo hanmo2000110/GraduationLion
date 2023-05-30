@@ -39,7 +39,11 @@ class MyPageState extends State<MyPage> {
                       AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
                         if (snapshot.connectionState == ConnectionState.waiting) {
                           return const Center(
-                            child: CircularProgressIndicator(),
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(vertical: 20),
+                              child: CircularProgressIndicator(
+                                color: Color(0xff00579C)),
+                            ),
                           );
                         }
 
