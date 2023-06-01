@@ -164,9 +164,9 @@ class HomePageState extends State<HomePage> {
                 categoryTitle('총 취득 학점'),
                 scoreInfo('취득 학점', get.totalCredit, 130),
 
-                // 평점 평균
-                categoryTitle('평점 평균'),
-                scoreInfo('평점 평균', get.credit1, 45),
+                // // 평점 평균
+                // categoryTitle('평점 평균'),
+                // scoreInfo('평점 평균', get.credit1, 45),
 
                 // 영어강의 과목 이수
                 categoryTitle('영어 강의 과목이수 (전공 21, 교양 6, 자유 3)'),
@@ -175,7 +175,6 @@ class HomePageState extends State<HomePage> {
                 takeCSinfo('수강 완료', get.list10),
                 divider(),
                 takeCSinfo('수강 예정', notcmplt),
-                divider(),
 
                 // 졸업영어시험 제출 여부
                 categoryTitle('졸업 영어 시험 제출 여부'),
