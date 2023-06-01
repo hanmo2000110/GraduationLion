@@ -60,8 +60,21 @@ class MyPageState extends State<MyPage> {
                             semesterCourseList.add(element);
                           }
                         }
-
-                        return ListView.separated(
+                        return semesterCourseList.length==0
+                        ? const SizedBox(
+                          width: double.infinity,
+                          height: 30,
+                          child: Center(
+                            child: Text('아직 수강한 수업이 없습니다',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.w500,
+                                    fontSize: 11,
+                                    color: Color(0xff8B95A1),
+                                    height: 1.1)
+                            ),
+                          )
+                        )
+                        : ListView.separated(
                           physics: const NeverScrollableScrollPhysics(),
                           shrinkWrap: true,
                           itemCount: semesterCourseList.length,
