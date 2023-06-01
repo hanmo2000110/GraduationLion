@@ -217,8 +217,7 @@ Widget setView(List<GCourseModel> get, String category, RxDouble remainA,
     ),
     scoreInfo('남은 학점', remainA, remainB),
     divider(),
-    takeCSinfo('수강 완료', cmplt),
-    divider(),
+    remainA.value == 0.0? Container(): Column(children: [takeCSinfo('수강 완료', cmplt), divider(),],),
     takeCSinfo('수강 예정', notcmplt),
   ]);
 }
@@ -286,10 +285,10 @@ Widget scoreInfo(String type, RxDouble left, int full) {
         text: TextSpan(children: [
       TextSpan(
         text: '${left.value} ',
-        style: const TextStyle(
+        style: TextStyle(
             fontWeight: FontWeight.w800,
             fontSize: 14,
-            color: Color(0xffFFC107)),
+            color: left.value>=full? const Color(0xff00579C) : const Color(0xffFFC107)),
       ),
       TextSpan(
         text: '/ $full학점',
