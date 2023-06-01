@@ -2,6 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:graduationlion/controller/coursecontroller.dart';
+import '../controller/userController.dart';
 import 'recommend.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,6 +15,8 @@ class MyPage extends StatefulWidget {
 }
 
 class MyPageState extends State<MyPage> {
+  UserController userController = Get.find<UserController>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -80,7 +83,7 @@ class MyPageState extends State<MyPage> {
                                       backgroundColor: Colors.red,
                                       foregroundColor: Colors.white,
                                       onPressed: (context) async{
-                                        //Get.find<CourseController>.deleteCourse();
+                                        userController.deleteCourse(semesterCourseList[index].data());
                                       })
                                 ],
                               ),
