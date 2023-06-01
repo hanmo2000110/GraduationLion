@@ -27,7 +27,7 @@ class MyPageState extends State<MyPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               profile('졸업사자'),
-              // currentState(45),
+              currentState(45),
               for (int i=1 ; i<=8 ; i++)
                 Column(
                   children: [
