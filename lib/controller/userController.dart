@@ -75,6 +75,25 @@ class UserController extends GetxController {
     return duplicated;
   }
 
+  Future<void >deleteCourse(Map<String, dynamic> json) async {
+    late String docId;
+    await FirebaseFirestore.instance
+        .collection("Users")
+        .doc(FirebaseAuth.instance.currentUser?.email)
+        .collection("Courses")
+        .where('name', isEqualTo: json['name'])
+        .get().then((QuerySnapshot qs) {
+      docId = qs.docs[0].id;
+    });
+    WriteBatch batch = FirebaseFirestore.instance.batch();
+
+    batch.delete(FirebaseFirestore.instance
+        .doc('/Users/${FirebaseAuth.instance.currentUser?.email}/Courses/${docId}'));
+
+    return batch.commit();
+  }
+
+
   Future<bool> signin() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     final db = FirebaseFirestore.instance;
