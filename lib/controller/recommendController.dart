@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:graduationlion/controller/coursecontroller.dart';
 import 'package:graduationlion/controller/userController.dart';
 // import 'package:graduationlion/controller/coursecontroller.dart';
 

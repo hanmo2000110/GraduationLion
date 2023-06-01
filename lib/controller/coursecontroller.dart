@@ -130,18 +130,12 @@ class CourseController extends GetxController {
     // var temp =
     await db
         .collection("Recommned")
-        .doc("컴공")
+        .doc("전자")
         .collection("Courses")
-        .doc("semester3")
-        .update({
-      "must": [
-        '공동체 리더십 훈련 3',
-        '채플 3',
-        'English Reading and Discussion',
-        '데이타구조',
-      ],
-      "free": [],
-      "select": ['자바프로그래밍언어', '논리설계', '오픈소스 소프트웨어 실습', '경영경제통계']
+        .doc("semester8")
+        .set({
+      "must": ['자유를 누리세요'],
+      "select": []
 
       // "name": "ERC",
       // 'gradeOrPf': "의미없음",
