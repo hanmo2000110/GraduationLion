@@ -60,7 +60,6 @@ class MyPageState extends State<MyPage> {
                             semesterCourseList.add(element);
                           }
                         }
-
                         return semesterCourseList.length==0
                         ? const SizedBox(
                           width: double.infinity,
