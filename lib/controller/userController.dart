@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:graduationlion/controller/recommendController.dart';
 import 'package:graduationlion/controller/requirementController.dart';
 import 'package:graduationlion/model/userCourseModel.dart';
 
@@ -9,22 +10,28 @@ class UserController extends GetxController {
   static UserController get to => Get.find();
   late List<UserCourseModel> userCourses;
   late int englishGrade = 0;
+  late int percentage;
+  late int semester;
+  late String major;
 
   Future<void> onInit() async {
     super.onInit();
     await loadUserCourses();
-    await loadEnglishGrade();
+    await loadUserData();
+    await RecommendController.to.loadRecommendCourses();
   }
 
-  Future<void> loadEnglishGrade() async {
+  Future<void> loadUserData() async {
     final db = FirebaseFirestore.instance;
 
     var snapshot = await db
         .collection("Users")
         .doc(FirebaseAuth.instance.currentUser?.email)
         .get();
-    print(snapshot.data()!['englishGrade']);
+
     englishGrade = snapshot.data()!['englishGrade'];
+    semester = snapshot.data()!['semester'];
+    major = snapshot.data()!['major'];
   }
 
   Future<void> loadUserCourses() async {

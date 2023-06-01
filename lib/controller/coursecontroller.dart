@@ -126,21 +126,36 @@ class CourseController extends GetxController {
 
   // 개발자용) 수업 추가 함수
   Future<void> addData() async {
-    // var db = FirebaseFirestore.instance;
-    // var temp = await db.collection("GCourses").add({
-    //   "name": "데이터수집과 응용",
-    //   'gradeOrPf': "G",
-    //   // 'englishName': 'Machine Learning',
-    //   'credit': 3,
-    //   'type': "교양선택필수",
-    //   'detail': "",
-    //   'category': "SGC"
+    var db = FirebaseFirestore.instance;
+    // var temp =
+    await db
+        .collection("Recommned")
+        .doc("컴공")
+        .collection("Courses")
+        .doc("semester3")
+        .update({
+      "must": [
+        '공동체 리더십 훈련 3',
+        '채플 3',
+        'English Reading and Discussion',
+        '데이타구조',
+      ],
+      "free": [],
+      "select": ['자바프로그래밍언어', '논리설계', '오픈소스 소프트웨어 실습', '경영경제통계']
 
-    //   // 'englishName': 'NULL',
-    //   // 'type': "선택필수",
-    //   // 'design': 0,
-    //   // 'semester': '4-2',
-    // });
+      // "name": "ERC",
+      // 'gradeOrPf': "의미없음",
+      // 'credit': 3,
+      // 'type': "의미없음",
+      // 'detail': "",
+      // 'category': "의미없음",
+      // 'semester': 3
+
+      // 'englishName': 'NULL',
+      // 'type': "선택필수",
+      // 'design': 0,
+      // 'semester': '4-2',
+    });
     // temp.get().then((value) => print(value.data()));
   }
 }
