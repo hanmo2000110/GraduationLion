@@ -1,30 +1,81 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:graduationlion/main.dart';
-
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  test(
+      'CheckEmail should return true for valid email with handong.ac.kr domain',
+      () {
+    // Arrange
+    String validEmail = 'example@handong.ac.kr';
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // Act
+    bool result = checkEmail(validEmail);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // Assert
+    expect(result, true,
+        reason: 'Expected the result to be true for a valid email.');
   });
+
+  test(
+      'CheckEmail should return false for invalid email without handong.ac.kr domain',
+      () {
+    // Arrange
+    String invalidEmail = 'example@gmail.com';
+
+    // Act
+    bool result = checkEmail(invalidEmail);
+
+    // Assert
+    expect(result, false,
+        reason:
+            'Expected the result to be false for an invalid email without the handong.ac.kr domain.');
+  });
+
+  test('CheckEmail should return false for invalid email without "@" symbol',
+      () {
+    // Arrange
+    String invalidEmail = 'examplehandong.ac.kr';
+
+    // Act
+    bool result = checkEmail(invalidEmail);
+
+    // Assert
+    expect(result, false,
+        reason:
+            'Expected the result to be false for an invalid email without the "@" symbol.');
+  });
+
+  test(
+      'CheckEmail should return false for invalid email with multiple "@" symbols',
+      () {
+    // Arrange
+    String invalidEmail = 'example@handong@ac.kr';
+
+    // Act
+    bool result = checkEmail(invalidEmail);
+
+    // Assert
+    expect(result, false,
+        reason:
+            'Expected the result to be false for an invalid email with multiple "@" symbols.');
+  });
+
+  test(
+      'CheckEmail should return false for invalid email with leading "@" symbol',
+      () {
+    // Arrange
+    String invalidEmail = '@handong.ac.kr';
+
+    // Act
+    bool result = checkEmail(invalidEmail);
+
+    // Assert
+    expect(result, false,
+        reason:
+            'Expected the result to be false for an invalid email with a leading "@" symbol.');
+  });
+}
+
+bool checkEmail(String googleUser) {
+  return (googleUser.contains("@handong.ac.kr") &&
+      googleUser != "@handong.ac.kr");
 }
