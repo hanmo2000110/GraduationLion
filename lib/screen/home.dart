@@ -174,7 +174,7 @@ class HomePageState extends State<HomePage> {
                 divider(),
                 takeCSinfo('수강 완료', get.list10),
                 divider(),
-                takeCSinfo('수강 예정', notcmplt),
+                // takeCSinfo('수강 예정', notcmplt),
 
                 // 졸업영어시험 제출 여부
                 categoryTitle('졸업 영어 시험 제출 여부'),
@@ -218,7 +218,7 @@ Widget setView(List<GCourseModel> get, String category, RxDouble remainA,
     scoreInfo('남은 학점', remainA, remainB),
     divider(),
     remainA.value == 0.0? Container(): Column(children: [takeCSinfo('수강 완료', cmplt), divider(),],),
-    takeCSinfo('수강 예정', notcmplt),
+    // takeCSinfo('수강 예정', notcmplt),
   ]);
 }
 
@@ -230,7 +230,7 @@ Widget _setView(
     divider(),
     takeCSinfo('수강 완료', cmplt),
     divider(),
-    takeCSinfo('수강 예정', notcmplt),
+    // takeCSinfo('수강 예정', notcmplt),
   ]);
 }
 
