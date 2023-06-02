@@ -70,8 +70,7 @@ class RequirementController extends GetxController {
     condition8 = await check8();
     condition9 = await check9();
     condition10 = await check10();
-    UserController.to.percentage = (totalCredit / 130).ceil();
-    print("for check : $credit1.value");
+    UserController.to.percentage = ((totalCredit.value / 130)*100).floor();
   }
 
   Future<void> countTotalCredit() async {

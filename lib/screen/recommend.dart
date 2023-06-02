@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:graduationlion/controller/recommendController.dart';
 
 class RecommendPage extends StatefulWidget {
   const RecommendPage({super.key});
@@ -8,20 +9,7 @@ class RecommendPage extends StatefulWidget {
 }
 
 class RecommendPageState extends State<RecommendPage> {
-  List<Map<String, String>> myCourseList = [
-    {
-      'course': 'AI 프로젝트 입문',
-      'desc': '2학점, 영어, 설계',
-    },
-    {
-      'course': '모바일 앱 개발',
-      'desc': '3학점',
-    },
-    {
-      'course': '환경과 인간',
-      'desc': '3학점, P/F',
-    },
-  ];
+  List<List> myCourseList = RecommendController.to.semesters;
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +36,8 @@ class RecommendPageState extends State<RecommendPage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              for(int i=1 ; i<=8 ; i++)
-                recommendCourseInfo(i, myCourseList)
+              for(int i=1 ; i<8 ; i++)
+                recommendCourseInfo(i, myCourseList[i])
             ],
           ),
         ],
@@ -79,49 +67,22 @@ Widget recommendCourseInfo(int semester, List myCourseList){
           ),
         ],
       ),
-      /*
-      StreamBuilder(
-        stream: FirebaseFirestore.instance
-            .collection('Courses')
-            .orderBy('name', descending: false)
-            .snapshots(),
-        builder: (BuildContext context,
-            AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-
-          final docs = snapshot.data!.docs;
-
-          return ListView.separated(
-            shrinkWrap: true,
-            itemCount: myCourseList.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                visualDensity: const VisualDensity(vertical: -3),
-                contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-                leading: Text(
-                  docs[index]['name'],
-                  style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-                ),
-                trailing: Text(
-                  '[${docs[index]['category']}] ${docs[index]['credit']}학점, ${docs[index]['gradeOrPf']}',
-                  textAlign: TextAlign.end,
-                  style: const TextStyle(
-                      fontWeight: FontWeight.w500,
-                      fontSize: 14,
-                      color: Color(0xff8B95A1),
-                      height: 1.1),
-                ),
-              );
-            },
-            separatorBuilder: (BuildContext context, int index) => divider(),
+      ListView.separated(
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        itemCount: myCourseList.length,
+        itemBuilder: (context, index) {
+          return ListTile(
+            visualDensity: const VisualDensity(vertical: -3),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 24),
+            leading: Text(
+              myCourseList[index],
+              style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
+            ),
           );
         },
-      ),
-       */
+        separatorBuilder: (BuildContext context, int index) => divider(),
+      )
     ],
   );
 }
