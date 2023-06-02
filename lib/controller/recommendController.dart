@@ -31,7 +31,7 @@ class RecommendController extends GetxController {
       // if (i == UserController.to.semester + 1) {
       for (var course in (temp.data()!['select'] as List)) select.add(course);
       // }
-      print("----------------- semester $i ----------------");
+      // print("----------------- semester $i ----------------");
       // print(must);
       // print(select);
       // print("---------------------------------");
@@ -94,8 +94,8 @@ class RecommendController extends GetxController {
 
       // print(must);
       // print(select);
-      print(semesters[i - 1]);
-      print("---------------------------------\n\n");
+      // print(semesters[i - 1]);
+      // print("---------------------------------\n\n");
     }
   }
 }
