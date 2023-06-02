@@ -38,8 +38,7 @@ class RecommendPageState extends State<RecommendPage> {
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
-              // TODO : semesters가 하나 부족하게 생성되는 문제 해결 후 i<9로 수정
-              for (int i = UserController.to.semester + 1; i < 8; i++)
+              for (int i = UserController.to.semester; i < 8; i++)
                 recommendCourseInfo(i, myCourseList[i])
             ],
           ),
