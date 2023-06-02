@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:graduationlion/controller/requirementController.dart';
@@ -126,30 +127,31 @@ class CourseController extends GetxController {
 
   // 개발자용) 수업 추가 함수
   Future<void> addData() async {
-    var db = FirebaseFirestore.instance;
-    // var temp =
-    await db
-        .collection("Recommned")
-        .doc("전자")
-        .collection("Courses")
-        .doc("semester8")
-        .set({
-      "must": ['자유를 누리세요'],
-      "select": []
+    await FirebaseAuth.instance.signOut();
+    // var db = FirebaseFirestore.instance;
+    // // var temp =
+    // await db
+    //     .collection("Recommned")
+    //     .doc("전자")
+    //     .collection("Courses")
+    //     .doc("semester8")
+    //     .set({
+    //   "must": ['자유를 누리세요'],
+    //   "select": []
 
-      // "name": "ERC",
-      // 'gradeOrPf': "의미없음",
-      // 'credit': 3,
-      // 'type': "의미없음",
-      // 'detail': "",
-      // 'category': "의미없음",
-      // 'semester': 3
+    // "name": "ERC",
+    // 'gradeOrPf': "의미없음",
+    // 'credit': 3,
+    // 'type': "의미없음",
+    // 'detail': "",
+    // 'category': "의미없음",
+    // 'semester': 3
 
-      // 'englishName': 'NULL',
-      // 'type': "선택필수",
-      // 'design': 0,
-      // 'semester': '4-2',
-    });
+    // 'englishName': 'NULL',
+    // 'type': "선택필수",
+    // 'design': 0,
+    // 'semester': '4-2',
+    // });
     // temp.get().then((value) => print(value.data()));
   }
 }

@@ -10,7 +10,7 @@ class UserController extends GetxController {
   static UserController get to => Get.find();
   late List<UserCourseModel> userCourses;
   late int englishGrade = 0;
-  late int percentage;
+  late int percentage = 0;
   late int semester;
   late String major;
 
@@ -18,7 +18,6 @@ class UserController extends GetxController {
     super.onInit();
     await loadUserCourses();
     await loadUserData();
-    await RecommendController.to.loadRecommendCourses();
   }
 
   Future<void> loadUserData() async {
@@ -32,6 +31,8 @@ class UserController extends GetxController {
     englishGrade = snapshot.data()!['englishGrade'];
     semester = snapshot.data()!['semester'];
     major = snapshot.data()!['major'];
+
+    await RecommendController.to.loadRecommendCourses();
   }
 
   Future<void> loadUserCourses() async {
@@ -82,30 +83,30 @@ class UserController extends GetxController {
     return duplicated;
   }
 
-  Future<void >deleteCourse(Map<String, dynamic> json) async {
+  Future<void> deleteCourse(Map<String, dynamic> json) async {
     late String docId;
     await FirebaseFirestore.instance
         .collection("Users")
         .doc(FirebaseAuth.instance.currentUser?.email)
         .collection("Courses")
         .where('name', isEqualTo: json['name'])
-        .get().then((QuerySnapshot qs) {
+        .get()
+        .then((QuerySnapshot qs) {
       docId = qs.docs[0].id;
     });
     WriteBatch batch = FirebaseFirestore.instance.batch();
 
-    batch.delete(FirebaseFirestore.instance
-        .doc('/Users/${FirebaseAuth.instance.currentUser?.email}/Courses/${docId}'));
+    batch.delete(FirebaseFirestore.instance.doc(
+        '/Users/${FirebaseAuth.instance.currentUser?.email}/Courses/${docId}'));
 
     return batch.commit();
   }
-
 
   Future<bool> signin() async {
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     final db = FirebaseFirestore.instance;
 
-    if (!googleUser!.email.contains("@handong.ac.kr")) {
+    if (!checkEmail(googleUser!.email)) {
       await FirebaseAuth.instance.signOut();
       return false;
     }
@@ -115,12 +116,12 @@ class UserController extends GetxController {
     if (!check.exists) {
       await db
           .collection("Users")
-          .doc(googleUser.email)
+          .doc(googleUser!.email)
           .set({"email": googleUser.email});
     }
 
     final GoogleSignInAuthentication googleAuth =
-        await googleUser.authentication;
+        await googleUser!.authentication;
 
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
@@ -129,6 +130,10 @@ class UserController extends GetxController {
 
     await FirebaseAuth.instance.signInWithCredential(credential);
     return true;
+  }
+
+  bool checkEmail(String googleUser) {
+    return googleUser.contains("@handong.ac.kr");
   }
 
   Future<void> addInitData(
