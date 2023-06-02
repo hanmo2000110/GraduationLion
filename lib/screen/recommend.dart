@@ -39,7 +39,7 @@ class RecommendPageState extends State<RecommendPage> {
             mainAxisAlignment: MainAxisAlignment.start,
             children: <Widget>[
               // TODO : semesters가 하나 부족하게 생성되는 문제 해결 후 i<9로 수정
-              for(int i=UserController.to.semester+1 ; i<8 ; i++)
+              for (int i = UserController.to.semester + 1; i < 8; i++)
                 recommendCourseInfo(i, myCourseList[i])
             ],
           ),
@@ -49,7 +49,7 @@ class RecommendPageState extends State<RecommendPage> {
   }
 }
 
-Widget recommendCourseInfo(int semester, List myCourseList){
+Widget recommendCourseInfo(int semester, List myCourseList) {
   return Column(
     children: [
       Stack(
@@ -64,7 +64,8 @@ Widget recommendCourseInfo(int semester, List myCourseList){
             children: [
               Padding(
                 padding: const EdgeInsets.only(left: 24),
-                child: Text('$semester학기', style: const TextStyle(fontSize: 10)),
+                child: Text('${semester + 1}학기',
+                    style: const TextStyle(fontSize: 10)),
               ),
             ],
           ),

@@ -49,6 +49,7 @@ dependencies:
 
   google_sign_in: ^6.1.0
   dots_indicator: ^3.0.0
+  test: ^1.24.1
 
 
 dev_dependencies:
