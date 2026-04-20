@@ -2,13 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import 'package:graduationlion/controller/initPageController.dart';
+import 'package:graduationlion/controller/init_page_controller.dart';
+import 'package:graduationlion/core/constants/app_colors.dart';
 
-class InitSemesterPage extends StatefulWidget{
+class InitSemesterPage extends StatefulWidget {
   const InitSemesterPage({super.key});
 
   @override
-  _InitSemesterPageState createState() => _InitSemesterPageState();
+  State<InitSemesterPage> createState() => _InitSemesterPageState();
 }
 
 class _InitSemesterPageState extends State<InitSemesterPage> {
@@ -17,7 +18,7 @@ class _InitSemesterPageState extends State<InitSemesterPage> {
 
   @override
   void dispose() {
-    if(textController.text.isNotEmpty){
+    if (textController.text.isNotEmpty) {
       initPageController.setSemester(int.parse(textController.text));
     }
     textController.dispose();
@@ -35,24 +36,22 @@ class _InitSemesterPageState extends State<InitSemesterPage> {
       children: [
         const SizedBox(
           height: 90,
-          child: Text('몇 학기 째\n재학 중이신가요?',
+          child: Text(
+            '몇 학기 째\n재학 중이신가요?',
             textAlign: TextAlign.center,
-            style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold
-            ),
+            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
         ),
         const SizedBox(height: 20),
         SizedBox(
-          width: 100, height: 120,
+          width: 100,
+          height: 120,
           child: TextField(
             controller: textController,
             decoration: InputDecoration(
               border: const OutlineInputBorder(
-                borderRadius: BorderRadius.all(Radius.circular(20)),
-                borderSide: BorderSide(color: Color(0xff00579C))
-              ),
+                  borderRadius: BorderRadius.all(Radius.circular(20)),
+                  borderSide: BorderSide(color: AppColors.primary)),
               hintText: initPageController.semester.value.toString(),
               hintStyle: const TextStyle(fontSize: 60),
             ),

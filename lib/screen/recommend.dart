@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
-import 'package:graduationlion/controller/recommendController.dart';
-import 'package:graduationlion/controller/userController.dart';
+import 'package:graduationlion/controller/recommend_controller.dart';
+import 'package:graduationlion/controller/user_controller.dart';
+import 'package:graduationlion/core/constants/app_colors.dart';
 
 class RecommendPage extends StatefulWidget {
   const RecommendPage({super.key});
@@ -56,7 +57,7 @@ Widget recommendCourseInfo(int semester, List myCourseList) {
         children: [
           Container(
             height: 30,
-            color: const Color(0xFFEFEFF4),
+            color: AppColors.sectionBackground,
           ),
           Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -97,7 +98,7 @@ Widget semesterTitle(String semester) {
     children: [
       Container(
         height: 30,
-        color: const Color(0xFFEFEFF4),
+        color: AppColors.sectionBackground,
       ),
       Padding(
         padding: const EdgeInsets.only(left: 24, bottom: 5),
@@ -110,7 +111,7 @@ Widget semesterTitle(String semester) {
 Widget divider() {
   return const Divider(
     thickness: 1,
-    color: Color(0xffC4C4C4),
+    color: AppColors.fieldBackground,
     height: 0,
   );
 }
@@ -136,7 +137,7 @@ Widget courseInfo(String title, List desc) {
           style: const TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 14,
-              color: Color(0xff8B95A1),
+              color: AppColors.mutedText,
               height: 1.1),
         ),
       ],

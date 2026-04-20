@@ -24,7 +24,7 @@ main.dart
 - `login.dart`: Google 로그인 진입점
 - `InitPage/`: 학과, 학기, 영어 성적 등 초기 사용자 정보 입력
 - `home.dart`: 졸업 요건 진행 상황
-- `addCourse.dart`: 수강 과목 검색 및 추가
+- `add_course.dart`: 수강 과목 검색 및 추가
 - `recommend.dart`: 추천 과목 확인
 - `mypage.dart`: 사용자 정보 및 수강 과목 관리
 
@@ -38,6 +38,14 @@ main.dart
 - `RecommendController`: 사용자 정보 기반 추천 과목 로딩
 - `InitPageController`: 초기 정보 입력 화면 상태 관리
 - `NavigationController`: 하단 내비게이션 상태 관리
+
+### Core
+
+`lib/core/`는 여러 화면과 컨트롤러에서 반복해서 사용하는 값을 모아둔 영역입니다.
+
+- `constants/app_colors.dart`: 앱의 주요 색상 토큰
+- `constants/firestore_collections.dart`: Firestore 컬렉션명과 경로 생성 헬퍼
+- `utils/email_validator.dart`: 한동대학교 이메일 검증 로직
 
 ### Models
 
@@ -71,4 +79,5 @@ Users/{email}/Courses
 - 상태 관리는 GetX 컨트롤러 중심으로 구성되어 있습니다.
 - Firebase 설정 파일은 기존 프로젝트 연결을 위해 유지합니다.
 - Freezed 모델 변경 시 `build_runner`로 generated 파일을 갱신해야 합니다.
-- 포트폴리오 정리에서는 기능 로직을 바꾸지 않고 문서, 설정, 네이밍, import 정리에 초점을 둡니다.
+- 현재 구조는 과한 Clean Architecture보다 기존 MVP 구조를 읽기 쉽게 다듬는 방향에 가깝습니다.
+- Firestore 접근은 아직 컨트롤러에 남아 있지만, 컬렉션명과 검증 로직처럼 반복되는 값은 `core/`로 분리했습니다.

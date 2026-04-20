@@ -1,8 +1,12 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:graduationlion/controller/userController.dart';
+import 'package:graduationlion/controller/user_controller.dart';
+import 'package:graduationlion/core/constants/app_colors.dart';
+import 'package:graduationlion/core/constants/firestore_collections.dart';
 
 class AddCoursePage extends StatefulWidget {
   const AddCoursePage({super.key});
@@ -11,14 +15,22 @@ class AddCoursePage extends StatefulWidget {
   State<AddCoursePage> createState() => AddCoursePageState();
 }
 
-enum engkor { kor, eng }
+Widget divider() {
+  return Container(
+    width: double.infinity,
+    height: 1,
+    color: AppColors.fieldBackground,
+  );
+}
 
-enum gradepf { grade, pf }
+enum CourseLanguage { korean, english }
+
+enum CourseGradeType { grade, passFail }
 
 class AddCoursePageState extends State<AddCoursePage> {
   final myController = TextEditingController();
-  engkor? value1 = engkor.kor;
-  gradepf? value2 = gradepf.grade;
+  CourseLanguage? courseLanguage = CourseLanguage.korean;
+  CourseGradeType? courseGradeType = CourseGradeType.grade;
 
   @override
   Widget build(BuildContext context) {
@@ -44,19 +56,21 @@ class AddCoursePageState extends State<AddCoursePage> {
               decoration: const InputDecoration(
                 prefixIcon: Icon(Icons.search, color: Colors.white),
                 filled: true,
-                fillColor: Color(0xffC4C4C4),
+                fillColor: AppColors.fieldBackground,
                 contentPadding: EdgeInsets.symmetric(
                   vertical: 8,
                   horizontal: 16,
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: Color(0xffC4C4C4)),
+                  borderSide:
+                      BorderSide(width: 1, color: AppColors.fieldBackground),
                   borderRadius: BorderRadius.all(
                     Radius.circular(10),
                   ),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(width: 1, color: Color(0xffC4C4C4)),
+                  borderSide:
+                      BorderSide(width: 1, color: AppColors.fieldBackground),
                   borderRadius: BorderRadius.all(
                     Radius.circular(10),
                   ),
@@ -72,8 +86,8 @@ class AddCoursePageState extends State<AddCoursePage> {
             ),
           ),
           bottom: const TabBar(
-            labelColor: Color(0xff00579C),
-            indicatorColor: Color(0xff00579C),
+            labelColor: AppColors.primary,
+            indicatorColor: AppColors.primary,
             tabs: <Widget>[
               Tab(
                   child: Text(
@@ -93,7 +107,7 @@ class AddCoursePageState extends State<AddCoursePage> {
           children: [
             StreamBuilder(
               stream: FirebaseFirestore.instance
-                  .collection('Courses')
+                  .collection(FirestoreCollections.courses)
                   .orderBy('name', descending: false)
                   .snapshots(),
               builder: (BuildContext context,
@@ -137,7 +151,7 @@ class AddCoursePageState extends State<AddCoursePage> {
                               style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 11,
-                                  color: Color(0xff8B95A1),
+                                  color: AppColors.mutedText,
                                   height: 1.4),
                             ),
                           ],
@@ -195,23 +209,27 @@ class AddCoursePageState extends State<AddCoursePage> {
                                             await UserController.to
                                                 .addCourseData(
                                                     searchedList[index].data(),
-                                                    value1 == engkor.eng
+                                                    courseLanguage ==
+                                                            CourseLanguage
+                                                                .english
                                                         ? true
                                                         : false,
-                                                    value2 == gradepf.grade
+                                                    courseGradeType ==
+                                                            CourseGradeType
+                                                                .grade
                                                         ? "G"
                                                         : "PF",
                                                     arguments['semester']);
                                             Get.offNamed('/navigation');
                                           } else {
                                             Get.back();
-                                            Get.snackbar("Add Course Failed",
-                                                "Duplicated Course");
+                                            Get.snackbar(
+                                                "과목 추가 실패", "이미 추가한 과목입니다.");
                                           }
                                         },
                                         child: const Text("추가",
                                             style: TextStyle(
-                                                color: Color(0xff00579C),
+                                                color: AppColors.primary,
                                                 fontSize: 14))),
                                   ],
                                   content: StatefulBuilder(builder:
@@ -237,15 +255,17 @@ class AddCoursePageState extends State<AddCoursePage> {
                                                 Radio(
                                                     splashRadius: 0.0,
                                                     activeColor:
-                                                        const Color(0xff00579C),
+                                                        AppColors.primary,
                                                     materialTapTargetSize:
                                                         MaterialTapTargetSize
                                                             .shrinkWrap,
-                                                    value: engkor.kor,
-                                                    groupValue: value1,
+                                                    value:
+                                                        CourseLanguage.korean,
+                                                    groupValue: courseLanguage,
                                                     onChanged: (value) {
-                                                      setState(
-                                                          () => value1 = value);
+                                                      setState(() =>
+                                                          courseLanguage =
+                                                              value);
                                                     }),
                                                 const Text("한국어분반",
                                                     style: TextStyle(
@@ -259,15 +279,17 @@ class AddCoursePageState extends State<AddCoursePage> {
                                                 Radio(
                                                     splashRadius: 0.0,
                                                     activeColor:
-                                                        const Color(0xff00579C),
+                                                        AppColors.primary,
                                                     materialTapTargetSize:
                                                         MaterialTapTargetSize
                                                             .shrinkWrap,
-                                                    value: engkor.eng,
-                                                    groupValue: value1,
+                                                    value:
+                                                        CourseLanguage.english,
+                                                    groupValue: courseLanguage,
                                                     onChanged: (value) {
-                                                      setState(
-                                                          () => value1 = value);
+                                                      setState(() =>
+                                                          courseLanguage =
+                                                              value);
                                                     }),
                                                 const Text("영어분반",
                                                     style: TextStyle(
@@ -287,15 +309,17 @@ class AddCoursePageState extends State<AddCoursePage> {
                                                 Radio(
                                                     splashRadius: 0.0,
                                                     activeColor:
-                                                        const Color(0xff00579C),
+                                                        AppColors.primary,
                                                     materialTapTargetSize:
                                                         MaterialTapTargetSize
                                                             .shrinkWrap,
-                                                    value: gradepf.grade,
-                                                    groupValue: value2,
+                                                    value:
+                                                        CourseGradeType.grade,
+                                                    groupValue: courseGradeType,
                                                     onChanged: (value) {
-                                                      setState(
-                                                          () => value2 = value);
+                                                      setState(() =>
+                                                          courseGradeType =
+                                                              value);
                                                     }),
                                                 const Text("Grade 성적",
                                                     style: TextStyle(
@@ -309,15 +333,17 @@ class AddCoursePageState extends State<AddCoursePage> {
                                                 Radio(
                                                     splashRadius: 0.0,
                                                     activeColor:
-                                                        const Color(0xff00579C),
+                                                        AppColors.primary,
                                                     materialTapTargetSize:
                                                         MaterialTapTargetSize
                                                             .shrinkWrap,
-                                                    value: gradepf.pf,
-                                                    groupValue: value2,
+                                                    value: CourseGradeType
+                                                        .passFail,
+                                                    groupValue: courseGradeType,
                                                     onChanged: (value) {
-                                                      setState(
-                                                          () => value2 = value);
+                                                      setState(() =>
+                                                          courseGradeType =
+                                                              value);
                                                     }),
                                                 const Text("P/F 성적",
                                                     style: TextStyle(
@@ -340,7 +366,7 @@ class AddCoursePageState extends State<AddCoursePage> {
                               elevation: 0.0,
                               minimumSize: Size.zero,
                               padding: EdgeInsets.zero,
-                              backgroundColor: const Color(0xff00579C),
+                              backgroundColor: AppColors.primary,
                             ),
                             child: const Text("추가",
                                 style: TextStyle(
@@ -359,7 +385,7 @@ class AddCoursePageState extends State<AddCoursePage> {
             ),
             StreamBuilder(
               stream: FirebaseFirestore.instance
-                  .collection('GCourses')
+                  .collection(FirestoreCollections.generalCourses)
                   .orderBy('name', descending: false)
                   .snapshots(),
               builder: (BuildContext context,
@@ -402,7 +428,7 @@ class AddCoursePageState extends State<AddCoursePage> {
                               style: const TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 11,
-                                  color: Color(0xff8B95A1),
+                                  color: AppColors.mutedText,
                                   height: 1.4),
                             ),
                           ],
@@ -459,23 +485,27 @@ class AddCoursePageState extends State<AddCoursePage> {
                                             await UserController.to
                                                 .addCourseData(
                                                     searchedList[index].data(),
-                                                    value1 == engkor.eng
+                                                    courseLanguage ==
+                                                            CourseLanguage
+                                                                .english
                                                         ? true
                                                         : false,
-                                                    value2 == gradepf.grade
+                                                    courseGradeType ==
+                                                            CourseGradeType
+                                                                .grade
                                                         ? "G"
                                                         : "PF",
                                                     arguments['semester']);
                                             Get.offNamed('/navigation');
                                           } else {
                                             Get.back();
-                                            Get.snackbar("Add Course Failed",
-                                                "Duplicated Course");
+                                            Get.snackbar(
+                                                "과목 추가 실패", "이미 추가한 과목입니다.");
                                           }
                                         },
                                         child: const Text("추가",
                                             style: TextStyle(
-                                                color: Color(0xff00579C),
+                                                color: AppColors.primary,
                                                 fontSize: 14))),
                                   ],
                                   content: StatefulBuilder(builder:
@@ -501,15 +531,17 @@ class AddCoursePageState extends State<AddCoursePage> {
                                                 Radio(
                                                     splashRadius: 0.0,
                                                     activeColor:
-                                                        const Color(0xff00579C),
+                                                        AppColors.primary,
                                                     materialTapTargetSize:
                                                         MaterialTapTargetSize
                                                             .shrinkWrap,
-                                                    value: engkor.kor,
-                                                    groupValue: value1,
+                                                    value:
+                                                        CourseLanguage.korean,
+                                                    groupValue: courseLanguage,
                                                     onChanged: (value) {
-                                                      setState(
-                                                          () => value1 = value);
+                                                      setState(() =>
+                                                          courseLanguage =
+                                                              value);
                                                     }),
                                                 const Text("한국어분반",
                                                     style: TextStyle(
@@ -523,15 +555,17 @@ class AddCoursePageState extends State<AddCoursePage> {
                                                 Radio(
                                                     splashRadius: 0.0,
                                                     activeColor:
-                                                        const Color(0xff00579C),
+                                                        AppColors.primary,
                                                     materialTapTargetSize:
                                                         MaterialTapTargetSize
                                                             .shrinkWrap,
-                                                    value: engkor.eng,
-                                                    groupValue: value1,
+                                                    value:
+                                                        CourseLanguage.english,
+                                                    groupValue: courseLanguage,
                                                     onChanged: (value) {
-                                                      setState(
-                                                          () => value1 = value);
+                                                      setState(() =>
+                                                          courseLanguage =
+                                                              value);
                                                     }),
                                                 const Text("영어분반",
                                                     style: TextStyle(
@@ -551,15 +585,17 @@ class AddCoursePageState extends State<AddCoursePage> {
                                                 Radio(
                                                     splashRadius: 0.0,
                                                     activeColor:
-                                                        const Color(0xff00579C),
+                                                        AppColors.primary,
                                                     materialTapTargetSize:
                                                         MaterialTapTargetSize
                                                             .shrinkWrap,
-                                                    value: gradepf.grade,
-                                                    groupValue: value2,
+                                                    value:
+                                                        CourseGradeType.grade,
+                                                    groupValue: courseGradeType,
                                                     onChanged: (value) {
-                                                      setState(
-                                                          () => value2 = value);
+                                                      setState(() =>
+                                                          courseGradeType =
+                                                              value);
                                                     }),
                                                 const Text("Grade 성적",
                                                     style: TextStyle(
@@ -573,15 +609,17 @@ class AddCoursePageState extends State<AddCoursePage> {
                                                 Radio(
                                                     splashRadius: 0.0,
                                                     activeColor:
-                                                        const Color(0xff00579C),
+                                                        AppColors.primary,
                                                     materialTapTargetSize:
                                                         MaterialTapTargetSize
                                                             .shrinkWrap,
-                                                    value: gradepf.pf,
-                                                    groupValue: value2,
+                                                    value: CourseGradeType
+                                                        .passFail,
+                                                    groupValue: courseGradeType,
                                                     onChanged: (value) {
-                                                      setState(
-                                                          () => value2 = value);
+                                                      setState(() =>
+                                                          courseGradeType =
+                                                              value);
                                                     }),
                                                 const Text("P/F 성적",
                                                     style: TextStyle(
@@ -604,7 +642,7 @@ class AddCoursePageState extends State<AddCoursePage> {
                               elevation: 0.0,
                               minimumSize: Size.zero,
                               padding: EdgeInsets.zero,
-                              backgroundColor: const Color(0xff00579C),
+                              backgroundColor: AppColors.primary,
                             ),
                             child: const Text("추가",
                                 style: TextStyle(

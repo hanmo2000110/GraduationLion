@@ -4,8 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:get/get.dart';
 
-import 'package:graduationlion/controller/coursecontroller.dart';
-import 'package:graduationlion/controller/userController.dart';
+import 'package:graduationlion/controller/course_controller.dart';
+import 'package:graduationlion/controller/user_controller.dart';
+import 'package:graduationlion/core/constants/app_colors.dart';
+import 'package:graduationlion/core/constants/firestore_collections.dart';
 import 'package:graduationlion/screen/recommend.dart';
 
 class MyPage extends StatefulWidget {
@@ -29,25 +31,27 @@ class MyPageState extends State<MyPage> {
             children: <Widget>[
               profile('졸업사자'),
               currentState(UserController.to.percentage),
-              for (int i=1 ; i<=8 ; i++)
+              for (int i = 1; i <= 8; i++)
                 Column(
                   children: [
                     semesterWithAdd(i),
                     StreamBuilder(
                       stream: FirebaseFirestore.instance
-                          .collection("Users")
+                          .collection(FirestoreCollections.users)
                           .doc(FirebaseAuth.instance.currentUser?.email)
-                          .collection("Courses")
+                          .collection(FirestoreCollections.courses)
                           .orderBy('name', descending: false)
                           .snapshots(),
                       builder: (BuildContext context,
-                      AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>> snapshot) {
-                        if (snapshot.connectionState == ConnectionState.waiting) {
+                          AsyncSnapshot<QuerySnapshot<Map<String, dynamic>>>
+                              snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
                           return const Center(
                             child: Padding(
                               padding: EdgeInsets.symmetric(vertical: 20),
                               child: CircularProgressIndicator(
-                                color: Color(0xff00579C)),
+                                  color: AppColors.primary),
                             ),
                           );
                         }
@@ -57,71 +61,83 @@ class MyPageState extends State<MyPage> {
                         var semesterCourseList = [];
                         for (var element in docs) {
                           if ((element.data()['semester'] as String)
-                              .contains("$i")) {
+                              .contains('$i')) {
                             semesterCourseList.add(element);
                           }
                         }
-                        return semesterCourseList.length==0
-                        ? const SizedBox(
-                          width: double.infinity,
-                          height: 30,
-                          child: Center(
-                            child: Text('아직 수강한 수업이 없습니다',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.w500,
-                                    fontSize: 11,
-                                    color: Color(0xff8B95A1),
-                                    height: 1.1)
-                            ),
-                          )
-                        )
-                        : ListView.separated(
-                          physics: const NeverScrollableScrollPhysics(),
-                          shrinkWrap: true,
-                          itemCount: semesterCourseList.length,
-                          itemBuilder: (context, index) {
-                            String courseLanguage = '';
-                            if(semesterCourseList[index]['isEnglish'] == true) {
-                              courseLanguage = "[영]";
-                            } else {
-                              courseLanguage = "[한]";
-                            }
-
-                            return Slidable(
-                              endActionPane: ActionPane(
-                                extentRatio: 0.2,
-                                motion: const ScrollMotion(),
-                                children: [
-                                  SlidableAction(
-                                      icon: Icons.delete,
-                                      backgroundColor: Colors.red,
-                                      foregroundColor: Colors.white,
-                                      onPressed: (context) async{
-                                        userController.deleteCourse(semesterCourseList[index].data());
-                                      })
-                                ],
-                              ),
-                              child: ListTile(
-                                visualDensity: const VisualDensity(vertical: -3),
-                                contentPadding: const EdgeInsets.symmetric(horizontal: 24),
-                                leading: Text(
-                                  semesterCourseList[index]['name'],
-                                  style: const TextStyle(fontWeight: FontWeight.w500, fontSize: 14),
-                                ),
-                                trailing: Text(
-                                  '$courseLanguage ${semesterCourseList[index]['credit']}학점, ${semesterCourseList[index]['gradeOrPf']}',
-                                  textAlign: TextAlign.end,
-                                  style: const TextStyle(
+                        return semesterCourseList.isEmpty
+                            ? const SizedBox(
+                                width: double.infinity,
+                                height: 30,
+                                child: Center(
+                                  child: Text(
+                                    '아직 수강한 수업이 없습니다',
+                                    style: TextStyle(
                                       fontWeight: FontWeight.w500,
-                                      fontSize: 14,
-                                      color: Color(0xff8B95A1),
-                                      height: 1.1),
+                                      fontSize: 11,
+                                      color: AppColors.mutedText,
+                                      height: 1.1,
+                                    ),
+                                  ),
                                 ),
-                              ),
-                            );
-                          },
-                          separatorBuilder: (BuildContext context, int index) => divider(),
-                        );
+                              )
+                            : ListView.separated(
+                                physics: const NeverScrollableScrollPhysics(),
+                                shrinkWrap: true,
+                                itemCount: semesterCourseList.length,
+                                itemBuilder: (context, index) {
+                                  String courseLanguage = '';
+                                  if (semesterCourseList[index]['isEnglish'] ==
+                                      true) {
+                                    courseLanguage = '[영]';
+                                  } else {
+                                    courseLanguage = '[한]';
+                                  }
+
+                                  return Slidable(
+                                    endActionPane: ActionPane(
+                                      extentRatio: 0.2,
+                                      motion: const ScrollMotion(),
+                                      children: [
+                                        SlidableAction(
+                                            icon: Icons.delete,
+                                            backgroundColor: Colors.red,
+                                            foregroundColor: Colors.white,
+                                            onPressed: (context) async {
+                                              userController.deleteCourse(
+                                                  semesterCourseList[index]
+                                                      .data());
+                                            })
+                                      ],
+                                    ),
+                                    child: ListTile(
+                                      visualDensity:
+                                          const VisualDensity(vertical: -3),
+                                      contentPadding:
+                                          const EdgeInsets.symmetric(
+                                              horizontal: 24),
+                                      leading: Text(
+                                        semesterCourseList[index]['name'],
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14),
+                                      ),
+                                      trailing: Text(
+                                        '$courseLanguage ${semesterCourseList[index]['credit']}학점, ${semesterCourseList[index]['gradeOrPf']}',
+                                        textAlign: TextAlign.end,
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            fontSize: 14,
+                                            color: AppColors.mutedText,
+                                            height: 1.1),
+                                      ),
+                                    ),
+                                  );
+                                },
+                                separatorBuilder:
+                                    (BuildContext context, int index) =>
+                                        divider(),
+                              );
                       },
                     ),
                   ],
@@ -146,7 +162,7 @@ Widget profile(String nickname) {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(100),
             border: Border.all(
-              color: const Color(0xffD4D1CE),
+              color: AppColors.profileBackground,
               width: 3,
             ),
           ),
@@ -160,7 +176,7 @@ Widget profile(String nickname) {
           children: [
             Text(
               '$nickname 학우님',
-              style: const TextStyle(fontSize: 12, color: Color(0xff777777)),
+              style: const TextStyle(fontSize: 12, color: AppColors.inactive),
             ),
             const Padding(
               padding: EdgeInsets.only(top: 7),
@@ -206,7 +222,7 @@ Widget currentState(int state) {
                     style: const TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.w600,
-                        color: Color(0xff00579C)),
+                        color: AppColors.primary),
                   ),
                   const TextSpan(
                     text: '\n아래에서 자세한 현황을 확인해보세요.',
@@ -214,7 +230,7 @@ Widget currentState(int state) {
                         height: 2.5,
                         fontSize: 11,
                         fontWeight: FontWeight.w400,
-                        color: Color(0xff777777)),
+                        color: AppColors.inactive),
                   ),
                 ])),
               ],
@@ -224,7 +240,7 @@ Widget currentState(int state) {
               style: const TextStyle(
                   height: 0,
                   fontSize: 33,
-                  color: Color(0xff00579C),
+                  color: AppColors.primary,
                   fontWeight: FontWeight.w800),
             ),
           ],
@@ -234,8 +250,8 @@ Widget currentState(int state) {
           height: 4,
           child: LinearProgressIndicator(
             value: state.toDouble() / 100,
-            valueColor: const AlwaysStoppedAnimation<Color>(Color(0xff00579C)),
-            backgroundColor: const Color(0xffD4D1CE),
+            valueColor: const AlwaysStoppedAnimation<Color>(AppColors.primary),
+            backgroundColor: AppColors.profileBackground,
           ),
         ),
       ],
@@ -250,7 +266,7 @@ Widget semesterWithAdd(int semester) {
     children: [
       Container(
         height: 30,
-        color: const Color(0xFFEFEFF4),
+        color: AppColors.sectionBackground,
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -261,43 +277,43 @@ Widget semesterWithAdd(int semester) {
             child: Text('$semester학기', style: const TextStyle(fontSize: 10)),
           ),
           Container(
-                height: 19,
-                width: 42,
-                margin: const EdgeInsets.only(left: 10, right: 24),
-                child: ElevatedButton(
-                  onPressed: () {
-                    Get.toNamed('/addcourse',
-                        arguments: ({"semester": semester.toString()}));
-                  },
-                  style: ElevatedButton.styleFrom(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(4.0)),
-                      elevation: 0.0,
-                      minimumSize: Size.zero,
-                      padding: EdgeInsets.zero,
-                      backgroundColor: const Color(0xff8B95A1),
-                      textStyle: const TextStyle(
+            height: 19,
+            width: 42,
+            margin: const EdgeInsets.only(left: 10, right: 24),
+            child: ElevatedButton(
+              onPressed: () {
+                Get.toNamed('/addcourse',
+                    arguments: ({"semester": semester.toString()}));
+              },
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(4.0)),
+                  elevation: 0.0,
+                  minimumSize: Size.zero,
+                  padding: EdgeInsets.zero,
+                  backgroundColor: AppColors.mutedText,
+                  textStyle: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                      fontSize: 12)),
+              child: const Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.add,
+                    size: 14,
+                    color: Colors.white,
+                  ),
+                  Text("추가",
+                      style: TextStyle(
+                          height: 1.3,
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
-                          fontSize: 12)),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.add,
-                        size: 14,
-                        color: Colors.white,
-                      ),
-                      Text("추가",
-                          style: TextStyle(
-                              height: 1.3,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600,
-                              fontSize: 10.5)),
-                    ],
-                  ),
-                ),
+                          fontSize: 10.5)),
+                ],
               ),
+            ),
+          ),
         ],
       ),
     ],

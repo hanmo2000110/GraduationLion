@@ -2,16 +2,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
-import 'package:graduationlion/controller/requirementController.dart';
-import 'package:graduationlion/model/courseModel.dart';
-import 'package:graduationlion/model/gcourseModel.dart';
+import 'package:graduationlion/controller/requirement_controller.dart';
+import 'package:graduationlion/core/constants/firestore_collections.dart';
+import 'package:graduationlion/model/course_model.dart';
+import 'package:graduationlion/model/g_course_model.dart';
 
 class CourseController extends GetxController {
   static CourseController get to => Get.find();
   late List<CourseModel> majorCourses;
   late List<GCourseModel> generalCourses;
   late List<GCourseModel> bsmCourses;
-  late List<GCourseModel> SGCourses;
+  late List<GCourseModel> specialGeneralCourses;
 
   @override
   Future<void> onInit() async {
@@ -20,48 +21,46 @@ class CourseController extends GetxController {
     await initMajorCourses();
     await initGeneralCourses();
     await initBsmCourses();
-    await initSGCourses();
+    await initSpecialGeneralCourses();
     await RequirementController.to.calculateRequirement();
   }
 
   Future<void> initMajorCourses() async {
     var db = FirebaseFirestore.instance;
     majorCourses = [];
-    var snapshot = await db.collection('Courses').get();
+    var snapshot = await db.collection(FirestoreCollections.courses).get();
     for (var element in snapshot.docs) {
       majorCourses.add(CourseModel.fromJson(element.data()));
     }
-    // print(majorCourses);
   }
 
   Future<void> initGeneralCourses() async {
     var db = FirebaseFirestore.instance;
     generalCourses = [];
-    var snapshot = await db.collection('GCourses').get();
+    var snapshot =
+        await db.collection(FirestoreCollections.generalCourses).get();
     for (var element in snapshot.docs) {
       generalCourses.add(GCourseModel.fromJson(element.data()));
     }
-    // print(majorCourses);
   }
 
   Future<void> initBsmCourses() async {
     var db = FirebaseFirestore.instance;
     bsmCourses = [];
-    var snapshot = await db.collection('BSM').get();
+    var snapshot = await db.collection(FirestoreCollections.bsm).get();
     for (var element in snapshot.docs) {
       bsmCourses.add(GCourseModel.fromJson(element.data()));
     }
-    // print(majorCourses);
   }
 
-  Future<void> initSGCourses() async {
+  Future<void> initSpecialGeneralCourses() async {
     var db = FirebaseFirestore.instance;
-    SGCourses = [];
-    var snapshot = await db.collection('SGCourses').get();
+    specialGeneralCourses = [];
+    var snapshot =
+        await db.collection(FirestoreCollections.specialGeneralCourses).get();
     for (var element in snapshot.docs) {
-      SGCourses.add(GCourseModel.fromJson(element.data()));
+      specialGeneralCourses.add(GCourseModel.fromJson(element.data()));
     }
-    // print(majorCourses);
   }
 
   // 신앙및세계관
@@ -83,7 +82,7 @@ class CourseController extends GetxController {
   // 전문 교양
   List<GCourseModel> getCategory3() {
     // TODO : 전문 교양 필드 추가
-    return SGCourses;
+    return specialGeneralCourses;
   }
 
   // 수학 및 기초과학 - 컴공
@@ -93,7 +92,7 @@ class CourseController extends GetxController {
   }
 
   // 수학 및 기초과학 + ICT융합기초 - 전자
-  List<GCourseModel> getCategory4_EE() {
+  List<GCourseModel> getCategory4ForEE() {
     // TODO : 수학 및 기초과학 필드 추가 (주의: 전자/컴공 인정 과목 다름)
     List<GCourseModel> bsmEE = [];
 
@@ -128,30 +127,5 @@ class CourseController extends GetxController {
   // 개발자용) 수업 추가 함수
   Future<void> addData() async {
     await FirebaseAuth.instance.signOut();
-    // var db = FirebaseFirestore.instance;
-    // // var temp =
-    // await db
-    //     .collection("Recommned")
-    //     .doc("전자")
-    //     .collection("Courses")
-    //     .doc("semester8")
-    //     .set({
-    //   "must": ['자유를 누리세요'],
-    //   "select": []
-
-    // "name": "ERC",
-    // 'gradeOrPf': "의미없음",
-    // 'credit': 3,
-    // 'type': "의미없음",
-    // 'detail': "",
-    // 'category': "의미없음",
-    // 'semester': 3
-
-    // 'englishName': 'NULL',
-    // 'type': "선택필수",
-    // 'design': 0,
-    // 'semester': '4-2',
-    // });
-    // temp.get().then((value) => print(value.data()));
   }
 }

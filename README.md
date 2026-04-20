@@ -30,6 +30,7 @@
 lib/
 ├── binding/       # GetX 의존성 주입
 ├── controller/    # 인증, 수강 과목, 졸업 요건, 추천 로직
+├── core/          # 앱 전역 상수와 유틸리티
 ├── model/         # Firestore 데이터 모델 및 Freezed generated 파일
 ├── route/         # GetX 라우트 정의
 ├── screen/        # 화면 UI
@@ -37,7 +38,7 @@ lib/
 └── main.dart
 ```
 
-자세한 구조와 데이터 흐름은 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)를 참고하세요.
+자세한 구조와 데이터 흐름은 [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md)를 참고하세요. UI 평가와 개선 방향은 [docs/DESIGN_REVIEW.md](docs/DESIGN_REVIEW.md)에 정리했습니다.
 
 ## 실행 방법
 
@@ -49,7 +50,3 @@ flutter run
 ```
 
 Firebase 설정 파일이 포함된 프로젝트이므로 Android, iOS, macOS 타깃에서 기존 Firebase 프로젝트와 연결됩니다.
-
-## 개발 메모
-
-이 저장소는 기존에 구현된 기능을 유지하면서 포트폴리오용으로 문서와 프로젝트 구성을 정리한 버전입니다. 기능 동작 방식은 유지하고, 프로젝트의 의도와 구조를 읽기 쉽게 드러내는 데 초점을 두었습니다.

@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'home.dart';
-import 'recommend.dart';
-import 'mypage.dart';
-import 'package:graduationlion/controller/getxcontroller.dart';
 import 'package:get/get.dart';
+
+import 'package:graduationlion/controller/navigation_controller.dart';
+import 'package:graduationlion/core/constants/app_colors.dart';
+import 'package:graduationlion/screen/home.dart';
+import 'package:graduationlion/screen/mypage.dart';
+import 'package:graduationlion/screen/recommend.dart';
 
 class NavigationPage extends GetView<NavigationController> {
   const NavigationPage({super.key});
@@ -23,9 +25,9 @@ class NavigationPage extends GetView<NavigationController> {
         }),
         bottomNavigationBar: Obx(
           () => BottomNavigationBar(
-            backgroundColor: const Color(0xff14171A),
+            backgroundColor: AppColors.navBackground,
             selectedItemColor: Colors.white,
-            unselectedItemColor: const Color(0xff777777),
+            unselectedItemColor: AppColors.inactive,
             currentIndex: controller.currentIndex.value,
             showSelectedLabels: false,
             showUnselectedLabels: false,

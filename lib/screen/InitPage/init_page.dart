@@ -2,18 +2,18 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:graduationlion/controller/initPageController.dart';
+import 'package:graduationlion/controller/init_page_controller.dart';
 
 import 'department.dart';
-import 'englishGrade.dart';
-import 'englishSubmit.dart';
+import 'english_grade.dart';
+import 'english_submit.dart';
 import 'semester.dart';
 
-class InitPage extends StatefulWidget{
+class InitPage extends StatefulWidget {
   const InitPage({super.key});
 
   @override
-  _InitPageState createState() => _InitPageState();
+  State<InitPage> createState() => _InitPageState();
 }
 
 class _InitPageState extends State<InitPage> {
@@ -28,8 +28,9 @@ class _InitPageState extends State<InitPage> {
   Widget build(BuildContext context) {
     return GetBuilder<InitPageController>(
       init: InitPageController(),
-      builder: (_) => Obx(() => Scaffold(
-        body: SafeArea(
+      builder: (_) => Obx(
+        () => Scaffold(
+            body: SafeArea(
           child: Column(
             children: [
               SizedBox(
@@ -37,45 +38,43 @@ class _InitPageState extends State<InitPage> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      _.index.value==0 ? const SizedBox(width: 48)
-                      : InkWell(
-                        child: navButton('이전'),
-                        onTap: ()=> _.decreaseIndex()
-                      ),
+                      _.index.value == 0
+                          ? const SizedBox(width: 48)
+                          : InkWell(
+                              child: navButton('이전'),
+                              onTap: () => _.decreaseIndex()),
                       DotsIndicator(
                         dotsCount: 4,
                         position: _.index.value,
                       ),
                       InkWell(
                           child: navButton('다음'),
-                          onTap: (){
-                            if(_.index.value==3){
+                          onTap: () {
+                            if (_.index.value == 3) {
                               _.submit();
                               Get.offNamed('/navigation');
-                            }
-                            else{
+                            } else {
                               _.increaseIndex();
                             }
-                          }
-                      ),
+                          }),
                     ],
-                  )
-              ),
+                  )),
               Expanded(
                 child: _body(_.index.value),
               )
             ],
           ),
-        )
-        ),
+        )),
       ),
     );
   }
 
-  Widget navButton(String msg){
+  Widget navButton(String msg) {
     return SizedBox(
-      width: 48, height: 28,
-      child: Text(msg, textAlign: TextAlign.center, style: const TextStyle(fontSize: 16)),
+      width: 48,
+      height: 28,
+      child: Text(msg,
+          textAlign: TextAlign.center, style: const TextStyle(fontSize: 16)),
     );
   }
 

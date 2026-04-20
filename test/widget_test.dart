@@ -1,5 +1,7 @@
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:graduationlion/core/utils/email_validator.dart';
+
 void main() {
   test(
       'CheckEmail should return true for valid email with handong.ac.kr domain',
@@ -8,7 +10,7 @@ void main() {
     String validEmail = 'example@handong.ac.kr';
 
     // Act
-    bool result = checkEmail(validEmail);
+    bool result = isHandongEmail(validEmail);
 
     // Assert
     expect(result, true,
@@ -22,7 +24,7 @@ void main() {
     String invalidEmail = 'example@gmail.com';
 
     // Act
-    bool result = checkEmail(invalidEmail);
+    bool result = isHandongEmail(invalidEmail);
 
     // Assert
     expect(result, false,
@@ -36,7 +38,7 @@ void main() {
     String invalidEmail = 'examplehandong.ac.kr';
 
     // Act
-    bool result = checkEmail(invalidEmail);
+    bool result = isHandongEmail(invalidEmail);
 
     // Assert
     expect(result, false,
@@ -51,7 +53,7 @@ void main() {
     String invalidEmail = 'example@handong@ac.kr';
 
     // Act
-    bool result = checkEmail(invalidEmail);
+    bool result = isHandongEmail(invalidEmail);
 
     // Assert
     expect(result, false,
@@ -66,16 +68,11 @@ void main() {
     String invalidEmail = '@handong.ac.kr';
 
     // Act
-    bool result = checkEmail(invalidEmail);
+    bool result = isHandongEmail(invalidEmail);
 
     // Assert
     expect(result, false,
         reason:
             'Expected the result to be false for an invalid email with a leading "@" symbol.');
   });
-}
-
-bool checkEmail(String googleUser) {
-  return (googleUser.contains("@handong.ac.kr") &&
-      googleUser != "@handong.ac.kr");
 }

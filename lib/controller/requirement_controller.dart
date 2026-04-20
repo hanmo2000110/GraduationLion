@@ -1,8 +1,8 @@
 import 'dart:math';
 
 import 'package:get/get.dart';
-import 'package:graduationlion/controller/coursecontroller.dart';
-import 'package:graduationlion/controller/userController.dart';
+import 'package:graduationlion/controller/course_controller.dart';
+import 'package:graduationlion/controller/user_controller.dart';
 
 class RequirementController extends GetxController {
   static RequirementController get to => Get.find();
@@ -70,7 +70,7 @@ class RequirementController extends GetxController {
     condition8 = await check8();
     condition9 = await check9();
     condition10 = await check10();
-    UserController.to.percentage = ((totalCredit.value / 130)*100).floor();
+    UserController.to.percentage = ((totalCredit.value / 130) * 100).floor();
   }
 
   Future<void> countTotalCredit() async {
@@ -170,7 +170,7 @@ class RequirementController extends GetxController {
     var requirement1 = 0.0;
 
     for (var course in UserController.to.userCourses) {
-      for (var sgc in CourseController.to.SGCourses) {
+      for (var sgc in CourseController.to.specialGeneralCourses) {
         if (course.name == sgc.name) {
           requirement1 += course.credit;
           list3.add(course.name);
@@ -337,10 +337,11 @@ class RequirementController extends GetxController {
       if (course.isEnglish == true && course.category != "실무 영어") {
         list10.add(course.name);
         requirement1 += course.credit;
-        if (course.category == "전공")
+        if (course.category == "전공") {
           requirement2 += course.credit;
-        else
+        } else {
           requirement3 += course.credit;
+        }
       }
     }
 

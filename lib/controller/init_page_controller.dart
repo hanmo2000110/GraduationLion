@@ -1,5 +1,5 @@
 import 'package:get/get.dart';
-import 'package:graduationlion/controller/userController.dart';
+import 'package:graduationlion/controller/user_controller.dart';
 
 class InitPageController extends GetxController {
   RxInt index = 0.obs;

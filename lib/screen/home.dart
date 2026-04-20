@@ -3,10 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:graduationlion/controller/coursecontroller.dart';
-import 'package:graduationlion/controller/requirementController.dart';
-import 'package:graduationlion/controller/userController.dart';
-import 'package:graduationlion/model/gcourseModel.dart';
+import 'package:graduationlion/controller/course_controller.dart';
+import 'package:graduationlion/controller/requirement_controller.dart';
+import 'package:graduationlion/controller/user_controller.dart';
+import 'package:graduationlion/core/constants/app_colors.dart';
+import 'package:graduationlion/core/constants/firestore_collections.dart';
+import 'package:graduationlion/model/g_course_model.dart';
+import 'package:graduationlion/route/routes.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -48,12 +51,12 @@ class HomePageState extends State<HomePage> {
         forceMaterialTransparency: true,
         backgroundColor: Colors.white,
         title: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 8),
           child: InkWell(
             onTap: () {
               FirebaseAuth.instance.signOut();
             },
-            child: Text(
+            child: const Text(
               '나의 수강 현황',
               style: TextStyle(
                 fontWeight: FontWeight.w800,
@@ -132,7 +135,7 @@ class HomePageState extends State<HomePage> {
                     ? setView(courseController.getCategory4(), '수학 및 기초 과학',
                         get.credit4, 18, get.list4, notcmplt)
                     : setView(
-                        courseController.getCategory4_EE(),
+                        courseController.getCategory4ForEE(),
                         '수학 및 기초 과학 + ICT 융합 기초',
                         get.credit4,
                         30,
@@ -197,7 +200,7 @@ class HomePageState extends State<HomePage> {
 
   getMajor() async {
     DocumentReference dr = FirebaseFirestore.instance
-        .collection("Users")
+        .collection(FirestoreCollections.users)
         .doc(FirebaseAuth.instance.currentUser?.email);
     await dr.get().then((snapshot) {
       major = snapshot.get("major");
@@ -210,14 +213,21 @@ Widget setView(List<GCourseModel> get, String category, RxDouble remainA,
   return Column(children: [
     GestureDetector(
       onTap: () {
-        Get.toNamed('/homeCategoryCourse',
+        Get.toNamed(Routes.homeCategoryCourse,
             arguments: {'title': category, 'snapshots': get});
       },
       child: courseCategoryTitle(category),
     ),
     scoreInfo('남은 학점', remainA, remainB),
     divider(),
-    remainA.value == 0.0? Container(): Column(children: [takeCSinfo('수강 완료', cmplt), divider(),],),
+    remainA.value == 0.0
+        ? Container()
+        : Column(
+            children: [
+              takeCSinfo('수강 완료', cmplt),
+              divider(),
+            ],
+          ),
     // takeCSinfo('수강 예정', notcmplt),
   ]);
 }
@@ -240,7 +250,7 @@ Widget categoryTitle(String title) {
     width: double.infinity,
     height: 30,
     padding: const EdgeInsets.fromLTRB(24, 10, 0, 0),
-    color: const Color(0xFFEFEFF4),
+    color: AppColors.sectionBackground,
     child: Text(title, style: const TextStyle(fontSize: 10)),
   );
 }
@@ -250,7 +260,7 @@ Widget courseCategoryTitle(String title) {
     width: double.infinity,
     height: 30,
     padding: const EdgeInsets.fromLTRB(24, 10, 0, 0),
-    color: const Color(0xFFEFEFF4),
+    color: AppColors.sectionBackground,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -269,7 +279,7 @@ Widget courseCategoryTitle(String title) {
 Widget divider() {
   return const Divider(
     thickness: 1,
-    color: Color(0xffC4C4C4),
+    color: AppColors.fieldBackground,
     height: 0,
   );
 }
@@ -288,7 +298,7 @@ Widget scoreInfo(String type, RxDouble left, int full) {
         style: TextStyle(
             fontWeight: FontWeight.w800,
             fontSize: 14,
-            color: left.value>=full? const Color(0xff00579C) : const Color(0xffFFC107)),
+            color: left.value >= full ? AppColors.primary : AppColors.warning),
       ),
       TextSpan(
         text: '/ $full학점',
@@ -320,7 +330,7 @@ Widget takeCSinfo(String cond, List cslist) {
           style: const TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 14,
-              color: Color(0xff8B95A1),
+              color: AppColors.mutedText,
               height: 1.1),
         ),
       ],
@@ -334,9 +344,9 @@ Widget showCond(String type, String cond) {
   Color color;
 
   if (cond == '합격') {
-    color = const Color(0xff00579C);
+    color = AppColors.primary;
   } else {
-    color = const Color(0xffFFC107);
+    color = AppColors.warning;
   }
 
   return Container(

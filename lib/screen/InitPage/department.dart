@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:graduationlion/controller/initPageController.dart';
+import 'package:graduationlion/controller/init_page_controller.dart';
+import 'package:graduationlion/core/constants/app_colors.dart';
 
-class InitDepartmentPage extends StatefulWidget{
+class InitDepartmentPage extends StatefulWidget {
   const InitDepartmentPage({super.key});
 
   @override
-  _InitDepartmentPageState createState() => _InitDepartmentPageState();
+  State<InitDepartmentPage> createState() => _InitDepartmentPageState();
 }
 
 class _InitDepartmentPageState extends State<InitDepartmentPage> {
@@ -28,11 +29,12 @@ class _InitDepartmentPageState extends State<InitDepartmentPage> {
       children: [
         const SizedBox(
           height: 120,
-          child: Text('전공이 무엇인가요?',
+          child: Text(
+            '전공이 무엇인가요?',
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.bold
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
             ),
           ),
         ),
@@ -42,14 +44,19 @@ class _InitDepartmentPageState extends State<InitDepartmentPage> {
             itemCount: departmentList.length,
             itemBuilder: (BuildContext context, int index) {
               return Obx(() => ListTile(
-                title: Text(departmentList[index]),
-                onTap: () => initPageController.setDepartment(index),
-                tileColor: index==initPageController.department.value ? const Color(0xff00579C) : Colors.white,
-                textColor: index==initPageController.department.value ? Colors.white : Colors.black,
-              ));
+                    title: Text(departmentList[index]),
+                    onTap: () => initPageController.setDepartment(index),
+                    tileColor: index == initPageController.department.value
+                        ? AppColors.primary
+                        : Colors.white,
+                    textColor: index == initPageController.department.value
+                        ? Colors.white
+                        : Colors.black,
+                  ));
             },
-            separatorBuilder: (BuildContext context, int index) => const Divider(height: 0),
-          )
+            separatorBuilder: (BuildContext context, int index) =>
+                const Divider(height: 0),
+          ),
         ),
       ],
     );

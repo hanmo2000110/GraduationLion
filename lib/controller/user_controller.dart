@@ -2,9 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:graduationlion/controller/recommendController.dart';
-import 'package:graduationlion/controller/requirementController.dart';
-import 'package:graduationlion/model/userCourseModel.dart';
+
+import 'package:graduationlion/controller/recommend_controller.dart';
+import 'package:graduationlion/controller/requirement_controller.dart';
+import 'package:graduationlion/core/constants/firestore_collections.dart';
+import 'package:graduationlion/core/utils/email_validator.dart';
+import 'package:graduationlion/model/user_course_model.dart';
 
 class UserController extends GetxController {
   static UserController get to => Get.find();
@@ -14,6 +17,7 @@ class UserController extends GetxController {
   late int semester;
   late String major;
 
+  @override
   Future<void> onInit() async {
     super.onInit();
     await loadUserCourses();
@@ -24,7 +28,7 @@ class UserController extends GetxController {
     final db = FirebaseFirestore.instance;
 
     var snapshot = await db
-        .collection("Users")
+        .collection(FirestoreCollections.users)
         .doc(FirebaseAuth.instance.currentUser?.email)
         .get();
 
@@ -39,9 +43,9 @@ class UserController extends GetxController {
     final db = FirebaseFirestore.instance;
 
     var snapshot = await db
-        .collection("Users")
+        .collection(FirestoreCollections.users)
         .doc(FirebaseAuth.instance.currentUser?.email)
-        .collection("Courses")
+        .collection(FirestoreCollections.courses)
         .get();
 
     userCourses = [];
@@ -49,15 +53,14 @@ class UserController extends GetxController {
     for (var element in snapshot.docs) {
       userCourses.add(UserCourseModel.fromJson(element.data()));
     }
-    // print(userCourse.length);
   }
 
   Future<void> addCourseData(Map<String, dynamic> json, bool isEnglish,
       String gradeOrPf, String semester) async {
-    final db = await FirebaseFirestore.instance
-        .collection("Users")
+    final db = FirebaseFirestore.instance
+        .collection(FirestoreCollections.users)
         .doc(FirebaseAuth.instance.currentUser?.email)
-        .collection("Courses");
+        .collection(FirestoreCollections.courses);
 
     json['gradeOrPf'] = gradeOrPf;
     json['isEnglish'] = isEnglish;
@@ -72,9 +75,9 @@ class UserController extends GetxController {
 
   Future<bool> checkDuplicated(Map<String, dynamic> json) async {
     bool duplicated = await FirebaseFirestore.instance
-        .collection("Users")
+        .collection(FirestoreCollections.users)
         .doc(FirebaseAuth.instance.currentUser?.email)
-        .collection("Courses")
+        .collection(FirestoreCollections.courses)
         .where('name', isEqualTo: json['name'])
         .get()
         .then((QuerySnapshot qs) {
@@ -86,9 +89,9 @@ class UserController extends GetxController {
   Future<void> deleteCourse(Map<String, dynamic> json) async {
     late String docId;
     await FirebaseFirestore.instance
-        .collection("Users")
+        .collection(FirestoreCollections.users)
         .doc(FirebaseAuth.instance.currentUser?.email)
-        .collection("Courses")
+        .collection(FirestoreCollections.courses)
         .where('name', isEqualTo: json['name'])
         .get()
         .then((QuerySnapshot qs) {
@@ -96,8 +99,8 @@ class UserController extends GetxController {
     });
     WriteBatch batch = FirebaseFirestore.instance.batch();
 
-    batch.delete(FirebaseFirestore.instance.doc(
-        '/Users/${FirebaseAuth.instance.currentUser?.email}/Courses/${docId}'));
+    batch.delete(FirebaseFirestore.instance.doc(FirestorePaths.userCourse(
+        FirebaseAuth.instance.currentUser!.email!, docId)));
 
     return batch.commit();
   }
@@ -111,17 +114,20 @@ class UserController extends GetxController {
       return false;
     }
 
-    var check = await db.collection("Users").doc(googleUser.email).get();
+    var check = await db
+        .collection(FirestoreCollections.users)
+        .doc(googleUser.email)
+        .get();
 
     if (!check.exists) {
       await db
-          .collection("Users")
-          .doc(googleUser!.email)
+          .collection(FirestoreCollections.users)
+          .doc(googleUser.email)
           .set({"email": googleUser.email});
     }
 
     final GoogleSignInAuthentication googleAuth =
-        await googleUser!.authentication;
+        await googleUser.authentication;
 
     final credential = GoogleAuthProvider.credential(
       accessToken: googleAuth.accessToken,
@@ -133,13 +139,13 @@ class UserController extends GetxController {
   }
 
   bool checkEmail(String googleUser) {
-    return googleUser.contains("@handong.ac.kr");
+    return isHandongEmail(googleUser);
   }
 
   Future<void> addInitData(
       int department, int semester, int englishSubmit, int englishGrade) async {
     await FirebaseFirestore.instance
-        .collection("Users")
+        .collection(FirestoreCollections.users)
         .doc(FirebaseAuth.instance.currentUser?.email)
         .update({
       "major": department == 0 ? '컴공' : '전자',

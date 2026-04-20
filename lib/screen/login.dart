@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:graduationlion/controller/userController.dart';
+
+import 'package:graduationlion/controller/user_controller.dart';
+import 'package:graduationlion/core/constants/app_colors.dart';
+import 'package:graduationlion/route/routes.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  _LoginPageState createState() => _LoginPageState();
+  State<LoginPage> createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
@@ -18,7 +21,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: const Color(0xff00579C),
+        backgroundColor: AppColors.primary,
         body: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -38,10 +41,9 @@ class _LoginPageState extends State<LoginPage> {
                 onTap: () async {
                   var result = await UserController.to.signin();
                   if (result) {
-                    Get.offNamed('/init');
+                    Get.offNamed(Routes.init);
                   } else {
-                    Get.snackbar(
-                        "Log In Failed", "Your email is not Handong email");
+                    Get.snackbar("로그인 실패", "한동대학교 이메일로만 로그인할 수 있습니다.");
                   }
                 },
                 child: Container(
@@ -68,7 +70,7 @@ class _LoginPageState extends State<LoginPage> {
                         const Text(
                           '구글로 로그인하기',
                           style: TextStyle(
-                            color: Color(0xff00579C),
+                            color: AppColors.primary,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
                           ),

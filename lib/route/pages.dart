@@ -1,16 +1,15 @@
 import 'package:get/get.dart';
 
-import 'package:graduationlion/screen/InitPage/initPage.dart';
-import 'package:graduationlion/screen/addCourse.dart';
-import 'package:graduationlion/screen/homeCategoryCourse.dart';
+import 'package:graduationlion/screen/InitPage/init_page.dart';
+import 'package:graduationlion/screen/add_course.dart';
+import 'package:graduationlion/screen/home_category_course.dart';
 import 'package:graduationlion/screen/home.dart';
 import 'package:graduationlion/screen/login.dart';
 import 'package:graduationlion/screen/mypage.dart';
-import 'package:graduationlion/screen/navigationPage.dart';
+import 'package:graduationlion/screen/navigation_page.dart';
 import 'package:graduationlion/screen/recommend.dart';
 import 'package:graduationlion/screen/splash.dart';
-
-part 'routes.dart';
+import 'package:graduationlion/route/routes.dart';
 
 class AppPages {
   static const initial = Routes.splash;
