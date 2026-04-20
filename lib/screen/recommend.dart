@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:graduationlion/controller/recommendController.dart';
 
-import '../controller/userController.dart';
+import 'package:graduationlion/controller/recommendController.dart';
+import 'package:graduationlion/controller/userController.dart';
 
 class RecommendPage extends StatefulWidget {
   const RecommendPage({super.key});

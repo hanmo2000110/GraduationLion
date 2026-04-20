@@ -1,10 +1,10 @@
-import 'package:graduationlion/controller/getxcontroller.dart';
 import 'package:get/get.dart';
 
-import '../controller/coursecontroller.dart';
-import '../controller/recommendController.dart';
-import '../controller/requirementController.dart';
-import '../controller/userController.dart';
+import 'package:graduationlion/controller/coursecontroller.dart';
+import 'package:graduationlion/controller/getxcontroller.dart';
+import 'package:graduationlion/controller/recommendController.dart';
+import 'package:graduationlion/controller/requirementController.dart';
+import 'package:graduationlion/controller/userController.dart';
 
 class InitBinding implements Bindings {
   @override

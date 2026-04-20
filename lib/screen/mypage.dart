@@ -1,11 +1,12 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
-import 'package:graduationlion/controller/coursecontroller.dart';
-import '../controller/userController.dart';
-import 'recommend.dart';
 import 'package:get/get.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+
+import 'package:graduationlion/controller/coursecontroller.dart';
+import 'package:graduationlion/controller/userController.dart';
+import 'package:graduationlion/screen/recommend.dart';
 
 class MyPage extends StatefulWidget {
   const MyPage({super.key});

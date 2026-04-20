@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controller/initPageController.dart';
+import 'package:graduationlion/controller/initPageController.dart';
 
 class InitEnglishSubmitPage extends StatefulWidget{
   const InitEnglishSubmitPage({super.key});

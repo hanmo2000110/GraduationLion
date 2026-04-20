@@ -1,21 +1,21 @@
-import 'package:flutter/material.dart';
-import '../controller/userController.dart';
-import 'home.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class addCoursePage extends StatefulWidget {
-  const addCoursePage({super.key});
+import 'package:graduationlion/controller/userController.dart';
+
+class AddCoursePage extends StatefulWidget {
+  const AddCoursePage({super.key});
 
   @override
-  State<addCoursePage> createState() => addCoursePageState();
+  State<AddCoursePage> createState() => AddCoursePageState();
 }
 
 enum engkor { kor, eng }
 
 enum gradepf { grade, pf }
 
-class addCoursePageState extends State<addCoursePage> {
+class AddCoursePageState extends State<AddCoursePage> {
   final myController = TextEditingController();
   engkor? value1 = engkor.kor;
   gradepf? value2 = gradepf.grade;

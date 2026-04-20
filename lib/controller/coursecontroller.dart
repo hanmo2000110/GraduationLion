@@ -1,10 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:get/get.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
+
 import 'package:graduationlion/controller/requirementController.dart';
 import 'package:graduationlion/model/courseModel.dart';
-
-import '../model/gcourseModel.dart';
+import 'package:graduationlion/model/gcourseModel.dart';
 
 class CourseController extends GetxController {
   static CourseController get to => Get.find();

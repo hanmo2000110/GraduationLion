@@ -6,7 +6,8 @@ abstract class Routes {
   static const init = '/init';
   static const navigation = '/navigation';
   static const home = '/home';
-  static const recommned = '/recommend';
+  static const recommend = '/recommend';
+  static const recommned = recommend;
   static const mypage = '/mypage';
   static const addcourse = '/addcourse';
   static const homeCategoryCourse = '/homeCategoryCourse';

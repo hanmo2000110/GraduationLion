@@ -1,15 +1,14 @@
-import 'package:graduationlion/screen/home.dart';
+import 'package:get/get.dart';
+
 import 'package:graduationlion/screen/InitPage/initPage.dart';
-import 'package:graduationlion/screen/recommend.dart';
+import 'package:graduationlion/screen/addCourse.dart';
+import 'package:graduationlion/screen/homeCategoryCourse.dart';
+import 'package:graduationlion/screen/home.dart';
+import 'package:graduationlion/screen/login.dart';
 import 'package:graduationlion/screen/mypage.dart';
 import 'package:graduationlion/screen/navigationPage.dart';
-import 'package:graduationlion/screen/addCourse.dart';
-
-import 'package:get/get.dart';
+import 'package:graduationlion/screen/recommend.dart';
 import 'package:graduationlion/screen/splash.dart';
-
-import '../screen/homeCategoryCourse.dart';
-import '../screen/login.dart';
 
 part 'routes.dart';
 
@@ -19,7 +18,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: Routes.splash,
-      page: () => SplashScreen(),
+      page: () => const SplashScreen(),
     ),
     GetPage(
       name: Routes.login,
@@ -38,7 +37,7 @@ class AppPages {
       page: () => const HomePage(),
     ),
     GetPage(
-      name: Routes.recommned,
+      name: Routes.recommend,
       page: () => const RecommendPage(),
     ),
     GetPage(
@@ -47,7 +46,7 @@ class AppPages {
     ),
     GetPage(
       name: Routes.addcourse,
-      page: () => const addCoursePage(),
+      page: () => const AddCoursePage(),
     ),
     GetPage(
       name: Routes.homeCategoryCourse,

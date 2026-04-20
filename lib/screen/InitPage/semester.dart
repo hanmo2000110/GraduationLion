@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
-import '../../controller/initPageController.dart';
+import 'package:graduationlion/controller/initPageController.dart';
 
 class InitSemesterPage extends StatefulWidget{
   const InitSemesterPage({super.key});

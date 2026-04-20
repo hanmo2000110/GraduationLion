@@ -1,11 +1,11 @@
 {
-    "name": "graduationlion",
-    "short_name": "graduationlion",
+    "name": "GraduationLion",
+    "short_name": "졸업사자",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "Graduation requirement checker and course recommendation app for Handong Global University students.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

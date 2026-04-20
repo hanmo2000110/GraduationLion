@@ -2,7 +2,8 @@ import 'package:dots_indicator/dots_indicator.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../controller/initPageController.dart';
+import 'package:graduationlion/controller/initPageController.dart';
+
 import 'department.dart';
 import 'englishGrade.dart';
 import 'englishSubmit.dart';

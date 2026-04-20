@@ -1,10 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:graduationlion/screen/splash.dart';
-import 'firebase_options.dart';
 import 'package:get/get.dart';
-import 'package:graduationlion/route/pages.dart';
+
 import 'package:graduationlion/binding/binding.dart';
+import 'package:graduationlion/firebase_options.dart';
+import 'package:graduationlion/route/pages.dart';
+import 'package:graduationlion/screen/splash.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'MyUIBuilding',
+      title: 'GraduationLion',
       theme: ThemeData(
         // 아이콘 클릭 시 물결 효과 없애기
         splashColor: Colors.transparent,
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.white),
         useMaterial3: true,
       ),
-      home: SplashScreen(),
+      home: const SplashScreen(),
       initialRoute: AppPages.initial,
       getPages: AppPages.routes,
       initialBinding: InitBinding(),
